@@ -34,6 +34,7 @@
 		1B8AA76D29FA9010001C3A97 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76C29FA9010001C3A97 /* Entity.swift */; };
 		1B8AA76F29FA94F6001C3A97 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76E29FA94F6001C3A97 /* PriorityQueue.swift */; };
 		1B8AA77029FA95D0001C3A97 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76E29FA94F6001C3A97 /* PriorityQueue.swift */; };
+		1B8AA77229FAA983001C3A97 /* Routine+CustomTableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA77129FAA983001C3A97 /* Routine+CustomTableRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		1B8AA76A29FA849D001C3A97 /* TestDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDouble.swift; sourceTree = "<group>"; };
 		1B8AA76C29FA9010001C3A97 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		1B8AA76E29FA94F6001C3A97 /* PriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityQueue.swift; sourceTree = "<group>"; };
+		1B8AA77129FAA983001C3A97 /* Routine+CustomTableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Routine+CustomTableRow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */,
 				1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */,
 				1B8AA75829FA6217001C3A97 /* View+List.swift */,
+				1B8AA77129FAA983001C3A97 /* Routine+CustomTableRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				1B8AA76B29FA849D001C3A97 /* TestDouble.swift in Sources */,
 				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
 				1B8AA76129FA8431001C3A97 /* Routine.swift in Sources */,
+				1B8AA77229FAA983001C3A97 /* Routine+CustomTableRow.swift in Sources */,
 				1B8AA76329FA8437001C3A97 /* Activity.swift in Sources */,
 				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
 				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,

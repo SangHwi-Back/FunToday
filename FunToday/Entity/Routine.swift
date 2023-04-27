@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Routine: Entity {
+struct Routine: Identifiable, Entity {
   var uniqueID: String
   var name: String
   var description: String
@@ -16,4 +16,9 @@ struct Routine: Entity {
   var regID: String
   
   var activities: [Activity]
+  
+  typealias ID = String
+  var id: ID {
+    uniqueID
+  }
 }
