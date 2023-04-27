@@ -8,13 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */; };
-		1B6BDE6A29FA37C300FDABA3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* ContentView.swift */; };
+		1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */; };
 		1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */; };
-		1B6BDE6F29FA37C500FDABA3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6E29FA37C500FDABA3 /* Preview Assets.xcassets */; };
 		1B6BDE7929FA37C500FDABA3 /* FunTodayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE7829FA37C500FDABA3 /* FunTodayTests.swift */; };
 		1B6BDE8329FA37C500FDABA3 /* FunTodayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */; };
 		1B6BDE8529FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */; };
 		1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9129FA3A9800FDABA3 /* README.md */; };
+		1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9329FA551900FDABA3 /* GoalsView.swift */; };
+		1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9529FA552200FDABA3 /* ReviewView.swift */; };
+		1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9729FA552800FDABA3 /* SettingView.swift */; };
+		1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */; };
+		1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */; };
+		1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */; };
+		1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */; };
+		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
+		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
+		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,15 +46,24 @@
 /* Begin PBXFileReference section */
 		1B6BDE6429FA37C300FDABA3 /* FunToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayApp.swift; sourceTree = "<group>"; };
-		1B6BDE6929FA37C300FDABA3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayAppTabView.swift; sourceTree = "<group>"; };
 		1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1B6BDE6E29FA37C500FDABA3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B6BDE7429FA37C500FDABA3 /* FunTodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FunTodayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE7829FA37C500FDABA3 /* FunTodayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayTests.swift; sourceTree = "<group>"; };
 		1B6BDE7E29FA37C500FDABA3 /* FunTodayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FunTodayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITests.swift; sourceTree = "<group>"; };
 		1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B6BDE9129FA3A9800FDABA3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1B6BDE9329FA551900FDABA3 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		1B6BDE9529FA552200FDABA3 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		1B6BDE9729FA552800FDABA3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayTab.swift; sourceTree = "<group>"; };
+		1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalItem.swift; sourceTree = "<group>"; };
+		1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shadow.swift"; sourceTree = "<group>"; };
+		1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Colors.swift"; sourceTree = "<group>"; };
+		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
+		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,19 +116,15 @@
 			isa = PBXGroup;
 			children = (
 				1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */,
-				1B6BDE6929FA37C300FDABA3 /* ContentView.swift */,
+				1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */,
+				1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */,
+				1B6BDE9B29FA585800FDABA3 /* Goals */,
+				1B6BDE9C29FA585E00FDABA3 /* Review */,
+				1B6BDE9D29FA586400FDABA3 /* Setting */,
 				1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */,
-				1B6BDE6D29FA37C500FDABA3 /* Preview Content */,
+				1B6BDEA029FA5AA600FDABA3 /* Common */,
 			);
 			path = FunToday;
-			sourceTree = "<group>";
-		};
-		1B6BDE6D29FA37C500FDABA3 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1B6BDE6E29FA37C500FDABA3 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1B6BDE7729FA37C500FDABA3 /* FunTodayTests */ = {
@@ -128,6 +142,59 @@
 				1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */,
 			);
 			path = FunTodayUITests;
+			sourceTree = "<group>";
+		};
+		1B6BDE9B29FA585800FDABA3 /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				1B6BDE9329FA551900FDABA3 /* GoalsView.swift */,
+				1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */,
+				1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		1B6BDE9C29FA585E00FDABA3 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				1B6BDE9529FA552200FDABA3 /* ReviewView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		1B6BDE9D29FA586400FDABA3 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1B6BDE9729FA552800FDABA3 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		1B6BDEA029FA5AA600FDABA3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1B8AA75329FA5B9B001C3A97 /* Preview Content */,
+				1B6BDEA129FA5AAE00FDABA3 /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1B6BDEA129FA5AAE00FDABA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */,
+				1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */,
+				1B8AA75829FA6217001C3A97 /* View+List.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B8AA75329FA5B9B001C3A97 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */,
-				1B6BDE6F29FA37C500FDABA3 /* Preview Assets.xcassets in Resources */,
+				1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */,
 				1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +328,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B6BDE6A29FA37C300FDABA3 /* ContentView.swift in Sources */,
+				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
+				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
+				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,
+				1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */,
+				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
+				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
+				1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */,
+				1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */,
+				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
+				1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */,
 				1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,15 +496,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FunToday/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FunToday/Common/Preview Content\"";
 				DEVELOPMENT_TEAM = L3ZPWB4HNK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -449,15 +527,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FunToday/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FunToday/Common/Preview Content\"";
 				DEVELOPMENT_TEAM = L3ZPWB4HNK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
