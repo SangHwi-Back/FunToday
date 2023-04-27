@@ -14,6 +14,7 @@
 		1B6BDE7929FA37C500FDABA3 /* FunTodayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE7829FA37C500FDABA3 /* FunTodayTests.swift */; };
 		1B6BDE8329FA37C500FDABA3 /* FunTodayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */; };
 		1B6BDE8529FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */; };
+		1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9129FA3A9800FDABA3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		1B6BDE7E29FA37C500FDABA3 /* FunTodayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FunTodayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITests.swift; sourceTree = "<group>"; };
 		1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B6BDE9129FA3A9800FDABA3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		1B6BDE5B29FA37C300FDABA3 = {
 			isa = PBXGroup;
 			children = (
+				1B6BDE9129FA3A9800FDABA3 /* README.md */,
 				1B6BDE6629FA37C300FDABA3 /* FunToday */,
 				1B6BDE7729FA37C500FDABA3 /* FunTodayTests */,
 				1B6BDE8129FA37C500FDABA3 /* FunTodayUITests */,
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */,
 				1B6BDE6F29FA37C500FDABA3 /* Preview Assets.xcassets in Resources */,
 				1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */,
 			);
