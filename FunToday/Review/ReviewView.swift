@@ -12,29 +12,22 @@ struct ReviewView: View {
     GeometryReader { proxy in
       VStack(alignment: .center, spacing: 8) {
         HStack(alignment: .center, spacing: 24) {
-          ZStack {
-            Circle()
-              .opacity(0.3)
-              .foregroundColor(Color.red)
-            
-            Circle()
-              .trim(from: 0.5, to: 1)
-              .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
-              .padding(10)
-              .foregroundColor(Color.red)
-          }
+          ProgressCircle<Button<Text>>(
+            value: Binding.constant(CGFloat(0.9)),
+            mainColor: Binding.constant(Color.red),
+            contentsHandler: Binding.constant({
+              Button {
+                print("testing")
+              } label: {
+                Text("90%")
+              }
+            }))
+            .buttonStyle(CommonPushButtonStyle())
           
-          ZStack {
-            Circle()
-              .opacity(0.3)
-              .foregroundColor(Color.red)
-            
-            Circle()
-              .trim(from: 0.5, to: 0.895)
-              .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
-              .padding(10)
-              .foregroundColor(Color.red)
-          }
+          ProgressCircle<Text>(
+            value: Binding.constant(CGFloat(0.5)),
+            mainColor: Binding.constant(Color.red),
+            contentsHandler: Binding.constant({ Text("50%") }))
         }
         .padding(.horizontal)
         
