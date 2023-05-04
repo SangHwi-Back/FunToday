@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-extension Routine: CustomTableRow {
-  func getColumns() -> Text {
+extension Routine: RowElement {
+  typealias ContentsView = Text
+  func getColumns() -> ContentsView {
     Text(self.name + " " + self.description)
   }
 }

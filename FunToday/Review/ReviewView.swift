@@ -31,14 +31,11 @@ struct ReviewView: View {
         }
         .padding(.horizontal)
         
-        CustomTable(
-          columnTitles: ["이름", "활동"],
-          rowData: [
-            Routine.getDouble(),
-            Routine.getDouble(),
-            Routine.getDouble(),
-            Routine.getDouble(),
-          ])
+        CustomTable<Routine, Any>(
+          titles: ["","이름", "활동"],
+          rows: Binding.constant([Routine.getDouble(), Routine.getDouble()]))
+          .padding(.horizontal)
+        
       }
     }
   }
@@ -50,34 +47,61 @@ struct ReviewView_Previews: PreviewProvider {
   }
 }
 
-struct CustomTable<Element>: View where Element: CustomTableRow {
+struct CustomTable<Element, ContentsView>: View where Element: RowElement {
   
-  var columnTitles: [String]
+  var titles: [String]
   private var column: Int {
-    columnTitles.count
+    titles.count
   }
-  var rowData: [Element]
+  
+  @Binding var rows: [Element]
   private var row: Int {
-    rowData.count
+    rows.count
   }
   
   var body: some View {
-    VStack { ForEach(0...row, id: \.self) { row in
-      HStack { ForEach(0..<column, id: \.self) { column in
-        if row == 0 {
-          Text(columnTitles[column])
-            .padding(8)
-          Spacer()
-        } else {
-          rowData[row-1].getColumns()
-            .padding(.vertical, 8)
+    VStack(spacing: 4) { ForEach(0...row, id: \.self) { row in
+      if row == 0 {
+        LazyVGrid(columns: getGrid(columnCount: titles.count), spacing: 4) {
+          ForEach(titles, id: \.self) { title in
+            ZStack {
+              if title.isEmpty == false {
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(.black, lineWidth: 1)
+                Text(title)
+              }
+            }
+          }
         }
-      }}
+        .padding(.horizontal, 4)
+      } else {
+        LazyVGrid(columns: getGrid(columnCount: column), spacing: 4) {
+          ForEach(0..<column, id: \.self) { column in
+            ZStack {
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(.black, lineWidth: 1)
+              rows[row-1].getColumns()
+            }
+          }
+        }
+        .padding(.horizontal, 8)
+      }
     }}
-    .padding(10)
+    .padding(.vertical, 8)
+    .overlay {
+      RoundedRectangle(cornerRadius: 8)
+        .stroke(.black, lineWidth: 1)
+    }
+  }
+  
+  private func getGrid(columnCount: Int) -> [GridItem] {
+    return Array(
+      repeating: GridItem(.flexible()),
+      count: columnCount)
   }
 }
 
-protocol CustomTableRow {
-  func getColumns() -> Text
+protocol RowElement where ContentsView: View {
+  associatedtype ContentsView
+  func getColumns() -> ContentsView
 }
