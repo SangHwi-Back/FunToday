@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B1696062A08CD6300D827FB /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696052A08CD6300D827FB /* Dependency.swift */; };
-		1B1696082A08CEB400D827FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B1696072A08CEB400D827FB /* GoogleService-Info.plist */; };
 		1B16960B2A08CF2400D827FB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960A2A08CF2400D827FB /* FirebaseDatabase */; };
 		1B16960D2A08CF2400D827FB /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */; };
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
@@ -63,7 +62,6 @@
 
 /* Begin PBXFileReference section */
 		1B1696052A08CD6300D827FB /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
-		1B1696072A08CEB400D827FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				1B6BDE9D29FA586400FDABA3 /* Setting */,
 				1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */,
 				1B6BDEA029FA5AA600FDABA3 /* Common */,
-				1B1696072A08CEB400D827FB /* GoogleService-Info.plist */,
 			);
 			path = FunToday;
 			sourceTree = "<group>";
@@ -375,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */,
-				1B1696082A08CEB400D827FB /* GoogleService-Info.plist in Resources */,
 				1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */,
 				1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */,
 			);
