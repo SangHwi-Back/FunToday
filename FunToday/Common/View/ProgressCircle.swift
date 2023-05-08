@@ -25,7 +25,7 @@ struct ProgressCircle: View {
       .foregroundColor(status.color)
     
     Text(status.text)
-  }.aspectRatio(contentMode: .fill)
+  }.aspectRatio(contentMode: .fit)
   }
 }
 
