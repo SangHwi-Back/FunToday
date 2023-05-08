@@ -8,9 +8,10 @@
 import Foundation
 
 extension Goal: TestDouble {
-  static func getDouble() -> Goal {
+  static func getDouble(inx: Int = 0) -> Goal {
     .init(
       uniqueID: "1",
+      index: inx,
       name: "testName",
       description: "testDescription",
       regDate: Date().description,

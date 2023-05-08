@@ -8,9 +8,10 @@
 import Foundation
 
 extension Activity: TestDouble {
-  static func getDouble() -> Activity {
+  static func getDouble(inx: Int = 0) -> Activity {
     .init(
       uniqueID: "1",
+      index: inx,
       name: "testName",
       description: "testDescription",
       regDate: Date().description,

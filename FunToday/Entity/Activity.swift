@@ -9,6 +9,7 @@ import Foundation
 
 struct Activity: Entity {
   var uniqueID: String
+  var index: Int
   var name: String
   var description: String
   var regDate: String

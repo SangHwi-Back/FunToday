@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct GoalsView: View {
+  
+  @State var goals: [Goal] = [
+    Goal.getDouble(inx: 0), Goal.getDouble(inx: 1),
+    Goal.getDouble(inx: 2), Goal.getDouble(inx: 3),
+    Goal.getDouble(inx: 4), Goal.getDouble(inx: 5),
+    Goal.getDouble(inx: 6), Goal.getDouble(inx: 7),
+    Goal.getDouble(inx: 8), Goal.getDouble(inx: 9),
+  ]
+  
   var body: some View {
     GeometryReader { proxy in
       NavigationView {
         ScrollView {
           LazyVStack
           {
-            ForEach(0..<20) { inx in
+            ForEach($goals, id: \.index) { $goal in
               NavigationLink {
                 GoalDetail()
               } label: {
                 GoalItem(
-                  rgbColor: Color.cell,
+                  goal: $goal,
                   size: CGSize(width: proxy.size.width - 16, height: 120)) {
                     Text("Hello World")
                   }

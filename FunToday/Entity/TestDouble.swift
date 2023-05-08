@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TestDouble {
-  static func getDouble() -> Self
+  static func getDouble(inx: Int) -> Self
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Routine: Identifiable, Entity {
   var uniqueID: String
+  var index: Int
   var name: String
   var description: String
   var regDate: String

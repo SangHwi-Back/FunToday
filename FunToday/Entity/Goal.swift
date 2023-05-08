@@ -10,6 +10,8 @@ import Foundation
 struct Goal: Entity {
   var uniqueID: String
   
+  var index: Int
+  
   var name: String
   
   var description: String
@@ -22,4 +24,6 @@ struct Goal: Entity {
   
   var routines: [Routine]
   var activeRoutine: Routine?
+  
+  var isFold: Bool = true
 }

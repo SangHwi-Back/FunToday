@@ -33,7 +33,7 @@ struct ReviewView: View {
         
         CustomTable<Routine, Any>(
           titles: ["","이름", "활동"],
-          rows: Binding.constant([Routine.getDouble(), Routine.getDouble()]))
+          rows: Binding.constant([Routine.getDouble(), Routine.getDouble(inx: 1)]))
           .padding(.horizontal)
         
       }

@@ -10,6 +10,8 @@ import Foundation
 protocol Entity: Codable {
   /// 고유 ID
   var uniqueID: String { get }
+  /// 고유 인덱스
+  var index: Int { get }
   /// 이름
   var name: String { get set }
   /// 설명

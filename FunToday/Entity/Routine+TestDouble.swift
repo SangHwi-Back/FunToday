@@ -8,9 +8,10 @@
 import Foundation
 
 extension Routine: TestDouble {
-  static func getDouble() -> Routine {
+  static func getDouble(inx: Int = 0) -> Routine {
     .init(
       uniqueID: "1",
+      index: inx,
       name: "testRoutine",
       description: "testDescription",
       regDate: Date().description,
