@@ -19,8 +19,10 @@ struct GoalsView: View {
                 GoalDetail()
               } label: {
                 GoalItem(
-                  rgbColor: Color.red.opacity(0.2),
-                  size: CGSize(width: proxy.size.width - 16, height: 120))
+                  rgbColor: Color.cell,
+                  size: CGSize(width: proxy.size.width - 16, height: 120)) {
+                    Text("Hello World")
+                  }
               }
               .navigationBarHidden(true)
             }
