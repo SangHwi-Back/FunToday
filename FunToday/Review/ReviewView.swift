@@ -12,22 +12,8 @@ struct ReviewView: View {
     GeometryReader { proxy in
       VStack(alignment: .center, spacing: 8) {
         HStack(alignment: .center, spacing: 24) {
-          ProgressCircle<Button<Text>>(
-            value: Binding.constant(CGFloat(0.9)),
-            mainColor: Binding.constant(Color.red),
-            contentsHandler: Binding.constant({
-              Button {
-                print("testing")
-              } label: {
-                Text("90%")
-              }
-            }))
-            .buttonStyle(CommonPushButtonStyle())
-          
-          ProgressCircle<Text>(
-            value: Binding.constant(CGFloat(0.5)),
-            mainColor: Binding.constant(Color.red),
-            contentsHandler: Binding.constant({ Text("50%") }))
+          ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
+          ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
         }
         .padding(.horizontal)
         
@@ -35,7 +21,6 @@ struct ReviewView: View {
           titles: ["","이름", "활동"],
           rows: Binding.constant([Routine.getDouble(), Routine.getDouble(inx: 1)]))
           .padding(.horizontal)
-        
       }
     }
   }

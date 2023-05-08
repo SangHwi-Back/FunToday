@@ -7,42 +7,42 @@
 
 import SwiftUI
 
-struct ProgressCircle<ContentsView>: View where ContentsView: View {
+struct ProgressCircle: View {
   
-  @Binding var value: CGFloat
-  
-  @Binding var mainColor: Color
-  @Binding var contentsHandler: () -> ContentsView
+  @Binding var status: ProgressStatus
   
   var body: some View
   { ZStack {
     Circle()
       .opacity(0.3)
-      .foregroundColor(mainColor)
+      .foregroundColor(status.color)
     
     Circle()
-      .trim(from: 0.0, to: value)
+      .trim(from: 0.0, to: status.value)
       .rotation(Angle.degrees(-90))
       .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
       .padding(4)
-      .foregroundColor(mainColor)
+      .foregroundColor(status.color)
     
-    contentsHandler()
-  }}
+    Text(status.text)
+  }.aspectRatio(contentMode: .fill)
+  }
+}
+
+struct ProgressStatus {
+  var value: CGFloat
+  var color: Color
+  var text: String
+}
+
+extension ProgressStatus: TestDouble {
+  static func getDouble(inx: Int = 0) -> ProgressStatus {
+    return .init(value: 5, color: Color.element, text: "50%")
+  }
 }
 
 struct ProgressCircle_Previews: PreviewProvider {
   static var previews: some View {
-    ProgressCircle<Button<Text>>(
-      value: Binding.constant(CGFloat(0.9)),
-      mainColor: Binding.constant(Color.red),
-      contentsHandler: Binding.constant({
-        Button {
-          print("testing")
-        } label: {
-          Text("90%")
-        }
-      }))
-    .buttonStyle(CommonPushButtonStyle())
+    ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
   }
 }

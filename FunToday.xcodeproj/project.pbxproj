@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
 		1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */; };
+		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
 		1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */; };
 		1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */; };
 		1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
+		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
 		1B6BDE6429FA37C300FDABA3 /* FunToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayApp.swift; sourceTree = "<group>"; };
 		1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayAppTabView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				1B8AA77129FAA983001C3A97 /* Routine+CustomTableRow.swift */,
 				1B396F942A03691900C7966C /* ProgressCircle.swift */,
 				1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */,
+				1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */,
 				1B8AA75F29FA842C001C3A97 /* Goal.swift in Sources */,
 				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
+				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
 				1B8AA76529FA8458001C3A97 /* Goal+TestDouble.swift in Sources */,
 				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
 				1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */,

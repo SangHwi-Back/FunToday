@@ -16,9 +16,6 @@ struct GoalItem<ContentsView: View>: View {
   private var chevronImageName: String {
     goal.isFold ? "chevron.compact.down" : "chevron.compact.up"
   }
-  private var bottomViewHeight: CGFloat {
-    goal.isFold ? 18 : 240
-  }
   
   init(goal: Binding<Goal>,
        size: CGSize, _ contentsView: @escaping () -> ContentsView) {
@@ -27,71 +24,44 @@ struct GoalItem<ContentsView: View>: View {
     self.contentsView = contentsView
   }
   
-  var body: some View {
+  var body: some View
+  { ZStack {
+    CommonRectangle(color: Binding.constant(Color.element))
+      .northWestShadow()
+    
     ZStack {
-      ZStack {
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.element)
-          .cornerRadius(12)
-          .northWestShadow()
-      }
-      ZStack {
-        
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.cell)
+      CommonRectangle(color: Binding.constant(Color.cell))
+      
+      VStack(spacing: 8) {
+        contentsView().padding(8)
         
         VStack(spacing: 8) {
-          contentsView()
-            .padding(8)
+          Image(systemName: chevronImageName)
+            .padding(.top, goal.isFold ? 0 : 8)
+            .foregroundColor(Color.element)
           
-          Spacer()
-          
-          ZStack {
-            RoundedRectangle(cornerRadius: 8)
-              .fill(Color.highlight)
-            VStack {
-              if goal.isFold {
-                Image(systemName: chevronImageName)
-              }
-              else {
-                VStack(spacing: 8) {
-                  Image(systemName: chevronImageName)
-                    .padding(.top, 8)
-                  Spacer()
-                  HStack {
-                    ProgressCircle(
-                      value: Binding.constant(CGFloat(0.5)),
-                      mainColor: Binding.constant(Color.element),
-                      contentsHandler: Binding.constant({
-                        Text("운동")
-                      })
-                    )
-                    ProgressCircle(
-                      value: Binding.constant(CGFloat(0.7)),
-                      mainColor: Binding.constant(Color.element),
-                      contentsHandler: Binding.constant({
-                        Text("공부")
-                      })
-                    )
-                  }
-                  CustomTable<Routine, Any>(
-                    titles: ["50%", "70%"],
-                    rows: Binding.constant([])
-                  )
-                  .padding(.horizontal, 8)
-                }
-              }
+          if goal.isFold == false {
+            HStack {
+              ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
+              ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
             }
+            CustomTable<Routine, Any>(
+              titles: ["50%", "70%"],
+              rows: Binding.constant([]))
+            .padding(.bottom, 8)
+            .padding(.horizontal, 8)
           }
-          .frame(height: bottomViewHeight)
-          .onTapGesture { goal.isFold.toggle() }
         }
+        .frame(width: size.width)
+        .frame(minHeight: 18)
+        .background(Color.highlight)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .onTapGesture { goal.isFold.toggle() }
       }
-      .padding(8)
-    }
-    .frame(width: size.width,
-           height: size.height + bottomViewHeight)
-    .animation(.easeOut(duration: 0.2), value: goal.isFold)
+    }.padding(8)
+  }
+  .frame(width: size.width)
+  .animation(.easeOut(duration: 0.2), value: goal.isFold)
   }
 }
 

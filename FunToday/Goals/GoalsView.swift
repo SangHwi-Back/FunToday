@@ -30,7 +30,12 @@ struct GoalsView: View {
                 GoalItem(
                   goal: $goal,
                   size: CGSize(width: proxy.size.width - 16, height: 120)) {
-                    Text("Hello World")
+                    VStack {
+                      // TODO: Binding 혹은 constant 한 Range 만을 써야하므로 오류가 발생하고 있음. 수정 예정.
+                      ForEach(0..<Int.random(in: 1...5)) {_ in
+                        Text("Hello World")
+                      }
+                    }
                   }
               }
               .navigationBarHidden(true)
