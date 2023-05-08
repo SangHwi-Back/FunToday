@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ReviewView: View {
+  @EnvironmentObject var db: DependencyFirebaseDB
+  
   var body: some View {
     GeometryReader { proxy in
       VStack(alignment: .center, spacing: 8) {

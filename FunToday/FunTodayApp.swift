@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct FunTodayApp: App {
-    var body: some Scene {
-        WindowGroup {
-            FunTodayAppTabView()
-        }
+  
+  @ObservedObject var firebasedb = DependencyFirebaseDB()
+  
+  var body: some Scene {
+    WindowGroup {
+      FunTodayAppTabView()
+        .environmentObject(firebasedb)
     }
+  }
 }
