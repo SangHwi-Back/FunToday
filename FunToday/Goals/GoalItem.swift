@@ -45,11 +45,13 @@ struct GoalItem<ContentsView: View>: View {
               ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
               ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
             }
-            CustomTable<Routine, Any>(
-              titles: ["50%", "70%"],
-              rows: Binding.constant([]))
-            .padding(.bottom, 8)
-            .padding(.horizontal, 8)
+            
+            CustomTable([goal]) { goal in
+              [
+                CustomTableColumn(title: "운동", value: \.name),
+                CustomTableColumn(title: "공부", value: \.name),
+              ]
+            }
           }
         }
         .frame(width: size.width)

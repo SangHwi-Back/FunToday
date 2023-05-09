@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct Activity: Entity {
+struct Activity: Identifiable, Entity {
   var uniqueID: String
+  
+  var id: String {
+    uniqueID
+  }
+  
   var index: Int
   var name: String
   var description: String
@@ -25,6 +30,14 @@ struct Activity: Entity {
   var time_s: Date
   /// 활동 종료 시간
   var time_e: Date
+  
+  var timeFromTo: String {
+    time_s.ISO8601Format(
+      .iso8601.dateSeparator(.dash).year().month().day()) +
+    "~" +
+    time_e.ISO8601Format(
+      .iso8601.dateSeparator(.dash).year().month().day())
+  }
   
   /// 매일 진행할지 여부
   var isDailyRoutine: Bool

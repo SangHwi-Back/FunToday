@@ -11,6 +11,7 @@
 		1B16960B2A08CF2400D827FB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960A2A08CF2400D827FB /* FirebaseDatabase */; };
 		1B16960D2A08CF2400D827FB /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */; };
 		1B16960F2A08D53800D827FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B16960E2A08D53800D827FB /* GoogleService-Info.plist */; };
+		1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696122A09C5A000D827FB /* CustomTable.swift */; };
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
 		1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
@@ -64,6 +65,7 @@
 /* Begin PBXFileReference section */
 		1B1696052A08CD6300D827FB /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		1B16960E2A08D53800D827FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B1696122A09C5A000D827FB /* CustomTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTable.swift; sourceTree = "<group>"; };
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				1B396F942A03691900C7966C /* ProgressCircle.swift */,
 				1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */,
 				1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */,
+				1B1696122A09C5A000D827FB /* CustomTable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
 				1B8AA76129FA8431001C3A97 /* Routine.swift in Sources */,
 				1B8AA77229FAA983001C3A97 /* Routine+CustomTableRow.swift in Sources */,
+				1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */,
 				1B8AA76329FA8437001C3A97 /* Activity.swift in Sources */,
 				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
 				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,

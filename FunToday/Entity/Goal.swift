@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct Goal: Entity {
+struct Goal: Identifiable, Entity {
   var uniqueID: String
+  
+  var id: String {
+    uniqueID
+  }
   
   var index: Int
   

@@ -12,4 +12,8 @@ extension Color {
   static let highlight = Color("Highlight")
   static let shadow = Color("Shadow")
   static let cell = Color("Cell")
+  static let border = Color("Border")
+  static let tableTitle = Color("TableTitle")
+  static let label = Color("Label")
+  static let labelReversed = Color("LabelReversed")
 }

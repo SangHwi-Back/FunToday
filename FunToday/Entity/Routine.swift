@@ -9,6 +9,11 @@ import Foundation
 
 struct Routine: Identifiable, Entity {
   var uniqueID: String
+  
+  var id: String {
+    uniqueID
+  }
+  
   var index: Int
   var name: String
   var description: String
@@ -18,8 +23,7 @@ struct Routine: Identifiable, Entity {
   
   var activities: [Activity]
   
-  typealias ID = String
-  var id: ID {
-    uniqueID
+  var timeFromTo: String {
+    updateDate ?? "none"
   }
 }
