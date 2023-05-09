@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomTable<T>: View {
+struct CustomTable<T>: View where T: Identifiable {
   
   var data: [T]
   var columnGuide: [CustomTableColumn<T>]
@@ -22,25 +22,24 @@ struct CustomTable<T>: View {
   
   var body: some View {
     HStack(spacing: 0) {
-      ForEach(columnGuide, id: \.self) { columnInfo in
+      ForEach(columnGuide) { columnInfo in
         
         VStack {
-          ForEach(0...data.count, id: \.self) { rowNumber in
+          ZStack {
+            Rectangle()
+              .fill(Color.tableTitle)
+            Text(columnInfo.title)
+              .styleTableText()
+          }
+          
+          ForEach(data) { rowData in
+            
             ZStack {
-              let isTitle = rowNumber == 0
-              let title = isTitle ?
-                columnInfo.title :
-                data[rowNumber-1][keyPath: columnInfo.value]
-              
               Rectangle()
-                .fill(isTitle ? Color.tableTitle : Color.labelReversed)
-              
-              Text(title)
-                .frame(alignment: .leading)
-                .padding(4)
-                .foregroundColor(Color.label)
-                .minimumScaleFactor(0.2)
-                .lineLimit(isTitle ? 1 : 8)
+                .fill(Color.labelReversed)
+              Text(rowData[keyPath: columnInfo.value])
+                .styleTableText()
+                .lineLimit(8)
             }
           }
         }
@@ -51,7 +50,6 @@ struct CustomTable<T>: View {
     .aspectRatio(contentMode: .fit)
   }
   
-  
   private func getGrid(columnCount: Int) -> [GridItem] {
     return Array(
       repeating: GridItem(.flexible()),
@@ -59,9 +57,10 @@ struct CustomTable<T>: View {
   }
 }
 
-struct CustomTableColumn<T>: Hashable {
+struct CustomTableColumn<T>: Hashable, Identifiable {
   var title: String
   var value: KeyPath<T, String>
+  var id = UUID()
 }
 
 protocol RowElement where ContentsView: View {
@@ -79,5 +78,23 @@ struct CustomTable_Previews: PreviewProvider {
         CustomTableColumn(title: "설명", value: \.description)
       ]
     }
+  }
+}
+
+// MARK: - ViewModifier
+
+private struct CustomTableTextModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .frame(alignment: .leading)
+      .padding(4)
+      .foregroundColor(Color.label)
+      .minimumScaleFactor(0.2)
+  }
+}
+
+private extension Text {
+  func styleTableText() -> some View {
+    modifier(CustomTableTextModifier())
   }
 }
