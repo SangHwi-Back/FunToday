@@ -24,7 +24,7 @@ struct CustomTable<T>: View where T: Identifiable {
     HStack(spacing: 0) {
       ForEach(columnGuide) { columnInfo in
         
-        VStack {
+        VStack(spacing: 0) {
           ZStack {
             Rectangle()
               .fill(Color.tableTitle)

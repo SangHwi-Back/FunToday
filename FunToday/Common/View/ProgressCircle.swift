@@ -37,7 +37,7 @@ struct ProgressStatus {
 
 extension ProgressStatus: TestDouble {
   static func getDouble(inx: Int = 0) -> ProgressStatus {
-    return .init(value: 5, color: Color.element, text: "50%")
+    return .init(value: 0.5, color: Color.blue, text: "50%")
   }
 }
 
