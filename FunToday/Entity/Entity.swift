@@ -20,6 +20,4 @@ protocol Entity: Codable {
   var regDate: String { get }
   /// 수정일자
   var updateDate: String? { get set }
-  /// 등록 사용자 ID
-  var regID: String { get }
 }

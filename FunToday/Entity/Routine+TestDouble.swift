@@ -16,7 +16,6 @@ extension Routine: TestDouble {
       description: "testDescription",
       regDate: Date().description,
       updateDate: nil,
-      regID: "1",
       activities: [])
   }
 }

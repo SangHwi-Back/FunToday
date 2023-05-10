@@ -19,7 +19,6 @@ struct Activity: Identifiable, Entity {
   var description: String
   var regDate: String
   var updateDate: String?
-  var regID: String
   
   var categoryValue: Int
   var category: ActivityCategory? {
@@ -27,24 +26,34 @@ struct Activity: Identifiable, Entity {
   }
   
   /// 활동 시작 시간
-  var time_s: Date
+  var time_s: String
   /// 활동 종료 시간
-  var time_e: Date
-  
-  var timeFromTo: String {
-    time_s.ISO8601Format(
-      .iso8601.dateSeparator(.dash).year().month().day()) +
-    "~" +
-    time_e.ISO8601Format(
-      .iso8601.dateSeparator(.dash).year().month().day())
-  }
+  var time_e: String
   
   /// 매일 진행할지 여부
-  var isDailyRoutine: Bool
+  var isDailyActive: Bool
   /// 주말에는 활성화되지 않을지 여부
-  var noActivateWeekend: Bool
-  
+  var isWeekendActive: Bool
+  /// 활동을 활성 혹은 정지할지 여부
   var isActive: Bool = true
+  
+  var completionRatio: Int
+  var completionUseSwitch: Bool = false
+  
+  // MARK: - Not Decoding. Just setter.
+  /// yyyy-MM-dd ~ yyyy-MM-dd
+  var timeFromTo: String {
+    time_s + "~" + time_e
+  }
+  
+  var ratio: Float {
+    get {
+      floor(Float(completionRatio) / 100)
+    }
+    set(newValue) {
+      completionRatio = Int(floor(newValue * 100))
+    }
+  }
 }
 
 enum ActivityCategory: Int, Codable {
@@ -63,6 +72,24 @@ extension Int {
       return .normal
     } else {
       return .custom
+    }
+  }
+}
+
+@propertyWrapper
+struct Percentage {
+  private var value: Int
+  
+  var wrappedValue: Int {
+    get {
+      wrappedValue
+    }
+    set {
+      guard wrappedValue >= 0 else {
+        wrappedValue = 0
+        return
+      }
+      wrappedValue = min(wrappedValue, 100)
     }
   }
 }

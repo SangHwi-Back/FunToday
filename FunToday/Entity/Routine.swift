@@ -19,7 +19,6 @@ struct Routine: Identifiable, Entity {
   var description: String
   var regDate: String
   var updateDate: String?
-  var regID: String
   
   var activities: [Activity]
   

@@ -15,7 +15,6 @@ extension Goal: TestDouble {
       name: "testName",
       description: "testDescription",
       regDate: Date().description,
-      regID: "1",
       routines: [])
   }
 }

@@ -16,11 +16,13 @@ extension Activity: TestDouble {
       description: "testDescription",
       regDate: Date().description,
       updateDate: nil,
-      regID: "testRegID",
       categoryValue: 1,
-      time_s: Date(),
-      time_e: Date(timeInterval: 1200, since: Date()),
-      isDailyRoutine: true,
-      noActivateWeekend: false)
+      time_s: "2023-05-10",
+      time_e: "2023-05-13",
+      isDailyActive: true,
+      isWeekendActive: false,
+      isActive: true,
+      completionRatio: 0,
+      completionUseSwitch: false)
   }
 }

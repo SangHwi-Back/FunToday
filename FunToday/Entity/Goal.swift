@@ -24,8 +24,6 @@ struct Goal: Identifiable, Entity {
   
   var updateDate: String?
   
-  var regID: String
-  
   var routines: [Routine]
   var activeRoutine: Routine?
   
