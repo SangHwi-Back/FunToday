@@ -31,7 +31,7 @@ struct ActivityInputView: View {
   
   var body: some View {
     CustomSectionView {
-      VStack {
+      VStack(spacing: 4) {
         InputField(title: "이름 :", isEssential: true, text: $activity.name)
         InputField(title: "설명 :", isEssential: false, text: $activity.description)
         
@@ -45,13 +45,14 @@ struct ActivityInputView: View {
           }
           .frame(maxWidth: .infinity)
         }
+        .padding(.vertical, 4)
         
         HStack {
-          Text("기간")
           DatePicker("", selection: $startDate, displayedComponents: [.date])
-          Text(" ~ ")
+          Text("~")
           DatePicker("", selection: $endDate, displayedComponents: [.date])
         }
+        .padding(.vertical, 4)
         
         Toggle("매일 진행하나요?", isOn: $activity.isDailyActive)
         Toggle("주말에도 진행하나요?", isOn: $activity.isWeekendActive)

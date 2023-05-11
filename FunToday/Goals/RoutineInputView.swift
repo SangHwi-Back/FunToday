@@ -26,8 +26,10 @@ struct RoutineInputView: View {
           }
         }
         
-        ForEach($routine.activities) { activity in
-          ActivityInputView(activity: activity)
+        VStack(spacing: 8) {
+          ForEach($routine.activities) { activity in
+            ActivityInputView(activity: activity)
+          }
         }
       }
     }
