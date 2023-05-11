@@ -33,7 +33,9 @@ struct GoalItem<ContentsView: View>: View {
       CommonRectangle(color: Binding.constant(Color.cell))
       
       VStack(spacing: 8) {
-        contentsView().padding(8)
+        contentsView()
+          .padding(.horizontal, 8)
+          .padding(.top, 8)
         
         VStack(spacing: 8) {
           Image(systemName: chevronImageName)
@@ -52,6 +54,7 @@ struct GoalItem<ContentsView: View>: View {
                 CustomTableColumn(title: "공부", value: \.name),
               ]
             }
+            .padding()
           }
         }
         .frame(width: size.width)

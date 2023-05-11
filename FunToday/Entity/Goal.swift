@@ -24,6 +24,10 @@ struct Goal: Identifiable, Entity {
   
   var updateDate: String?
   
+  var timeFromTo: String {
+    regDate + " ~ " + (updateDate ?? regDate)
+  }
+  
   var routines: [Routine]
   var activeRoutine: Routine?
   

@@ -9,12 +9,15 @@ import Foundation
 
 extension Goal: TestDouble {
   static func getDouble(inx: Int = 0) -> Goal {
-    .init(
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    
+    return .init(
       uniqueID: "1",
       index: inx,
       name: "testName",
       description: "testDescription",
-      regDate: Date().description,
+      regDate: formatter.string(from: Date()),
       routines: [])
   }
 }
