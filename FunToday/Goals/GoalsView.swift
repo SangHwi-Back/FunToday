@@ -47,7 +47,7 @@ struct GoalsView: View {
       }}
       // MARK: - Floating Button
       NavigationLink { GoalInsertView() } label: {
-        FloatingPlusButton(width: proxy.size.width / 6) {}
+        FloatingPlusButton(width: proxy.size.width / 6)
       }
     }}
     .padding(.vertical, 0.1)
