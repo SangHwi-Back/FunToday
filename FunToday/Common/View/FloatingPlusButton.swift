@@ -9,7 +9,18 @@ import SwiftUI
 
 struct FloatingPlusButton: View {
   let width: CGFloat
+  let bgColor: Color
   let actionHandler: () -> Void
+  
+  init(
+    width: CGFloat,
+    bgColor: Color = Color.blue,
+    actionHandler: @escaping () -> Void) {
+    
+    self.width = width
+    self.bgColor = bgColor
+    self.actionHandler = actionHandler
+  }
   
   var body: some View {
     Button(action: actionHandler, label: {
@@ -22,7 +33,7 @@ struct FloatingPlusButton: View {
       .clipped()
     })
     .frame(width: width, height: width)
-    .background(Color.blue.opacity(0.9))
+    .background(bgColor.opacity(0.9))
     .cornerRadius(width / 2)
     .shadow(color: Color.shadow, radius: 3, x: 3, y: 3)
     .padding()

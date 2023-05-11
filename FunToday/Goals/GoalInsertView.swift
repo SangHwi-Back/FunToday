@@ -26,7 +26,7 @@ struct GoalInsertView: View {
         HStack {
           Text("루틴 \(routines.count)")
             .frame(maxWidth: .infinity, alignment: .leading)
-          FloatingPlusButton(width: 18) {
+          FloatingPlusButton(width: 24, bgColor: .gray) {
             routines.append(Routine.getDouble(inx: routines.count))
           }
         }

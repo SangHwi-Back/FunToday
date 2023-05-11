@@ -21,7 +21,7 @@ struct RoutineInputView: View {
         HStack {
           Text("활동")
             .frame(maxWidth: .infinity, alignment: .leading)
-          FloatingPlusButton(width: 18) {
+          FloatingPlusButton(width: 24, bgColor: .gray) {
             routine.activities.append(Activity.getDouble(inx: routine.activities.count))
           }
         }
