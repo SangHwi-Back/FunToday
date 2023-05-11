@@ -48,30 +48,10 @@ struct GoalsView: View {
                 .navigationBarHidden(true)
               }
             }
-          }
+          } // EO ScrollView
           
-          let buttonWidth = proxy.size.width / 6
-          VStack {
-            Spacer()
-            HStack {
-              Spacer()
-              Button(action: {
-                goals.append(Goal.getDouble(inx: goals.count))
-              }, label: {
-                ZStack(alignment: .center) {
-                  Rectangle().fill(Color.white)
-                    .frame(width: buttonWidth / 3, height: 4)
-                  Rectangle().fill(Color.white)
-                    .frame(width: 4, height: buttonWidth / 3)
-                }
-                .clipped()
-              })
-              .frame(width: buttonWidth, height: buttonWidth)
-              .background(Color.blue.opacity(0.9))
-              .cornerRadius(buttonWidth / 2)
-              .shadow(color: Color.shadow, radius: 3, x: 3, y: 3)
-              .padding()
-            }
+          FloatingPlusButton(width: proxy.size.width / 6) {
+            goals.append(Goal.getDouble(inx: goals.count))
           }
         }
       } // EO NavigationView
