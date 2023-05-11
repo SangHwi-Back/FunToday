@@ -32,15 +32,8 @@ struct ActivityInputView: View {
   var body: some View {
     CustomSectionView {
       VStack {
-        InputField(labels: [],
-                   textField: CommonTextField(
-                    title: "이름 :",
-                    placeHolder: "(X)", text: $activity.name))
-        
-        InputField(labels: [],
-                   textField: CommonTextField(
-                    title: "설명 :",
-                    placeHolder: "(-)", text: $activity.description))
+        InputField(title: "이름 :", isEssential: true, text: $activity.name)
+        InputField(title: "설명 :", isEssential: false, text: $activity.description)
         
         HStack {
           Text("카테고리")

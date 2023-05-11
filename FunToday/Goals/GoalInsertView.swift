@@ -19,14 +19,8 @@ struct GoalInsertView: View {
       VStack(spacing: 8) {
         
         // MARK: - Goal Section
-        InputField(labels: [],
-                   textField: CommonTextField(
-                    title: "이름 :",
-                    placeHolder: "(X)", text: $name))
-        InputField(labels: [],
-                   textField: CommonTextField(
-                    title: "설명 :",
-                    placeHolder: "(-)", text: $desc))
+        InputField(title: "이름 :", isEssential: true, text: $name)
+        InputField(title: "설명 :", isEssential: false, text: $desc)
         
         // MARK: - Routines Section
         HStack {

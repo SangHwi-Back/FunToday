@@ -21,6 +21,10 @@ struct InputField: View {
     self.textField = textField
   }
   
+  init(title: String, isEssential: Bool, text: Binding<String>) {
+    self.init(labels: [], textField: CommonTextField(title: title, placeHolder: isEssential ? "(X)" : "(-)", text: text))
+  }
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 4) {
       textField
