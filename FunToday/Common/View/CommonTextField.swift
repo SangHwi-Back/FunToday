@@ -10,6 +10,7 @@ import SwiftUI
 struct CommonTextField: View {
   
   let capImage: Image?
+  let title: String?
   let isSecure: Bool
   let placeHolder: String
   
@@ -21,7 +22,21 @@ struct CommonTextField: View {
     placeHolder: String,
     text: Binding<String>
   ) {
+    self.title = nil
     self.capImage = capImage
+    self.isSecure = isSecure
+    self.placeHolder = placeHolder
+    self._text = text
+  }
+  
+  init(
+    title: String? = nil,
+    isSecure: Bool = false,
+    placeHolder: String,
+    text: Binding<String>
+  ) {
+    self.title = title
+    self.capImage = nil
     self.isSecure = isSecure
     self.placeHolder = placeHolder
     self._text = text
@@ -32,6 +47,9 @@ struct CommonTextField: View {
       HStack {
         if let capImage {
           capImage.frame(width: 20, height: 20)
+        }
+        else if let title {
+          Text(title)
         }
         
         if isSecure {

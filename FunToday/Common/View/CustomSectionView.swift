@@ -35,7 +35,7 @@ struct CustomSection_Previews: PreviewProvider {
     CustomSectionView(title: "루틴",
                   contents: {
       InputField(labels: [],
-                 textField: CommonTextField(placeHolder: "X", text: Binding.constant("")))
+                 textField: CommonTextField(title: "이름", placeHolder: "X", text: Binding.constant("")))
     })
       .padding()
   }

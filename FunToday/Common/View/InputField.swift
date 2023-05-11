@@ -37,6 +37,7 @@ struct InputField_Previews: PreviewProvider {
       DescriptionText(text: "Test", isBold: true),
       DescriptionText(text: "Test", isBold: true)
     ], textField: CommonTextField(
+      title: "이름",
       placeHolder: "Email",
       text: .constant("test@gmail.com")
     ))
