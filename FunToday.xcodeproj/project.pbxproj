@@ -30,6 +30,11 @@
 		1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */; };
 		1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */; };
 		1B6C37672A0C8AEF00BA731B /* FloatingPlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37662A0C8AEF00BA731B /* FloatingPlusButton.swift */; };
+		1B6C37692A0C8CC900BA731B /* GoalInsertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37682A0C8CC900BA731B /* GoalInsertView.swift */; };
+		1B6C376B2A0C8FB900BA731B /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C376A2A0C8FB900BA731B /* InputField.swift */; };
+		1B6C376D2A0C8FCC00BA731B /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C376C2A0C8FCC00BA731B /* CommonTextField.swift */; };
+		1B6C376F2A0C902500BA731B /* DescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C376E2A0C902500BA731B /* DescriptionText.swift */; };
+		1B6C37712A0CA5DD00BA731B /* CustomSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37702A0CA5DD00BA731B /* CustomSectionView.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -88,6 +93,11 @@
 		1B6BDEA229FA5AB800FDABA3 /* View+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shadow.swift"; sourceTree = "<group>"; };
 		1B6BDEA429FA5B0E00FDABA3 /* View+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Colors.swift"; sourceTree = "<group>"; };
 		1B6C37662A0C8AEF00BA731B /* FloatingPlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPlusButton.swift; sourceTree = "<group>"; };
+		1B6C37682A0C8CC900BA731B /* GoalInsertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInsertView.swift; sourceTree = "<group>"; };
+		1B6C376A2A0C8FB900BA731B /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		1B6C376C2A0C8FCC00BA731B /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
+		1B6C376E2A0C902500BA731B /* DescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionText.swift; sourceTree = "<group>"; };
+		1B6C37702A0CA5DD00BA731B /* CustomSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSectionView.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -200,6 +210,7 @@
 				1B6BDE9329FA551900FDABA3 /* GoalsView.swift */,
 				1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */,
 				1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */,
+				1B6C37682A0C8CC900BA731B /* GoalInsertView.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -241,6 +252,10 @@
 				1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */,
 				1B1696122A09C5A000D827FB /* CustomTable.swift */,
 				1B6C37662A0C8AEF00BA731B /* FloatingPlusButton.swift */,
+				1B6C376A2A0C8FB900BA731B /* InputField.swift */,
+				1B6C376E2A0C902500BA731B /* DescriptionText.swift */,
+				1B6C376C2A0C8FCC00BA731B /* CommonTextField.swift */,
+				1B6C37702A0CA5DD00BA731B /* CustomSectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -414,8 +429,10 @@
 				1B8AA76129FA8431001C3A97 /* Routine.swift in Sources */,
 				1B8AA77229FAA983001C3A97 /* Routine+CustomTableRow.swift in Sources */,
 				1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */,
+				1B6C376F2A0C902500BA731B /* DescriptionText.swift in Sources */,
 				1B6C37672A0C8AEF00BA731B /* FloatingPlusButton.swift in Sources */,
 				1B8AA76329FA8437001C3A97 /* Activity.swift in Sources */,
+				1B6C376B2A0C8FB900BA731B /* InputField.swift in Sources */,
 				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
 				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,
 				1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */,
@@ -425,7 +442,9 @@
 				1B8AA76529FA8458001C3A97 /* Goal+TestDouble.swift in Sources */,
 				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
 				1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */,
+				1B6C376D2A0C8FCC00BA731B /* CommonTextField.swift in Sources */,
 				1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */,
+				1B6C37692A0C8CC900BA731B /* GoalInsertView.swift in Sources */,
 				1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */,
 				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
 				1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */,
@@ -434,6 +453,7 @@
 				1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */,
 				1B8AA76F29FA94F6001C3A97 /* PriorityQueue.swift in Sources */,
 				1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */,
+				1B6C37712A0CA5DD00BA731B /* CustomSectionView.swift in Sources */,
 				1B8AA76729FA845F001C3A97 /* Routine+TestDouble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

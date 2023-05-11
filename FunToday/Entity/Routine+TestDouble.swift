@@ -10,7 +10,7 @@ import Foundation
 extension Routine: TestDouble {
   static func getDouble(inx: Int = 0) -> Routine {
     .init(
-      uniqueID: "1",
+      uniqueID: "\(inx)",
       index: inx,
       name: "testRoutine",
       description: "testDescription",
