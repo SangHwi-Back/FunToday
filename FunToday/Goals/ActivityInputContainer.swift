@@ -28,6 +28,8 @@ struct ActivityInputContainer: View {
         })
       }
     }
+    .navigationBarTitleDisplayMode(.inline)
+    .navigationTitle("활동 추가")
     .padding()
   }
 }

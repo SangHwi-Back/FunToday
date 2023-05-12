@@ -49,6 +49,8 @@ struct GoalInsertView: View {
         }
       }.padding()
     }
+    .navigationBarTitleDisplayMode(.large)
+    .navigationTitle("목표 추가")
   }
 }
 
