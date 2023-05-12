@@ -16,22 +16,19 @@ struct RoutineInputView: View {
         InputField(title: "이름 :", isEssential: true, text: $routine.name)
         InputField(title: "설명 :", isEssential: false, text: $routine.description)
         
-        // MARK: - Activities Section ( Inside of Routine)
+        Text("활동")
+          .frame(maxWidth: .infinity, alignment: .leading)
         
-        HStack {
-          Text("활동")
-            .frame(maxWidth: .infinity, alignment: .leading)
-          FloatingPlusButton(width: 24, bgColor: .gray) {
-            routine.activities.append(Activity.getDouble(inx: routine.activities.count))
-          }
-        }
-        
-        VStack(spacing: 8) {
-          ForEach($routine.activities) { activity in
-            ActivityInputView(activity: activity)
-          }
+        NavigationLink { ActivityInputContainer(activities: $routine.activities) } label: {
+          Text("Put some Input activities")
         }
       }
     }
+  }
+}
+
+struct RoutineInputView_Preview: PreviewProvider {
+  static var previews: some View {
+    RoutineInputView(routine: .constant(Routine.getDouble()))
   }
 }

@@ -38,6 +38,7 @@
 		1B6C37732A0D21A600BA731B /* RoutineInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37722A0D21A600BA731B /* RoutineInputView.swift */; };
 		1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37742A0D21C900BA731B /* ActivityInputView.swift */; };
 		1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37762A0D30DB00BA731B /* View+If.swift */; };
+		1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -104,6 +105,7 @@
 		1B6C37722A0D21A600BA731B /* RoutineInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInputView.swift; sourceTree = "<group>"; };
 		1B6C37742A0D21C900BA731B /* ActivityInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInputView.swift; sourceTree = "<group>"; };
 		1B6C37762A0D30DB00BA731B /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
+		1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInputContainer.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */,
 				1B6C37682A0C8CC900BA731B /* GoalInsertView.swift */,
 				1B6C37742A0D21C900BA731B /* ActivityInputView.swift */,
+				1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */,
 				1B6C37722A0D21A600BA731B /* RoutineInputView.swift */,
 			);
 			path = Goals;
@@ -447,6 +450,7 @@
 				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,
 				1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */,
 				1B8AA75F29FA842C001C3A97 /* Goal.swift in Sources */,
+				1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */,
 				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
 				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
 				1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */,
