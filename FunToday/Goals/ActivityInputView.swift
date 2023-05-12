@@ -49,9 +49,11 @@ struct ActivityInputView: View {
           .padding(.vertical, 4)
           
           HStack {
-            DatePicker("", selection: $startDate, displayedComponents: [.date])
+            Text("기간")
+            Spacer()
+            DatePicker("", selection: $startDate, displayedComponents: [.hourAndMinute])
             Text("~")
-            DatePicker("", selection: $endDate, displayedComponents: [.date])
+            DatePicker("", selection: $endDate, displayedComponents: [.hourAndMinute])
           }
           .padding(.vertical, 4)
           
@@ -62,5 +64,11 @@ struct ActivityInputView: View {
         }
       }
     }
+  }
+}
+
+struct ActivityInputView_Previes: PreviewProvider {
+  static var previews: some View {
+    ActivityInputView(activity: Binding.constant(Activity.getDouble()))
   }
 }
