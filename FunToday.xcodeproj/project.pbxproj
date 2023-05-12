@@ -39,6 +39,7 @@
 		1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37742A0D21C900BA731B /* ActivityInputView.swift */; };
 		1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37762A0D30DB00BA731B /* View+If.swift */; };
 		1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */; };
+		1B6C377B2A0E04A900BA731B /* FloatingMinusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C377A2A0E04A900BA731B /* FloatingMinusButton.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -106,6 +107,7 @@
 		1B6C37742A0D21C900BA731B /* ActivityInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInputView.swift; sourceTree = "<group>"; };
 		1B6C37762A0D30DB00BA731B /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInputContainer.swift; sourceTree = "<group>"; };
+		1B6C377A2A0E04A900BA731B /* FloatingMinusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMinusButton.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */,
 				1B1696122A09C5A000D827FB /* CustomTable.swift */,
 				1B6C37662A0C8AEF00BA731B /* FloatingPlusButton.swift */,
+				1B6C377A2A0E04A900BA731B /* FloatingMinusButton.swift */,
 				1B6C37762A0D30DB00BA731B /* View+If.swift */,
 				1B6C376A2A0C8FB900BA731B /* InputField.swift */,
 				1B6C376E2A0C902500BA731B /* DescriptionText.swift */,
@@ -460,6 +463,7 @@
 				1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */,
 				1B6C376D2A0C8FCC00BA731B /* CommonTextField.swift in Sources */,
 				1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */,
+				1B6C377B2A0E04A900BA731B /* FloatingMinusButton.swift in Sources */,
 				1B6C37692A0C8CC900BA731B /* GoalInsertView.swift in Sources */,
 				1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */,
 				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
