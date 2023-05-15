@@ -56,38 +56,58 @@ struct ReviewView: View {
       VStack(spacing: 8) {
         
         // MARK: Header Button
-        Button {
-          showPeriod = true
-        } label: {
+        HStack(spacing: 8) {
           ZStack {
             RoundedRectangle(cornerRadius: 8)
               .fill(Color.element)
-            HStack {
-              Text("<").padding(.leading)
-              Spacer()
-              Text(currentSelectedPeriod.name).padding()
-              Spacer()
-              Text(">").padding(.trailing)
-            }
-            .foregroundColor(Color.label)
+            Text("목표")
+              .foregroundColor(Color.label)
           }
-          .frame(height: 32)
-        }
-        .padding()
-        .popover(
-          isPresented: $showPeriod,
-          attachmentAnchor: .point(.bottom),
-          arrowEdge: .top,
-          content: {
-            VStack(spacing: 16) {
-              ForEach(ReviewViewState.allCases) { state in
-                Button(state.name, action: {currentSelectedPeriod = state})
-                  .background(Color.element)
-                  .disabled(currentSelectedPeriod == state)
-              }
+          .layoutPriority(0.5)
+          .aspectRatio(1, contentMode: ContentMode.fill)
+          .contextMenu(ContextMenu(menuItems: {
+            VStack {
+              Text("A")
+              Text("B")
+              Text("C")
+              Text("D")
             }
-            .padding()
-          })
+          }))
+          
+          Button {
+            showPeriod = true
+          } label: {
+            ZStack {
+              RoundedRectangle(cornerRadius: 8)
+                .fill(Color.element)
+              HStack {
+                Text("<").padding(.leading)
+                Spacer(minLength: 8)
+                Text(currentSelectedPeriod.name)
+                Spacer(minLength: 8)
+                Text(">").padding(.trailing)
+              }
+              .foregroundColor(Color.label)
+            }
+          }
+          .layoutPriority(0.7)
+          .popover(
+            isPresented: $showPeriod,
+            attachmentAnchor: .point(.bottom),
+            arrowEdge: .top,
+            content: {
+              VStack(spacing: 16) {
+                ForEach(ReviewViewState.allCases) { state in
+                  Button(state.name, action: {currentSelectedPeriod = state})
+                    .background(Color.element)
+                    .disabled(currentSelectedPeriod == state)
+                }
+              }
+              .padding()
+            })
+        }
+        .frame(height: 48)
+        .padding()
         
         ScrollView {
           // MARK: Category Section
