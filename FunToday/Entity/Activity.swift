@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Activity: Identifiable, Entity {
+struct Activity: Identifiable, Entity, Hashable {
   var uniqueID: String
   
   var id: String {
@@ -27,8 +27,18 @@ struct Activity: Identifiable, Entity {
   
   /// 활동 시작 시간
   var time_s: String
+  var startDate: Date {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.date(from: time_s) ?? Date()
+  }
   /// 활동 종료 시간
   var time_e: String
+  var endDate: Date {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.date(from: time_e) ?? Date()
+  }
   
   /// 매일 진행할지 여부
   var isDailyActive: Bool
@@ -48,7 +58,7 @@ struct Activity: Identifiable, Entity {
   
   var ratio: Float {
     get {
-      floor(Float(completionRatio) / 100)
+      Float(completionRatio) / 100
     }
     set(newValue) {
       completionRatio = Int(floor(newValue * 100))

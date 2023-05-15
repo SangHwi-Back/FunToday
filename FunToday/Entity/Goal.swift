@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Goal: Identifiable, Entity {
+struct Goal: Identifiable, Entity, Equatable {
+  static func == (lhs: Goal, rhs: Goal) -> Bool {
+    lhs.id == rhs.id
+  }
+  
   var uniqueID: String
   
   var id: String {
