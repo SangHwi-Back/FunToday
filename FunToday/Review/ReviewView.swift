@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+private struct ReviewViewHeaderElement<ContentsView: View>: View {
+  private var contents: () -> ContentsView
+  
+  init(_ contents: @escaping () -> ContentsView) {
+    self.contents = contents
+  }
+  
+  var body: some View {
+    ZStack {
+      RoundedRectangle(cornerRadius: 8)
+        .fill(Color.element)
+      contents()
+    }
+  }
+}
+
 struct ReviewView: View {
   
   enum ReviewViewState: Identifiable, CaseIterable {
@@ -57,14 +73,10 @@ struct ReviewView: View {
         
         // MARK: Header Button
         HStack(spacing: 8) {
-          ZStack {
-            RoundedRectangle(cornerRadius: 8)
-              .fill(Color.element)
+          ReviewViewHeaderElement {
             Text("목표")
-              .foregroundColor(Color.label)
           }
-          .layoutPriority(0.5)
-          .aspectRatio(1, contentMode: ContentMode.fill)
+          .aspectRatio(1, contentMode: ContentMode.fit)
           .contextMenu(ContextMenu(menuItems: {
             VStack {
               Text("A")
@@ -74,23 +86,17 @@ struct ReviewView: View {
             }
           }))
           
-          Button {
-            showPeriod = true
-          } label: {
-            ZStack {
-              RoundedRectangle(cornerRadius: 8)
-                .fill(Color.element)
-              HStack {
-                Text("<").padding(.leading)
-                Spacer(minLength: 8)
-                Text(currentSelectedPeriod.name)
-                Spacer(minLength: 8)
-                Text(">").padding(.trailing)
-              }
-              .foregroundColor(Color.label)
+          ReviewViewHeaderElement {
+            HStack {
+              Text("<")
+              Spacer(minLength: 8)
+              Text(currentSelectedPeriod.name)
+              Spacer(minLength: 8)
+              Text(">")
             }
+            .padding(.horizontal)
           }
-          .layoutPriority(0.7)
+          .onTapGesture(perform: { showPeriod = true })
           .popover(
             isPresented: $showPeriod,
             attachmentAnchor: .point(.bottom),
@@ -98,16 +104,21 @@ struct ReviewView: View {
             content: {
               VStack(spacing: 16) {
                 ForEach(ReviewViewState.allCases) { state in
-                  Button(state.name, action: {currentSelectedPeriod = state})
-                    .background(Color.element)
-                    .disabled(currentSelectedPeriod == state)
+                  Button(state.name, action: {
+                    currentSelectedPeriod = state
+                    showPeriod = false
+                  })
+                  .background(Color.element)
+                  .disabled(currentSelectedPeriod == state)
                 }
               }
               .padding()
-            })
+            }
+          )
         }
+        .foregroundColor(Color.label)
         .frame(height: 48)
-        .padding()
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 16))
         
         ScrollView {
           // MARK: Category Section
@@ -122,43 +133,40 @@ struct ReviewView: View {
                 }
               }
             }
-            .padding(.top)
+            .padding(EdgeInsets(top: 8, leading: -8, bottom: 0, trailing: -8))
           }
           .padding(.horizontal)
           
+          // TODO: Need View Binding
           CustomSectionView(title: "날짜 당 달성률") {
-            // TODO: Need View Binding
             HStack(spacing: 4) {
               
-              VStack(spacing: 4) {
+              VStack(spacing: 12) {
                 ForEach(currentSelectedPeriod.range, id: \.self) { num in
                   Text("\(num+1)")
+                    .frame(height: 40)
                 }
               }
-              .frame(height: 40)
               
-              VStack(spacing: 2) {
-                ForEach(0...10, id: \.self) { num in
-                  Circle().background(Color.element)
-                    .frame(width: 1, height: 1)
-                }
+              VStack(spacing: 12) {
+                DottedLine()
               }
-              .frame(height: 40)
-              .padding(.horizontal)
               
               GeometryReader { proxy in
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 12) {
                   ForEach(currentSelectedPeriod.range, id: \.self) { num in
-                    ForEach(getTestRatio.sorted(by: { $0.key.rawValue > $1.key.rawValue }), id: \.key) { activity, ratio in
-                      HStack(spacing: 4) {
+                    // TODO: Replace CommonBarChart
+                    VStack(alignment: .leading, spacing: 4) {
+                      ForEach(getTestRatio.sorted(by: { $0.key.rawValue < $1.key.rawValue }), id: \.key) { activity, ratio in
                         Rectangle()
                           .fill(activity.color.opacity(0.8))
                           .frame(width: proxy.size.width * ratio)
                       }
                     }
+                    .frame(height: 40)
+                    
                   }
                 }
-                .frame(height: 40)
               }
             }
             .padding(.top)
@@ -179,14 +187,10 @@ struct ReviewView_Previews: PreviewProvider {
 extension ActivityCategory {
   var color: Color {
     switch self {
-    case .health:
-      return .green
-    case .concentrate:
-      return .secondary
-    case .normal:
-      return .gray
-    case .custom:
-      return .element
+    case .health: return .green
+    case .concentrate: return .cyan
+    case .normal: return .gray
+    case .custom: return .cell
     }
   }
 }

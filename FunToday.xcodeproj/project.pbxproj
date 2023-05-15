@@ -40,6 +40,8 @@
 		1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37762A0D30DB00BA731B /* View+If.swift */; };
 		1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */; };
 		1B6C377B2A0E04A900BA731B /* FloatingMinusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C377A2A0E04A900BA731B /* FloatingMinusButton.swift */; };
+		1B6C37832A1240A100BA731B /* DottedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37822A1240A100BA731B /* DottedLine.swift */; };
+		1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37842A12439A00BA731B /* CommonBarChart.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -108,6 +110,8 @@
 		1B6C37762A0D30DB00BA731B /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		1B6C37782A0DCFDA00BA731B /* ActivityInputContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInputContainer.swift; sourceTree = "<group>"; };
 		1B6C377A2A0E04A900BA731B /* FloatingMinusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMinusButton.swift; sourceTree = "<group>"; };
+		1B6C37822A1240A100BA731B /* DottedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLine.swift; sourceTree = "<group>"; };
+		1B6C37842A12439A00BA731B /* CommonBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBarChart.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				1B6C376E2A0C902500BA731B /* DescriptionText.swift */,
 				1B6C376C2A0C8FCC00BA731B /* CommonTextField.swift */,
 				1B6C37702A0CA5DD00BA731B /* CustomSectionView.swift */,
+				1B6C37822A1240A100BA731B /* DottedLine.swift */,
+				1B6C37842A12439A00BA731B /* CommonBarChart.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -456,6 +462,7 @@
 				1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */,
 				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
 				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
+				1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */,
 				1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */,
 				1B8AA76529FA8458001C3A97 /* Goal+TestDouble.swift in Sources */,
 				1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */,
@@ -469,6 +476,7 @@
 				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
 				1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */,
 				1B8AA76929FA8464001C3A97 /* Activity+TestDouble.swift in Sources */,
+				1B6C37832A1240A100BA731B /* DottedLine.swift in Sources */,
 				1B8AA76D29FA9010001C3A97 /* Entity.swift in Sources */,
 				1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */,
 				1B8AA76F29FA94F6001C3A97 /* PriorityQueue.swift in Sources */,
