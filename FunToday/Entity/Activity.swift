@@ -56,7 +56,11 @@ struct Activity: Identifiable, Entity {
   }
 }
 
-enum ActivityCategory: Int, Codable, CaseIterable {
+enum ActivityCategory: Int, Codable, CaseIterable, Identifiable {
+  var id: Self {
+    self
+  }
+  
   case health, concentrate, normal, custom
 }
 
