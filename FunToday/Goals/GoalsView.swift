@@ -17,34 +17,37 @@ struct GoalsView: View {
     GeometryReader { proxy in NavigationView { ZStack(alignment: .bottomTrailing) {
       // MARK: - ScrollView
       
-      ScrollView { LazyVStack {
-        ForEach($goals) { goal in
-          GoalItem(
-            goal: goal,
-            size: CGSize(width: proxy.size.width - 16, height: 120)) {
-              NavigationLink { GoalDetail() } label: {
-                VStack(alignment: .leading, spacing: 8) {
-                  let goalValue = goal.wrappedValue
-                  Text(goalValue.name)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(Font.title)
-                  
-                  Text(goalValue.description)
-                    .lineLimit(3)
-                    .truncationMode(.tail)
-                    .font(Font.subheadline)
-                  
-                  Label(goalValue.timeFromTo, systemImage: "calendar")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .font(Font.caption)
-                }
-                .fixedSize(horizontal: false, vertical: true)
-                .foregroundColor(Color.label)
-              }
-            }
-            .navigationBarHidden(true)
-        }
-      }}
+      ScrollView {
+        // TODO: iOS 14.0 compatible issue
+//        LazyVStack {
+//          ForEach($goals) { goal in
+//            GoalItem(
+//              goal: goal,
+//              size: CGSize(width: proxy.size.width - 16, height: 120)) {
+//                NavigationLink { GoalDetail() } label: {
+//                  VStack(alignment: .leading, spacing: 8) {
+//                    let goalValue = goal.wrappedValue
+//                    Text(goalValue.name)
+//                      .frame(maxWidth: .infinity, alignment: .leading)
+//                      .font(Font.title)
+//
+//                    Text(goalValue.description)
+//                      .lineLimit(3)
+//                      .truncationMode(.tail)
+//                      .font(Font.subheadline)
+//
+//                    Label(goalValue.timeFromTo, systemImage: "calendar")
+//                      .frame(maxWidth: .infinity, alignment: .trailing)
+//                      .font(Font.caption)
+//                  }
+//                  .fixedSize(horizontal: false, vertical: true)
+//                  .foregroundColor(Color.label)
+//                }
+//              }
+//              .navigationBarHidden(true)
+//          }
+//        }
+      }
       // MARK: - Floating Button
       NavigationLink { GoalInsertView() } label: {
         FloatingPlusButton(width: proxy.size.width / 6)

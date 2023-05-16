@@ -8,16 +8,17 @@
 import SwiftUI
 
 extension View {
-  func getLayout(
-    _ proxy: GeometryProxy
-    , numberInRow: Int = 1
-    , spacing: CGFloat = 8) -> [GridItem] {
-      var width = proxy.size.width / CGFloat(numberInRow)
-      
-      width -= (spacing * CGFloat(3 - numberInRow))
-      
-      return Array(
-        repeating: GridItem(.fixed(width)),
-        count: numberInRow)
-    }
+  // TODO: iOS 14.0 compatible issue
+//  func getLayout(
+//    _ proxy: GeometryProxy
+//    , numberInRow: Int = 1
+//    , spacing: CGFloat = 8) -> [GridItem] {
+//      var width = proxy.size.width / CGFloat(numberInRow)
+//      
+//      width -= (spacing * CGFloat(3 - numberInRow))
+//      
+//      return Array(
+//        repeating: GridItem(.fixed(width)),
+//        count: numberInRow)
+//    }
 }

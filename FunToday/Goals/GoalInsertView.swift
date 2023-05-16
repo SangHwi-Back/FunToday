@@ -32,7 +32,7 @@ struct GoalInsertView: View {
             ZStack(alignment: .topLeading) {
               RoutineInputView(routine: routine)
               FloatingMinusButton(width: 24) {
-                routines.removeAll(where: { $0.id == routine.id })
+                routines.removeAll(where: { $0 == routine.wrappedValue })
               }
                 .offset(x: -24, y: -24)
             }
@@ -49,8 +49,9 @@ struct GoalInsertView: View {
         }
       }.padding()
     }
-    .navigationBarTitleDisplayMode(.large)
-    .navigationTitle("목표 추가")
+    // TODO: iOS 14.0 compatible issue
+//    .navigationBarTitleDisplayMode(.large)
+//    .navigationTitle("목표 추가")
   }
 }
 

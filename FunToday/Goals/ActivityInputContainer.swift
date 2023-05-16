@@ -17,19 +17,20 @@ struct ActivityInputContainer: View {
         .padding(.vertical)
       ActivityInputScrollView(activities: $activities, size: proxy.size)
     }}
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: {
-          activities.append(Activity.getDouble(inx: activities.count))
-        }, label: {
-          Image(systemName: "plus")
-            .resizable()
-            .clipShape(Circle())
-        })
-      }
-    }
-    .navigationBarTitleDisplayMode(.inline)
-    .navigationTitle("활동 추가")
+    // TODO: iOS 14.0 compatible issue
+//    .toolbar {
+//      ToolbarItem(placement: .navigationBarTrailing) {
+//        Button(action: {
+//          activities.append(Activity.getDouble(inx: activities.count))
+//        }, label: {
+//          Image(systemName: "plus")
+//            .resizable()
+//            .clipShape(Circle())
+//        })
+//      }
+//    }
+//    .navigationBarTitleDisplayMode(.inline)
+//    .navigationTitle("활동 추가")
     .padding()
   }
 }
@@ -42,7 +43,9 @@ struct ActivityButtonScrollView: View {
       HStack(spacing: 18) {
         ForEach($activities) { activity in
           ActivityButton(activity: activity, minusButtonHandler: {
-            activities.removeAll(where: { $0.id == activity.id })
+//            let aa = $0
+            
+            activities.removeAll(where: { $0 == activity.wrappedValue })
           })
         }
       }
@@ -66,12 +69,13 @@ struct ActivityButtonScrollView: View {
             .foregroundColor(Color.label)
             .padding()
         }
-        .overlay {
-          FloatingMinusButton(width: 24) {
-            minusButtonHandler?()
-          }
-          .offset(x: 20, y: -20)
-        }
+        // TODO: iOS 15.0 compatible issue
+//        .overlay {
+//          FloatingMinusButton(width: 24) {
+//            minusButtonHandler?()
+//          }
+//          .offset(x: 20, y: -20)
+//        }
       }
     }
   }
@@ -88,8 +92,9 @@ struct ActivityInputScrollView: View {
           ActivityInputView(activity: activity).tag(activity.id)
         }
       }
-      .tabViewStyle(PageTabViewStyle(indexDisplayMode: activities.isEmpty ? .never : .always))
-      .navigationBarTitleDisplayMode(.inline)
+      // TODO: iOS 14.0 compatible issue
+//      .tabViewStyle(PageTabViewStyle(indexDisplayMode: activities.isEmpty ? .never : .always))
+//      .navigationBarTitleDisplayMode(.inline)
       .frame(width: size.width, height: size.height - 16)
     }
   }
@@ -100,5 +105,21 @@ struct ActivityInputContainer_Previews: PreviewProvider {
     NavigationView {
       ActivityInputContainer(activities: Binding.constant([Activity.getDouble(inx: 0), Activity.getDouble(inx: 1)]))
     }
+  }
+}
+
+//extension Binding where Value: Identifiable<String> {
+//  var bindingID: ObjectIdentifier {
+//    return ObjectIdentifier(NSString(string: wrappedValue.id))
+//  }
+//}
+
+extension Identifiable where ID == String {
+  static func == (lhs: Self, rhs: Self) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  var id: String {
+    self.id
   }
 }

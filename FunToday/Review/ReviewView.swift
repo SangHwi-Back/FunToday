@@ -241,7 +241,7 @@ extension ActivityCategory {
   var color: Color {
     switch self {
     case .health: return .green
-    case .concentrate: return .cyan
+    case .concentrate: return Color(red: 0, green: 1, blue: 1)
     case .normal: return .gray
     case .custom: return .cell
     }

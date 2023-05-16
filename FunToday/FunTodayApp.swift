@@ -7,15 +7,16 @@
 
 import SwiftUI
 
-@main
-struct FunTodayApp: App {
-  
-  @ObservedObject var firebasedb = DependencyFirebaseDB()
-  
-  var body: some Scene {
-    WindowGroup {
-      FunTodayAppTabView()
-        .environmentObject(firebasedb)
-    }
-  }
-}
+// TODO: iOS 14.0 compatible issue (main)
+//@main
+//struct FunTodayApp: App {
+//
+//  @ObservedObject var firebasedb = DependencyFirebaseDB()
+//
+//  var body: some Scene {
+//    WindowGroup {
+//      FunTodayAppTabView()
+//        .environmentObject(firebasedb)
+//    }
+//  }
+//}

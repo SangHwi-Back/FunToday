@@ -25,11 +25,18 @@ enum FunTodayTab: String {
     Text(self.rawValue.uppercased())
   }
   
-  func getLabel() -> Label<Text, Image> {
-    Label {
-      self.getText
-    } icon: {
-      self.thumbnailImage
+  // TODO: iOS 14.0 compatible issue
+  func getLabel() -> some View {
+    VStack {
+      thumbnailImage
+      getText
     }
   }
+//  func getLabel() -> Label<Text, Image> {
+//    Label {
+//      self.getText
+//    } icon: {
+//      self.thumbnailImage
+//    }
+//  }
 }
