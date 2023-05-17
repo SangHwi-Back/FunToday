@@ -17,20 +17,19 @@ struct ActivityInputContainer: View {
         .padding(.vertical)
       ActivityInputScrollView(activities: $activities, size: proxy.size)
     }}
-    // TODO: iOS 14.0 compatible issue
-//    .toolbar {
-//      ToolbarItem(placement: .navigationBarTrailing) {
-//        Button(action: {
-//          activities.append(Activity.getDouble(inx: activities.count))
-//        }, label: {
-//          Image(systemName: "plus")
-//            .resizable()
-//            .clipShape(Circle())
-//        })
-//      }
-//    }
-//    .navigationBarTitleDisplayMode(.inline)
-//    .navigationTitle("활동 추가")
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {
+          activities.append(Activity.getDouble(inx: activities.count))
+        }, label: {
+          Image(systemName: "plus")
+            .resizable()
+            .clipShape(Circle())
+        })
+      }
+    }
+    .navigationBarTitleDisplayMode(.inline)
+    .navigationTitle("활동 추가")
     .padding()
   }
 }
@@ -92,9 +91,8 @@ struct ActivityInputScrollView: View {
           ActivityInputView(activity: activity).tag(activity.id)
         }
       }
-      // TODO: iOS 14.0 compatible issue
-//      .tabViewStyle(PageTabViewStyle(indexDisplayMode: activities.isEmpty ? .never : .always))
-//      .navigationBarTitleDisplayMode(.inline)
+      .tabViewStyle(PageTabViewStyle(indexDisplayMode: activities.isEmpty ? .never : .always))
+      .navigationBarTitleDisplayMode(.inline)
       .frame(width: size.width, height: size.height - 16)
     }
   }
@@ -107,12 +105,6 @@ struct ActivityInputContainer_Previews: PreviewProvider {
     }
   }
 }
-
-//extension Binding where Value: Identifiable<String> {
-//  var bindingID: ObjectIdentifier {
-//    return ObjectIdentifier(NSString(string: wrappedValue.id))
-//  }
-//}
 
 extension Identifiable where ID == String {
   static func == (lhs: Self, rhs: Self) -> Bool {

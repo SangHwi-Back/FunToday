@@ -49,12 +49,6 @@ struct CustomTable<T>: View where T: Identifiable {
     .border(Color.border)
     .aspectRatio(contentMode: .fit)
   }
-  // TODO: iOS 14.0 compatible issue
-//  private func getGrid(columnCount: Int) -> [GridItem] {
-//    return Array(
-//      repeating: GridItem(.flexible()),
-//      count: columnCount)
-//  }
 }
 
 struct CustomTableColumn<T>: Hashable, Identifiable {

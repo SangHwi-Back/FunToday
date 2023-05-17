@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main
+//@main
 struct AppWrapper {
   static func main() {
     UIApplicationMain(

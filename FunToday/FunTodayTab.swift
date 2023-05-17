@@ -25,7 +25,6 @@ enum FunTodayTab: String {
     Text(self.rawValue.uppercased())
   }
   
-  // TODO: iOS 14.0 compatible issue
   func getLabel() -> some View {
     VStack {
       thumbnailImage

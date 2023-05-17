@@ -49,9 +49,8 @@ struct GoalInsertView: View {
         }
       }.padding()
     }
-    // TODO: iOS 14.0 compatible issue
-//    .navigationBarTitleDisplayMode(.large)
-//    .navigationTitle("목표 추가")
+    .navigationBarTitleDisplayMode(.large)
+    .navigationTitle("목표 추가")
   }
 }
 

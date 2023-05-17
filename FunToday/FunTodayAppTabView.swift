@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FunTodayAppTabView: View {
-  @ObservedObject var firebasedb = DependencyFirebaseDB()
   @State var selectedTab = FunTodayTab.goal
   
   var body: some View {
@@ -28,7 +27,6 @@ struct FunTodayAppTabView: View {
           FunTodayTab.setting.getLabel()
         }
     }
-    .environmentObject(firebasedb)
   }
 }
 
