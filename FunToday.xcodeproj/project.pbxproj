@@ -14,6 +14,7 @@
 		1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696122A09C5A000D827FB /* CustomTable.swift */; };
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
 		1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */; };
+		1B5CD5E42A14A58200160B96 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 1B5CD5E32A14A58200160B96 /* ComposableArchitecture */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
 		1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */; };
 		1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */; };
@@ -139,6 +140,7 @@
 			files = (
 				1B16960D2A08CF2400D827FB /* FirebaseDatabaseSwift in Frameworks */,
 				1B16960B2A08CF2400D827FB /* FirebaseDatabase in Frameworks */,
+				1B5CD5E42A14A58200160B96 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +334,7 @@
 			packageProductDependencies = (
 				1B16960A2A08CF2400D827FB /* FirebaseDatabase */,
 				1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */,
+				1B5CD5E32A14A58200160B96 /* ComposableArchitecture */,
 			);
 			productName = FunToday;
 			productReference = 1B6BDE6429FA37C300FDABA3 /* FunToday.app */;
@@ -407,6 +410,7 @@
 			mainGroup = 1B6BDE5B29FA37C300FDABA3;
 			packageReferences = (
 				1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 1B6BDE6529FA37C300FDABA3 /* Products */;
 			projectDirPath = "";
@@ -846,6 +850,14 @@
 				kind = branch;
 			};
 		};
+		1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.53.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -858,6 +870,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		1B5CD5E32A14A58200160B96 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
