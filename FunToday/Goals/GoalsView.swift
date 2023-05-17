@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct GoalsView: View {
   
-  @State var goals: [Goal] = [
-    Goal.getDouble(inx: 0)
-  ]
+  let store: StoreOf<GoalListFeature>
   
-  var body: some View {
-    GeometryReader { proxy in NavigationView { ZStack(alignment: .bottomTrailing) {
-      // MARK: - ScrollView
-      
+  var body: some View
+  { WithViewStore(store, observe: { $0 }) { viewStore in GeometryReader { proxy in NavigationView {
+    
+    ZStack(alignment: .bottomTrailing) {
       ScrollView {
         LazyVStack {
-          ForEach($goals) { goal in
+          ForEach(viewStore.binding(get: { $0.list }, send: .requestGoals)) { goal in
             GoalItem(goal: goal, size: CGSize(width: proxy.size.width - 16, height: 120)) {
               NavigationLink { GoalDetail() } label: {
                 GoalItemContents(goal: goal)
@@ -29,18 +28,25 @@ struct GoalsView: View {
           }
         }
       }
-      // MARK: - Floating Button
+      .onAppear { viewStore.send(.requestGoals) }
+      
       NavigationLink { GoalInsertView() } label: {
         FloatingPlusButton(width: proxy.size.width / 6)
       }
-    }}
-    .padding(.vertical, 0.1)
     }
   }
+  }}.padding(.vertical, 0.1)}
 }
+
 struct GoalsView_Previews: PreviewProvider {
   static var previews: some View {
-    GoalsView()
+    let initialStore = Store(
+      initialState: GoalListFeature.State(list: []),
+      reducer: {
+        GoalListFeature()
+      }
+    )
+    return GoalsView(store: initialStore)
   }
 }
 

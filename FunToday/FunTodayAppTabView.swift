@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct FunTodayAppTabView: View {
   @State var selectedTab = FunTodayTab.goal
   
   var body: some View {
     TabView(selection: $selectedTab) {
-      GoalsView()
+      GoalsView(store: Store(initialState: GoalListFeature.State(list: []), reducer: {
+        GoalListFeature()
+      }))
         .tabItem {
           FunTodayTab.goal.getLabel()
         }
