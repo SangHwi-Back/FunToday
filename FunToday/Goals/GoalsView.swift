@@ -20,30 +20,12 @@ struct GoalsView: View {
       ScrollView {
         LazyVStack {
           ForEach($goals) { goal in
-            GoalItem(
-              goal: goal,
-              size: CGSize(width: proxy.size.width - 16, height: 120)) {
-                NavigationLink { GoalDetail() } label: {
-                  VStack(alignment: .leading, spacing: 8) {
-                    let goalValue = goal.wrappedValue
-                    Text(goalValue.name)
-                      .frame(maxWidth: .infinity, alignment: .leading)
-                      .font(Font.title)
-
-                    Text(goalValue.description)
-                      .lineLimit(3)
-                      .truncationMode(.tail)
-                      .font(Font.subheadline)
-
-                    Label(goalValue.timeFromTo, systemImage: "calendar")
-                      .frame(maxWidth: .infinity, alignment: .trailing)
-                      .font(Font.caption)
-                  }
-                  .fixedSize(horizontal: false, vertical: true)
-                  .foregroundColor(Color.label)
-                }
+            GoalItem(goal: goal, size: CGSize(width: proxy.size.width - 16, height: 120)) {
+              NavigationLink { GoalDetail() } label: {
+                GoalItemContents(goal: goal)
               }
-              .navigationBarHidden(true)
+            }
+            .navigationBarHidden(true)
           }
         }
       }
@@ -59,5 +41,27 @@ struct GoalsView: View {
 struct GoalsView_Previews: PreviewProvider {
   static var previews: some View {
     GoalsView()
+  }
+}
+
+private struct GoalItemContents: View {
+  @Binding var goal: Goal
+  var body: some View {
+    VStack(alignment: .leading, spacing: 8) {
+      Text(goal.name)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .font(Font.title)
+      
+      Text(goal.description)
+        .lineLimit(3)
+        .truncationMode(.tail)
+        .font(Font.subheadline)
+      
+      Label(goal.timeFromTo, systemImage: "calendar")
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .font(Font.caption)
+    }
+    .fixedSize(horizontal: false, vertical: true)
+    .foregroundColor(Color.label)
   }
 }

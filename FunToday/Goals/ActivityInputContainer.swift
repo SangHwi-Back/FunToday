@@ -42,8 +42,6 @@ struct ActivityButtonScrollView: View {
       HStack(spacing: 18) {
         ForEach($activities) { activity in
           ActivityButton(activity: activity, minusButtonHandler: {
-//            let aa = $0
-            
             activities.removeAll(where: { $0 == activity.wrappedValue })
           })
         }
@@ -68,13 +66,14 @@ struct ActivityButtonScrollView: View {
             .foregroundColor(Color.label)
             .padding()
         }
-        // TODO: iOS 15.0 compatible issue
-//        .overlay {
-//          FloatingMinusButton(width: 24) {
-//            minusButtonHandler?()
-//          }
-//          .offset(x: 20, y: -20)
-//        }
+        .overlay({
+          GeometryReader { proxy in
+            FloatingMinusButton(width: 24) {
+              minusButtonHandler?()
+            }
+            .offset(x: -24, y: -24)
+          }
+        }())
       }
     }
   }
@@ -88,7 +87,7 @@ struct ActivityInputScrollView: View {
     ScrollView(.horizontal) {
       TabView {
         ForEach($activities) { activity in
-          ActivityInputView(activity: activity).tag(activity.id)
+          ActivityInputView(activity: activity).tag(activity.wrappedValue.id)
         }
       }
       .tabViewStyle(PageTabViewStyle(indexDisplayMode: activities.isEmpty ? .never : .always))
