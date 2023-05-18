@@ -13,35 +13,33 @@ struct GoalsView: View {
   let store: StoreOf<GoalListFeature>
   
   var body: some View
-  { WithViewStore(store, observe: { $0 }) { viewStore in GeometryReader { proxy in NavigationView {
-    
+  { WithViewStore(store, observe: { $0 }) { viewStore in NavigationView {
     ZStack(alignment: .bottomTrailing) {
       ScrollView {
         LazyVStack {
-          ForEach(viewStore.binding(get: { $0.list }, send: .requestGoals)) { goal in
-            GoalItem(goal: goal, size: CGSize(width: proxy.size.width - 16, height: 120)) {
+          ForEachStore(
+            store.scope(state: \.goalList, action: GoalListFeature.Action.goalItem(id:action:))
+          ) {
+            GoalItem(store: $0) {
               NavigationLink { GoalDetail() } label: {
-                GoalItemContents(goal: goal)
+                GoalItemContents(goal: Binding.constant(Goal.getDouble()))
               }
             }
             .navigationBarHidden(true)
           }
         }
       }
-      .onAppear { viewStore.send(.requestGoals) }
-      
       NavigationLink { GoalInsertView() } label: {
-        FloatingPlusButton(width: proxy.size.width / 6)
+        FloatingPlusButton(width: 54)
       }
     }
-  }
   }}.padding(.vertical, 0.1)}
 }
 
 struct GoalsView_Previews: PreviewProvider {
   static var previews: some View {
     let initialStore = Store(
-      initialState: GoalListFeature.State(list: []),
+      initialState: GoalListFeature.State(goalList: []),
       reducer: {
         GoalListFeature()
       }

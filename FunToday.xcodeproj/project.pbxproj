@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1B1696062A08CD6300D827FB /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696052A08CD6300D827FB /* Dependency.swift */; };
-		1B16960B2A08CF2400D827FB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960A2A08CF2400D827FB /* FirebaseDatabase */; };
-		1B16960D2A08CF2400D827FB /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */; };
 		1B16960F2A08D53800D827FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B16960E2A08D53800D827FB /* GoogleService-Info.plist */; };
 		1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696122A09C5A000D827FB /* CustomTable.swift */; };
+		1B2118C32A1600D2009E09FF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C22A1600D2009E09FF /* ComposableArchitecture */; };
+		1B2118C62A1600FC009E09FF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C52A1600FC009E09FF /* FirebaseDatabase */; };
+		1B2118C82A1600FC009E09FF /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C72A1600FC009E09FF /* FirebaseDatabaseSwift */; };
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
 		1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */; };
-		1B5CD5E42A14A58200160B96 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 1B5CD5E32A14A58200160B96 /* ComposableArchitecture */; };
 		1B5CD5E82A14A68F00160B96 /* GoalListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */; };
-		1B5CD5EC2A14C09E00160B96 /* GoalFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalFeature.swift */; };
+		1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
 		1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */; };
 		1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */; };
@@ -87,7 +87,7 @@
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
 		1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListFeature.swift; sourceTree = "<group>"; };
-		1B5CD5EB2A14C09E00160B96 /* GoalFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFeature.swift; sourceTree = "<group>"; };
+		1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalItemFeature.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
 		1B6BDE6429FA37C300FDABA3 /* FunToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayApp.swift; sourceTree = "<group>"; };
@@ -142,9 +142,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B16960D2A08CF2400D827FB /* FirebaseDatabaseSwift in Frameworks */,
-				1B16960B2A08CF2400D827FB /* FirebaseDatabase in Frameworks */,
-				1B5CD5E42A14A58200160B96 /* ComposableArchitecture in Frameworks */,
+				1B2118C82A1600FC009E09FF /* FirebaseDatabaseSwift in Frameworks */,
+				1B2118C62A1600FC009E09FF /* FirebaseDatabase in Frameworks */,
+				1B2118C32A1600D2009E09FF /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +237,7 @@
 			children = (
 				1B6BDE9329FA551900FDABA3 /* GoalsView.swift */,
 				1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */,
-				1B5CD5EB2A14C09E00160B96 /* GoalFeature.swift */,
+				1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */,
 				1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */,
 				1B6BDE9E29FA5A7C00FDABA3 /* GoalItem.swift */,
 				1B6C37682A0C8CC900BA731B /* GoalInsertView.swift */,
@@ -338,9 +338,9 @@
 			);
 			name = FunToday;
 			packageProductDependencies = (
-				1B16960A2A08CF2400D827FB /* FirebaseDatabase */,
-				1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */,
-				1B5CD5E32A14A58200160B96 /* ComposableArchitecture */,
+				1B2118C22A1600D2009E09FF /* ComposableArchitecture */,
+				1B2118C52A1600FC009E09FF /* FirebaseDatabase */,
+				1B2118C72A1600FC009E09FF /* FirebaseDatabaseSwift */,
 			);
 			productName = FunToday;
 			productReference = 1B6BDE6429FA37C300FDABA3 /* FunToday.app */;
@@ -415,8 +415,8 @@
 			);
 			mainGroup = 1B6BDE5B29FA37C300FDABA3;
 			packageReferences = (
-				1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				1B2118C12A1600D2009E09FF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				1B2118C42A1600FB009E09FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 1B6BDE6529FA37C300FDABA3 /* Products */;
 			projectDirPath = "";
@@ -481,7 +481,7 @@
 				1B6DE2682A13A8C70069D9EB /* SceneDelegate.swift in Sources */,
 				1B6C37792A0DCFDA00BA731B /* ActivityInputContainer.swift in Sources */,
 				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
-				1B5CD5EC2A14C09E00160B96 /* GoalFeature.swift in Sources */,
+				1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */,
 				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
 				1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */,
 				1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */,
@@ -850,39 +850,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		1B2118C12A1600D2009E09FF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.53.1;
+				minimumVersion = 0.53.2;
+			};
+		};
+		1B2118C42A1600FB009E09FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1B16960A2A08CF2400D827FB /* FirebaseDatabase */ = {
+		1B2118C22A1600D2009E09FF /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 1B2118C12A1600D2009E09FF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		1B2118C52A1600FC009E09FF /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2118C42A1600FB009E09FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
 		};
-		1B16960C2A08CF2400D827FB /* FirebaseDatabaseSwift */ = {
+		1B2118C72A1600FC009E09FF /* FirebaseDatabaseSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B1696092A08CF2400D827FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 1B2118C42A1600FB009E09FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
-		};
-		1B5CD5E32A14A58200160B96 /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1B5CD5E22A14A58200160B96 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
