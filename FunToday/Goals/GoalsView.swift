@@ -39,7 +39,7 @@ struct GoalsView: View {
 struct GoalsView_Previews: PreviewProvider {
   static var previews: some View {
     let initialStore = Store(
-      initialState: GoalListFeature.State(goalList: []),
+      initialState: GoalListFeature.State(goalList: IdentifiedArrayOf(arrayLiteral: GoalItemFeature.State(goal: Goal.getDouble(), id: UUID()))),
       reducer: {
         GoalListFeature()
       }
@@ -48,7 +48,7 @@ struct GoalsView_Previews: PreviewProvider {
   }
 }
 
-private struct GoalItemContents: View {
+struct GoalItemContents: View {
   @Binding var goal: Goal
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {

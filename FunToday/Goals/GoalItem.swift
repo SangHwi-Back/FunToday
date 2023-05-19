@@ -29,10 +29,10 @@ struct GoalItem<ContentsView: View>: View {
             { CommonRectangle(color: Binding.constant(Color.highlight))
               
               VStack(spacing: 8)
-              { Image(systemName: "chevron.compact.\(viewStore.goal.isFold ? "down" : "up")")
+              { Image(systemName: "chevron.compact.\(viewStore.isFold ? "down" : "up")")
                   .foregroundColor(Color.element)
                 
-                if viewStore.goal.isFold == false {
+                if viewStore.isFold == false {
                   HStack
                   {
                     ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
@@ -54,17 +54,19 @@ struct GoalItem<ContentsView: View>: View {
           }
         }.padding(8)
       }
-      .animation(.easeOut(duration: 0.2), value: viewStore.goal.isFold)
+      .animation(.easeOut(duration: 0.2), value: viewStore.isFold)
     }
   }
 }
 
-//struct GoalItem_Previews: PreviewProvider {
-//  static var previews: some View {
-//    GoalItem(
-//      goal: Binding.constant(Goal.getDouble()),
-//      size: CGSize(width: 300, height: 120)) {
-//        Text("Hello There!")
-//      }
-//  }
-//}
+struct GoalItem_Previews: PreviewProvider {
+  static var previews: some View {
+    GoalItem(
+      store: Store(
+        initialState: GoalItemFeature.State(goal: .getDouble(), id: .init()),
+        reducer: GoalItemFeature()
+      )) {
+        GoalItemContents(goal: Binding.constant(Goal.getDouble()))
+      }
+  }
+}

@@ -40,12 +40,8 @@ struct GoalListFeature: ReducerProtocol {
         state.goalList.sort { $0.id == $1.id }
         return .none
         
-      case .goalItem(id: let id, action: .setFold):
-        guard let goalState = state.goalList.first(where: {$0.id == id}) else {
-          return .none
-        }
-        print(goalState.goal.isFold)
-        return .send(.sortGoal)
+      case .goalItem(id: _, action: .setFold):
+        return .none
         
       case .goalItem:
         return .none
@@ -55,34 +51,4 @@ struct GoalListFeature: ReducerProtocol {
       GoalItemFeature()
     }
   }
-  
-//  func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-//    switch action {
-//    case .setGoal(let goal):
-//      guard state.goalList.contains(where: {$0.goal == goal}) else {
-//        return .none
-//      }
-//
-//      for i in 0..<state.goalList.count {
-//        if state.goalList[i].goal == goal {
-//          state.goalList[i].goal = goal
-//          break
-//        }
-//      }
-//
-//      return .none
-//
-//    case .goalItem(id: let id, action: .setFold):
-//      guard let goalState = state.goalList.first(where: {$0.id == id}) else {
-//        return .none
-//      }
-//
-//      return .run { send in
-//        await send(.setGoal(goalState.goal))
-//      }
-//
-//    case .goalItem:
-//      return .none
-//    }
-//  }
 }
