@@ -8,7 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct ActivityInputContainer: View {
+struct ActivityContainer: View {
   let store: StoreOf<ActivityContainerFeature>
   
   var body: some View {
@@ -33,56 +33,6 @@ struct ActivityInputContainer: View {
     .navigationTitle("활동 추가")
     .padding()
     }
-  }
-}
-
-struct ActivityInputContainer_Previews: PreviewProvider {
-  static var previews: some View {
-    let initialStore = Store(
-      initialState: ActivityContainerFeature.State(activities: .init()),
-      reducer: { ActivityContainerFeature() })
-    
-    return ActivityInputContainer(store: initialStore)
-  }
-}
-
-struct ActivityContainerFeature: ReducerProtocol {
-  struct State: Equatable, Identifiable {
-    static func == (lhs: ActivityContainerFeature.State, rhs: ActivityContainerFeature.State) -> Bool {
-      lhs.id == rhs.id
-    }
-    var id: UUID = .init()
-    var activities: IdentifiedArrayOf<ActivityInputFeature.State>
-  }
-  
-  enum Action {
-    case addActivity
-    case removeActivity
-    case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
-  }
-  
-  var body: some ReducerProtocol<State, Action> {
-    Reduce { state, action in
-      switch action {
-      case .addActivity:
-        state.activities.append(.init(activity: Activity.getDouble()))
-        return .none
-      case .removeActivity:
-        return .none
-      case .activityElement(id: let id, action: .removeActivity):
-        state.activities.remove(id: id)
-        return .none
-      case .activityElement:
-        return .none
-      }
-    }.forEach(\.activities, action: /Action.activityElement(id:action:)) {
-      ActivityInputFeature()
-    }
-  }
-  
-  // MARK: - Inner State
-  enum ActivityHeaderButtonType {
-    case basic, minus
   }
 }
 
@@ -152,5 +102,15 @@ struct ActivityInputScrollView: View {
         .frame(width: size.width, height: size.height - 16)
       }
     }
+  }
+}
+
+struct ActivityContainer_Previews: PreviewProvider {
+  static var previews: some View {
+    let initialStore = Store(
+      initialState: ActivityContainerFeature.State(activities: .init()),
+      reducer: { ActivityContainerFeature() })
+    
+    return ActivityContainer(store: initialStore)
   }
 }

@@ -29,7 +29,7 @@ struct GoalsView: View {
         }
       }
       NavigationLink {
-        GoalInsertView(
+        GoalInputView(
           store: Store(
             initialState: GoalInputFeature.State(
               goal: .getDouble(),

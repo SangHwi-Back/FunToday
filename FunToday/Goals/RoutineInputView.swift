@@ -28,7 +28,7 @@ struct RoutineInputView: View {
               .frame(maxWidth: .infinity, alignment: .leading)
             
             NavigationLink {
-              ActivityInputContainer(
+              ActivityContainer(
                 store: Store(
                   initialState: ActivityContainerFeature.State(
                     activities: .init()
@@ -60,42 +60,5 @@ struct RoutineInputView_Preview: PreviewProvider {
       reducer: { RoutineInputFeature() })
     
     return RoutineInputView(store: initialStore)
-  }
-}
-
-struct RoutineInputFeature: ReducerProtocol {
-  struct State: Equatable, Identifiable {
-    var id: UUID = .init()
-    var routine: Routine
-    var activities: IdentifiedArrayOf<ActivityContainerFeature.State>
-  }
-  
-  enum Action {
-    case updateName(String)
-    case updateDescription(String)
-    case removeRoutine
-    case activityContainerElement(id:ActivityContainerFeature.State.ID, action: ActivityContainerFeature.Action)
-  }
-  
-  var body: some ReducerProtocol<State, Action> {
-    Reduce { state, action in
-      switch action {
-      case .updateName(let txt):
-        state.routine.name = txt
-        return .none
-      case .updateDescription(let txt):
-        state.routine.description = txt
-        return .none
-      case .removeRoutine:
-        return .none
-      case .activityContainerElement(id: let id, action: .removeActivity):
-        state.activities.remove(id: id)
-        return .none
-      case .activityContainerElement:
-        return .none
-      }
-    }.forEach(\.activities, action: /Action.activityContainerElement(id:action:)) {
-      ActivityContainerFeature()
-    }
   }
 }
