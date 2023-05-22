@@ -100,12 +100,15 @@ struct ActivityInputFeature: ReducerProtocol {
       return .none
     case .updateCategory(let category):
       state.activity.categoryValue = category.rawValue
+      state.category = category
       return .none
     case .updateStartDate(let date):
       state.activity.time_s = state.dateFormatter.string(from: date)
+      state.startDate = date
       return .none
     case .updateEndDate(let date):
       state.activity.time_e = state.dateFormatter.string(from: date)
+      state.endDate = date
       return .none
     case .updateDailyActive:
       state.activity.isDailyActive.toggle()

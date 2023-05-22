@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Routine: Identifiable, Entity {
+struct Routine: Identifiable, Entity, Hashable {
   var uniqueID: String
   
   var id: String {

@@ -53,21 +53,20 @@ struct RoutineInputView: View {
   }
 }
 
-//struct RoutineInputView_Preview: PreviewProvider {
-//  static var previews: some View {
-//    RoutineInputView(routine: .constant(Routine.getDouble()))
-//  }
-//}
+struct RoutineInputView_Preview: PreviewProvider {
+  static var previews: some View {
+    let initialStore = Store(
+      initialState: RoutineInputFeature.State(routine: Routine.getDouble(), activities: .init()),
+      reducer: { RoutineInputFeature() })
+    
+    return RoutineInputView(store: initialStore)
+  }
+}
 
 struct RoutineInputFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
-    static func == (lhs: RoutineInputFeature.State, rhs: RoutineInputFeature.State) -> Bool {
-      lhs.id == rhs.id
-    }
-    
-    var routine: Routine
     var id: UUID = .init()
-    
+    var routine: Routine
     var activities: IdentifiedArrayOf<ActivityContainerFeature.State>
   }
   

@@ -41,7 +41,6 @@ struct GoalInsertView: View {
             ZStack {
               RoundedRectangle(cornerRadius: 8)
                 .strokeBorder(Color.gray)
-
               FloatingPlusButton(width: 24, bgColor: .gray) {
                 viewstore.send(.addRoutine)
               }
@@ -50,20 +49,16 @@ struct GoalInsertView: View {
         }.padding()
       }
       .navigationBarTitleDisplayMode(.large)
-    .navigationTitle("목표 추가")
+      .navigationTitle("목표 추가")
     }
   }
 }
 
 struct GoalInsertView_Previews: PreviewProvider {
   static var previews: some View {
-    let initialStore = Store.init(initialState: GoalInputFeature.State(
-      goal: Goal.getDouble(),
-      routines: .init()),
-      reducer: {
-        GoalInputFeature()
-      }
-    )
+    let initialStore = Store(
+      initialState: GoalInputFeature.State(goal: Goal.getDouble(), routines: .init()),
+      reducer: { GoalInputFeature() })
     
     return GoalInsertView(store: initialStore)
   }
@@ -72,12 +67,8 @@ struct GoalInsertView_Previews: PreviewProvider {
 struct GoalInputFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var goal: Goal
-    var id: String {
-      goal.uniqueID
-    }
-    
+    var id: UUID = .init()
     var routines: IdentifiedArrayOf<RoutineInputFeature.State>
-    var activeRoutine: Routine?
   }
   
   enum Action {

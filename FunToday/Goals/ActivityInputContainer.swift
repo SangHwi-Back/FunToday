@@ -36,12 +36,21 @@ struct ActivityInputContainer: View {
   }
 }
 
+struct ActivityInputContainer_Previews: PreviewProvider {
+  static var previews: some View {
+    let initialStore = Store(
+      initialState: ActivityContainerFeature.State(activities: .init()),
+      reducer: { ActivityContainerFeature() })
+    
+    return ActivityInputContainer(store: initialStore)
+  }
+}
+
 struct ActivityContainerFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     static func == (lhs: ActivityContainerFeature.State, rhs: ActivityContainerFeature.State) -> Bool {
       lhs.id == rhs.id
     }
-    
     var id: UUID = .init()
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
   }
@@ -143,23 +152,5 @@ struct ActivityInputScrollView: View {
         .frame(width: size.width, height: size.height - 16)
       }
     }
-  }
-}
-
-//struct ActivityInputContainer_Previews: PreviewProvider {
-//  static var previews: some View {
-//    NavigationView {
-//      ActivityInputContainer(activities: Binding.constant([Activity.getDouble(inx: 0), Activity.getDouble(inx: 1)]))
-//    }
-//  }
-//}
-
-extension Identifiable where ID == String {
-  static func == (lhs: Self, rhs: Self) -> Bool {
-    lhs.id == rhs.id
-  }
-  
-  var id: String {
-    self.id
   }
 }

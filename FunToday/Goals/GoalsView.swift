@@ -50,11 +50,9 @@ struct GoalsView: View {
 struct GoalsView_Previews: PreviewProvider {
   static var previews: some View {
     let initialStore = Store(
-      initialState: GoalListFeature.State(goalList: IdentifiedArrayOf(arrayLiteral: GoalItemFeature.State(goal: Goal.getDouble(), id: UUID()))),
-      reducer: {
-        GoalListFeature()
-      }
-    )
+      initialState: GoalListFeature.State(goalList: .init()),
+      reducer: { GoalListFeature() })
+    
     return GoalsView(store: initialStore)
   }
 }
