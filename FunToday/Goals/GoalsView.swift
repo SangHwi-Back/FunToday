@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct GoalsView: View {
-  
   let store: StoreOf<GoalListFeature>
   
   var body: some View
@@ -29,7 +28,19 @@ struct GoalsView: View {
           }
         }
       }
-      NavigationLink { GoalInsertView() } label: {
+      NavigationLink {
+        GoalInsertView(
+          store: Store(
+            initialState: GoalInputFeature.State(
+              goal: .getDouble(),
+              routines: .init()
+            ),
+            reducer: {
+              GoalInputFeature()
+            }
+          )
+        )
+      } label: {
         FloatingPlusButton(width: 54)
       }
     }
