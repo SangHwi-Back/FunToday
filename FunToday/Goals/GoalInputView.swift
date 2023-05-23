@@ -9,7 +9,11 @@ import SwiftUI
 import ComposableArchitecture
 
 struct GoalInputView: View {
+  @Environment(\.presentationMode) var presentationMode
+  
   let store: StoreOf<GoalInputFeature>
+  
+  @State var showAlert = false
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
@@ -50,14 +54,32 @@ struct GoalInputView: View {
           ZStack {
             RoundedRectangle(cornerRadius: 8)
               .strokeBorder(Color.gray)
-            Button("목표 달성을 응원합니다!") {
-              viewstore.send(.addGoal)
-            }
+              .background(Color.labelReversed)
+              .onTapGesture { showAlert.toggle() }
+              .alert(isPresented: $showAlert) {
+                Alert(
+                  title: Text("목표 추가"),
+                  message: Text("정말로 목표를 추가하시겠습니까?"),
+                  primaryButton: .default(Text("예")) {
+                    viewstore.send(.addGoal)
+                    presentationMode.wrappedValue.dismiss()
+                  },
+                  secondaryButton: .cancel(Text("아니오")) { showAlert.toggle() }
+                )
+              }
+            Text("목표 등록")
+              .foregroundColor(Color.label)
+              .fontWeight(.heavy)
+              .padding()
+              .allowsHitTesting(false)
           }
         }.padding()
       }
       .navigationBarTitleDisplayMode(.large)
       .navigationTitle("목표 추가")
+      .onDisappear {
+        viewstore.send(.resetGoal)
+      }
     }
   }
 }

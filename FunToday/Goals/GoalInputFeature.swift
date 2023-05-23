@@ -18,6 +18,7 @@ struct GoalInputFeature: ReducerProtocol {
   enum Action {
     case addGoal
     case addRoutine
+    case resetGoal
     case updateName(String)
     case updateDescription(String)
     case routineElement(id: RoutineInputFeature.State.ID, action: RoutineInputFeature.Action)
@@ -32,6 +33,10 @@ struct GoalInputFeature: ReducerProtocol {
         state.routines.append(
           RoutineInputFeature.State(routine: Routine.getDouble(), activities: .init())
         )
+        return .none
+      case .resetGoal:
+        state.goal = Goal.getDouble()
+        state.routines = []
         return .none
       case .updateName(let txt):
         state.goal.name = txt

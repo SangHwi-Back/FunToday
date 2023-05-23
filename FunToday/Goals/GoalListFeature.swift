@@ -20,6 +20,9 @@ struct GoalListFeature: ReducerProtocol {
   }
   
   var body: some ReducerProtocol<State, Action> {
+    Scope(state: \.newGoal, action: /Action.inputItem(action:)) {
+      GoalInputFeature()
+    }
     Reduce { state, action in
       switch action {
       case .goalItem(id: _, action: .setGoal(let goal)):

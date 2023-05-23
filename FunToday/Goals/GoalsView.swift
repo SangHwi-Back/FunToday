@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct GoalsView: View {
+  @Environment(\.presentationMode) var presentationMode
   let store: StoreOf<GoalListFeature>
   
   var body: some View
@@ -19,9 +20,10 @@ struct GoalsView: View {
           ForEachStore(
             store.scope(state: \.goalList, action: GoalListFeature.Action.goalItem(id:action:))
           ) {
-            GoalItem(store: $0) {
+            let store = $0
+            GoalItem(store: store) {
               NavigationLink { GoalDetail() } label: {
-                GoalItemContents(goal: Binding.constant(Goal.getDouble()))
+                GoalItemContents(store: store)
               }
             }
             .navigationBarHidden(true)
@@ -52,23 +54,25 @@ struct GoalsView_Previews: PreviewProvider {
 }
 
 struct GoalItemContents: View {
-  @Binding var goal: Goal
+  var store: StoreOf<GoalItemFeature>
   var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      Text(goal.name)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .font(Font.title)
-      
-      Text(goal.description)
-        .lineLimit(3)
-        .truncationMode(.tail)
-        .font(Font.subheadline)
-      
-      Label(goal.timeFromTo, systemImage: "calendar")
-        .frame(maxWidth: .infinity, alignment: .trailing)
-        .font(Font.caption)
+    WithViewStore(store, observe: { $0 }) { viewstore in
+      VStack(alignment: .leading, spacing: 8) {
+        Text(viewstore.goal.name)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .font(Font.title)
+        
+        Text(viewstore.goal.description)
+          .lineLimit(3)
+          .truncationMode(.tail)
+          .font(Font.subheadline)
+        
+        Label(viewstore.goal.timeFromTo, systemImage: "calendar")
+          .frame(maxWidth: .infinity, alignment: .trailing)
+          .font(Font.caption)
+      }
+      .fixedSize(horizontal: false, vertical: true)
+      .foregroundColor(Color.label)
     }
-    .fixedSize(horizontal: false, vertical: true)
-    .foregroundColor(Color.label)
   }
 }

@@ -61,12 +61,13 @@ struct GoalItem<ContentsView: View>: View {
 
 struct GoalItem_Previews: PreviewProvider {
   static var previews: some View {
-    GoalItem(
-      store: Store(
-        initialState: GoalItemFeature.State(goal: .getDouble(), id: .init()),
-        reducer: GoalItemFeature()
-      )) {
-        GoalItemContents(goal: Binding.constant(Goal.getDouble()))
-      }
+    let initialStore = Store(
+      initialState: GoalItemFeature.State(goal: .getDouble(), id: .init()),
+      reducer: GoalItemFeature()
+    )
+    
+    return GoalItem(store: initialStore) {
+      GoalItemContents(store: initialStore)
+    }
   }
 }
