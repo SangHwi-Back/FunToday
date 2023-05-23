@@ -16,11 +16,17 @@ struct GoalItemFeature: ReducerProtocol {
   }
   
   enum Action {
+    case addGoal(Goal)
+    case setGoal(Goal)
     case setFold
   }
   
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
+    case .addGoal(let goal):
+      return .none
+    case .setGoal(let goal):
+      return .none
     case .setFold:
       state.isFold.toggle()
       return .none

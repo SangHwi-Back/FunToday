@@ -30,15 +30,9 @@ struct GoalsView: View {
       }
       NavigationLink {
         GoalInputView(
-          store: Store(
-            initialState: GoalInputFeature.State(
-              goal: .getDouble(),
-              routines: .init()
-            ),
-            reducer: {
-              GoalInputFeature()
-            }
-          )
+          store: store.scope(
+            state: \.newGoal,
+            action: GoalListFeature.Action.inputItem(action:))
         )
       } label: {
         FloatingPlusButton(width: 54)

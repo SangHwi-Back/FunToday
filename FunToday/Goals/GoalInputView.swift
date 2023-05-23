@@ -46,6 +46,14 @@ struct GoalInputView: View {
               }
             }
           }
+          
+          ZStack {
+            RoundedRectangle(cornerRadius: 8)
+              .strokeBorder(Color.gray)
+            Button("목표 달성을 응원합니다!") {
+              viewstore.send(.addGoal)
+            }
+          }
         }.padding()
       }
       .navigationBarTitleDisplayMode(.large)
