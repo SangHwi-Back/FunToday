@@ -14,6 +14,7 @@ struct GoalInputView: View {
   let store: StoreOf<GoalInputFeature>
   
   @State var showAlert = false
+  @GestureState var dragstate: CGFloat = 0
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
@@ -84,8 +85,20 @@ struct GoalInputView: View {
           }
         }.padding()
       }
+      .navigationBarBackButtonHidden(true)
       .navigationBarTitleDisplayMode(.large)
       .navigationTitle("목표 추가")
+      .navigationBarItems(leading: Button("취소") {
+          viewstore.send(.resetGoal)
+          presentationMode.wrappedValue.dismiss()
+        }.buttonStyle(CommonPushButtonStyle())
+      )
+      .gesture(DragGesture().updating($dragstate, body: { value, state, transaction in
+        if (value.startLocation.x < 15 && value.translation.width > 70) {
+          viewstore.send(.resetGoal)
+          presentationMode.wrappedValue.dismiss()
+        }
+      }))
     }
   }
 }
