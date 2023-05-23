@@ -25,7 +25,7 @@
 		1B6BDE8329FA37C500FDABA3 /* FunTodayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */; };
 		1B6BDE8529FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */; };
 		1B6BDE9229FA3A9900FDABA3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9129FA3A9800FDABA3 /* README.md */; };
-		1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9329FA551900FDABA3 /* GoalsView.swift */; };
+		1B6BDE9429FA551900FDABA3 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9329FA551900FDABA3 /* GoalListView.swift */; };
 		1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9529FA552200FDABA3 /* ReviewView.swift */; };
 		1B6BDE9829FA552800FDABA3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9729FA552800FDABA3 /* SettingView.swift */; };
 		1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */; };
@@ -103,7 +103,7 @@
 		1B6BDE8229FA37C500FDABA3 /* FunTodayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITests.swift; sourceTree = "<group>"; };
 		1B6BDE8429FA37C500FDABA3 /* FunTodayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B6BDE9129FA3A9800FDABA3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1B6BDE9329FA551900FDABA3 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		1B6BDE9329FA551900FDABA3 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
 		1B6BDE9529FA552200FDABA3 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		1B6BDE9729FA552800FDABA3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayTab.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		1B6BDE9B29FA585800FDABA3 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
-				1B6BDE9329FA551900FDABA3 /* GoalsView.swift */,
+				1B6BDE9329FA551900FDABA3 /* GoalListView.swift */,
 				1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */,
 				1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */,
 				1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */,
@@ -503,7 +503,7 @@
 				1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */,
 				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
 				1B6DE26A2A13A9B60069D9EB /* AppWrapper.swift in Sources */,
-				1B6BDE9429FA551900FDABA3 /* GoalsView.swift in Sources */,
+				1B6BDE9429FA551900FDABA3 /* GoalListView.swift in Sources */,
 				1B6C376D2A0C8FCC00BA731B /* CommonTextField.swift in Sources */,
 				1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */,
 				1B6C377B2A0E04A900BA731B /* FloatingMinusButton.swift in Sources */,

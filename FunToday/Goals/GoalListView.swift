@@ -1,5 +1,5 @@
 //
-//  GoalsView.swift
+//  GoalListView.swift
 //  FunToday
 //
 //  Created by 백상휘 on 2023/04/27.
@@ -8,12 +8,11 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct GoalsView: View {
-  @Environment(\.presentationMode) var presentationMode
+struct GoalListView: View {
   let store: StoreOf<GoalListFeature>
   
   var body: some View
-  { WithViewStore(store, observe: { $0 }) { viewStore in NavigationView {
+  { WithViewStore(store, observe: { $0 }) { viewstore in NavigationView {
     ZStack(alignment: .bottomTrailing) {
       ScrollView {
         LazyVStack {
@@ -49,7 +48,7 @@ struct GoalsView_Previews: PreviewProvider {
       initialState: GoalListFeature.State(goalList: .init()),
       reducer: { GoalListFeature() })
     
-    return GoalsView(store: initialStore)
+    return GoalListView(store: initialStore)
   }
 }
 

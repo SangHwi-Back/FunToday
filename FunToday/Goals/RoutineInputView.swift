@@ -23,7 +23,9 @@ struct RoutineInputView: View {
             InputField(title: "설명 :",
                        isEssential: false,
                        text: viewstore.binding(get: \.routine.description, send: RoutineInputFeature.Action.updateDescription))
-
+            
+            Divider().padding(.vertical)
+            
             Text("활동")
               .frame(maxWidth: .infinity, alignment: .leading)
             

@@ -25,15 +25,18 @@ struct GoalInputView: View {
             title: "이름 :",
             isEssential: true,
             text: viewstore.binding(get: \.goal.name, send: GoalInputFeature.Action.updateName))
+            .padding(.top)
           InputField(
             title: "설명 :",
             isEssential: false,
             text: viewstore.binding(get: \.goal.description, send: GoalInputFeature.Action.updateDescription))
           
+          Divider().padding(.vertical)
+          
           // MARK: - Routines Section
-          Text("루틴 \(viewstore.routines.count)")
+          Text("루틴")
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical)
+            .padding(.bottom)
           
           VStack(spacing: 8) {
             ForEachStore(
@@ -45,17 +48,18 @@ struct GoalInputView: View {
             ZStack {
               RoundedRectangle(cornerRadius: 8)
                 .strokeBorder(Color.gray)
-              FloatingPlusButton(width: 24, bgColor: .gray) {
-                viewstore.send(.addRoutine)
-              }
+              FloatingPlusButton(width: 24, bgColor: .gray)
+            }.onTapGesture {
+              viewstore.send(.addRoutine)
             }
           }
+          
+          Divider().padding(.vertical)
           
           ZStack {
             RoundedRectangle(cornerRadius: 8)
               .strokeBorder(Color.gray)
               .background(Color.labelReversed)
-              .onTapGesture { showAlert.toggle() }
               .alert(isPresented: $showAlert) {
                 Alert(
                   title: Text("목표 추가"),
@@ -64,7 +68,9 @@ struct GoalInputView: View {
                     viewstore.send(.addGoal)
                     presentationMode.wrappedValue.dismiss()
                   },
-                  secondaryButton: .cancel(Text("아니오")) { showAlert.toggle() }
+                  secondaryButton: .cancel(Text("아니오")) {
+                    showAlert.toggle()
+                  }
                 )
               }
             Text("목표 등록")
@@ -72,6 +78,9 @@ struct GoalInputView: View {
               .fontWeight(.heavy)
               .padding()
               .allowsHitTesting(false)
+          }
+          .onTapGesture {
+            showAlert.toggle()
           }
         }.padding()
       }
