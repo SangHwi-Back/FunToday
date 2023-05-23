@@ -86,9 +86,6 @@ struct GoalInputView: View {
       }
       .navigationBarTitleDisplayMode(.large)
       .navigationTitle("목표 추가")
-      .onDisappear {
-        viewstore.send(.resetGoal)
-      }
     }
   }
 }
