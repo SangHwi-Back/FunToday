@@ -10,17 +10,18 @@ import ComposableArchitecture
 
 struct GoalListFeature: ReducerProtocol {
   struct State: Equatable {
-    var goalList: IdentifiedArrayOf<GoalItemFeature.State>
-    var newGoal: GoalInputFeature.State = .init(goal: .getDouble(), routines: .init())
+    var goalList: IdentifiedArrayOf<GoalInputFeature.State>
+    var newGoal: GoalInputFeature.State = .init(goal: .getDouble(), routines: .init(), isNew: true)
   }
   
   enum Action {
     case goalItem(id: GoalItemFeature.State.ID, action: GoalItemFeature.Action)
-    case inputItem(action: GoalInputFeature.Action)
+    case inputNewItem(action: GoalInputFeature.Action)
+    case inputItems(id: GoalInputFeature.State.ID, action: GoalInputFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
-    Scope(state: \.newGoal, action: /Action.inputItem(action:)) {
+    Scope(state: \.newGoal, action: /Action.inputNewItem(action:)) {
       GoalInputFeature()
     }
     Reduce { state, action in
@@ -33,18 +34,16 @@ struct GoalListFeature: ReducerProtocol {
         state.goalList[inx].goal = goal
         
         return .none
-      case .inputItem(action: .addGoal):
-        state.goalList.append(GoalItemFeature.State.init(goal: state.newGoal.goal, id: .init()))
+      case .inputNewItem(action: .addGoal):
+        state.goalList.append(state.newGoal)
         state.newGoal = .init(goal: .getDouble(), routines: .init())
         return .none
-      case .goalItem:
-        return .none
-      case .inputItem:
+      case .goalItem, .inputItems, .inputNewItem:
         return .none
       }
     }
-    .forEach(\State.goalList , action: /Action.goalItem(id:action:)) {
-      GoalItemFeature()
+    .forEach(\.goalList, action: /Action.inputItems(id:action:)) {
+      GoalInputFeature()
     }
   }
 }

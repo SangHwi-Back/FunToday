@@ -55,44 +55,48 @@ struct GoalInputView: View {
             }
           }
           
-          Divider().padding(.vertical)
-          
-          ZStack {
-            RoundedRectangle(cornerRadius: 8)
-              .strokeBorder(Color.gray)
-              .background(Color.labelReversed)
-              .alert(isPresented: $showAlert) {
-                Alert(
-                  title: Text("목표 추가"),
-                  message: Text("정말로 목표를 추가하시겠습니까?"),
-                  primaryButton: .default(Text("예")) {
-                    viewstore.send(.addGoal)
-                    presentationMode.wrappedValue.dismiss()
-                  },
-                  secondaryButton: .cancel(Text("아니오")) {
-                    showAlert.toggle()
-                  }
-                )
-              }
-            Text("목표 등록")
-              .foregroundColor(Color.label)
-              .fontWeight(.heavy)
-              .padding()
-              .allowsHitTesting(false)
-          }
-          .onTapGesture {
-            showAlert.toggle()
+          if viewstore.isNew {
+            Divider().padding(.vertical)
+            
+            ZStack {
+              RoundedRectangle(cornerRadius: 8)
+                .strokeBorder(Color.gray)
+                .background(Color.labelReversed)
+                .alert(isPresented: $showAlert) {
+                  Alert(
+                    title: Text("목표 추가"),
+                    message: Text("정말로 목표를 추가하시겠습니까?"),
+                    primaryButton: .default(Text("예")) {
+                      viewstore.send(.addGoal)
+                      presentationMode.wrappedValue.dismiss()
+                    },
+                    secondaryButton: .cancel(Text("아니오")) {
+                      showAlert.toggle()
+                    }
+                  )
+                }
+              Text("목표 등록")
+                .foregroundColor(Color.label)
+                .fontWeight(.heavy)
+                .padding()
+                .allowsHitTesting(false)
+            }
+            .onTapGesture {
+              showAlert.toggle()
+            }
           }
         }.padding()
       }
       .navigationBarBackButtonHidden(true)
       .navigationBarTitleDisplayMode(.large)
-      .navigationTitle("목표 추가")
-      .navigationBarItems(leading: Button("취소") {
+      .navigationTitle("목표\(viewstore.isNew ? " 추가" : "")")
+      .navigationBarItems(leading: Button(viewstore.isNew ? "취소" : "뒤로가기") {
+        if viewstore.isNew {
           viewstore.send(.resetGoal)
-          presentationMode.wrappedValue.dismiss()
-        }.buttonStyle(CommonPushButtonStyle())
-      )
+        }
+        
+        presentationMode.wrappedValue.dismiss()
+      }.buttonStyle(CommonPushButtonStyle()))
       .gesture(DragGesture().updating($dragstate, body: { value, state, transaction in
         if (value.startLocation.x < 15 && value.translation.width > 70) {
           viewstore.send(.resetGoal)

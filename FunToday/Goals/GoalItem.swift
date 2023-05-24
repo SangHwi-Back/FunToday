@@ -10,11 +10,11 @@ import ComposableArchitecture
 
 struct GoalItem<ContentsView: View>: View {
   
-  var store: StoreOf<GoalItemFeature>
+  var store: StoreOf<GoalInputFeature>
   var contentsView: () -> ContentsView
   
   var body: some View {
-    WithViewStore(self.store, observe: { $0 }) { viewStore in
+    WithViewStore(store, observe: { $0 }) { viewStore in
       ZStack
       { CommonRectangle(color: Binding.constant(Color.element))
           .northWestShadow()
@@ -29,10 +29,10 @@ struct GoalItem<ContentsView: View>: View {
             { CommonRectangle(color: Binding.constant(Color.highlight))
               
               VStack(spacing: 8)
-              { Image(systemName: "chevron.compact.\(viewStore.isFold ? "down" : "up")")
+              { Image(systemName: "chevron.compact.\(viewStore.goal.isFold ? "down" : "up")")
                   .foregroundColor(Color.element)
                 
-                if viewStore.isFold == false {
+                if viewStore.goal.isFold == false {
                   HStack
                   {
                     ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
@@ -54,20 +54,17 @@ struct GoalItem<ContentsView: View>: View {
           }
         }.padding(8)
       }
-      .animation(.easeOut(duration: 0.2), value: viewStore.isFold)
+      .animation(.easeOut(duration: 0.2), value: viewStore.goal.isFold)
     }
   }
 }
 
 struct GoalItem_Previews: PreviewProvider {
   static var previews: some View {
-    let initialStore = Store(
-      initialState: GoalItemFeature.State(goal: .getDouble(), id: .init()),
-      reducer: GoalItemFeature()
-    )
+    let store = Store(initialState: GoalInputFeature.State(goal: Goal.getDouble(), routines: .init()), reducer: GoalInputFeature())
     
-    return GoalItem(store: initialStore) {
-      GoalItemContents(store: initialStore)
+    return GoalItem(store: store) {
+      GoalItemContents(store: store)
     }
   }
 }

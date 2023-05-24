@@ -14,7 +14,7 @@ struct FunTodayAppTabView: View {
   var body: some View {
     TabView(selection: $selectedTab) {
       GoalListView(store: Store(initialState: GoalListFeature.State(goalList: [
-        GoalItemFeature.State(goal: Goal.getDouble(), id: UUID())
+        GoalInputFeature.State(goal: Goal.getDouble(), routines: .init())
       ]), reducer: {
         GoalListFeature()
       }))
