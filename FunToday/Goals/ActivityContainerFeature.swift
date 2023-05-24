@@ -27,7 +27,6 @@ struct ActivityContainerFeature: ReducerProtocol {
     Reduce { state, action in
       switch action {
       case .addActivity:
-        state.activities.append(.init(activity: Activity.getDouble()))
         return .none
       case .removeActivity:
         return .none

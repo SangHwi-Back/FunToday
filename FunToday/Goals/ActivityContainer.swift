@@ -12,26 +12,29 @@ struct ActivityContainer: View {
   let store: StoreOf<ActivityContainerFeature>
   
   var body: some View {
-    WithViewStore(store, observe: { $0 }) { viewstore in GeometryReader { proxy in VStack(spacing: 12) {
-      ActivityButtonScrollView(store: store)
-        .frame(height: 24)
-        .padding(.vertical)
-      ActivityInputScrollView(store: store, size: proxy.size)
-    }}
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: {
-          viewstore.send(.addActivity)
-        }, label: {
-          Image(systemName: "plus")
-            .resizable()
-            .clipShape(Circle())
-        })
+    WithViewStore(store, observe: { $0 }) { viewstore in
+      GeometryReader { proxy in
+        VStack(spacing: 12) {
+          ActivityButtonScrollView(store: store)
+            .frame(height: 24)
+            .padding(.vertical)
+          ActivityInputScrollView(store: store, size: proxy.size)
+        }
       }
-    }
-    .navigationBarTitleDisplayMode(.inline)
-    .navigationTitle("활동 추가")
-    .padding()
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            viewstore.send(.addActivity)
+          }, label: {
+            Image(systemName: "plus")
+              .resizable()
+              .clipShape(Circle())
+          })
+        }
+      }
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationTitle("활동 추가")
+      .padding()
     }
   }
 }

@@ -30,9 +30,7 @@ struct GoalInputFeature: ReducerProtocol {
       case .addGoal:
         return .none
       case .addRoutine:
-        state.routines.append(
-          RoutineInputFeature.State(routine: Routine.getDouble(), activities: .init())
-        )
+        state.routines.append(RoutineInputFeature.State(routine: Routine.getDouble()))
         return .none
       case .resetGoal:
         state.goal = Goal.getDouble()
