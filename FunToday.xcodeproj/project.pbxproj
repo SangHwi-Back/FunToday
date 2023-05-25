@@ -18,6 +18,10 @@
 		1B5CD5E82A14A68F00160B96 /* GoalListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */; };
 		1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
+		1B6A61A82A1F405100B5DF48 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A72A1F405100B5DF48 /* InstructionView.swift */; };
+		1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */; };
+		1B6A61AC2A1F406D00B5DF48 /* SettingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */; };
+		1B6A61AE2A1F407C00B5DF48 /* SettingActivityPresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61AD2A1F407C00B5DF48 /* SettingActivityPresetView.swift */; };
 		1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */; };
 		1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */; };
 		1B6BDE6C29FA37C500FDABA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */; };
@@ -93,6 +97,10 @@
 		1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListFeature.swift; sourceTree = "<group>"; };
 		1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalItemFeature.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
+		1B6A61A72A1F405100B5DF48 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
+		1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewInShortView.swift; sourceTree = "<group>"; };
+		1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewView.swift; sourceTree = "<group>"; };
+		1B6A61AD2A1F407C00B5DF48 /* SettingActivityPresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingActivityPresetView.swift; sourceTree = "<group>"; };
 		1B6BDE6429FA37C300FDABA3 /* FunToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6BDE6729FA37C300FDABA3 /* FunTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayApp.swift; sourceTree = "<group>"; };
 		1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunTodayAppTabView.swift; sourceTree = "<group>"; };
@@ -272,6 +280,10 @@
 			isa = PBXGroup;
 			children = (
 				1B6BDE9729FA552800FDABA3 /* SettingView.swift */,
+				1B6A61AD2A1F407C00B5DF48 /* SettingActivityPresetView.swift */,
+				1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */,
+				1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */,
+				1B6A61A72A1F405100B5DF48 /* InstructionView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -475,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B8AA76B29FA849D001C3A97 /* TestDouble.swift in Sources */,
+				1B6A61AC2A1F406D00B5DF48 /* SettingReviewView.swift in Sources */,
 				1B1696062A08CD6300D827FB /* Dependency.swift in Sources */,
 				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
 				1B8AA76129FA8431001C3A97 /* Routine.swift in Sources */,
@@ -503,12 +516,14 @@
 				1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */,
 				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
 				1B6DE26A2A13A9B60069D9EB /* AppWrapper.swift in Sources */,
+				1B6A61A82A1F405100B5DF48 /* InstructionView.swift in Sources */,
 				1B6BDE9429FA551900FDABA3 /* GoalListView.swift in Sources */,
 				1B6C376D2A0C8FCC00BA731B /* CommonTextField.swift in Sources */,
 				1B6BDEA529FA5B0E00FDABA3 /* View+Colors.swift in Sources */,
 				1B6C377B2A0E04A900BA731B /* FloatingMinusButton.swift in Sources */,
 				1B6C37692A0C8CC900BA731B /* GoalInputView.swift in Sources */,
 				1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */,
+				1B6A61AE2A1F407C00B5DF48 /* SettingActivityPresetView.swift in Sources */,
 				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
 				1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */,
 				1B8AA76929FA8464001C3A97 /* Activity+TestDouble.swift in Sources */,
@@ -519,6 +534,7 @@
 				1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */,
 				1B6C37712A0CA5DD00BA731B /* CustomSectionView.swift in Sources */,
 				1BD8298D2A1B92D100BE1B07 /* ActivityContainerFeature.swift in Sources */,
+				1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */,
 				1BD829892A1B923E00BE1B07 /* GoalInputFeature.swift in Sources */,
 				1B8AA76729FA845F001C3A97 /* Routine+TestDouble.swift in Sources */,
 			);
