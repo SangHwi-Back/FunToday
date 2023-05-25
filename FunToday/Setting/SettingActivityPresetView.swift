@@ -40,21 +40,33 @@ struct SettingActivityPresetView: View {
             .padding()
             
             HStack {
-              Button { showModal.toggle() } label: {
-                Text("취소")
-              }
-              .buttonStyle(CommonPushButtonStyle())
+              DecisionButton(action: { showModal.toggle() }, title: "취소")
               Spacer()
-              Button { viewstore.send(.itemAdd); showModal.toggle() } label: {
-                Text("등록하기")
-              }
-              .buttonStyle(CommonPushButtonStyle())
+              DecisionButton(action: { viewstore.send(.itemAdd); showModal.toggle() }, title: "등록하기")
             }
             .padding()
-            .padding(.bottom, 50)
           }
+        }
       }
+    }
+  }
+}
+
+private struct DecisionButton: View {
+  var action: () -> Void
+  var title: String
+  
+  var body: some View {
+    Button { action() } label: {
+      ZStack {
+        CommonRectangle(color: Binding.constant(Color.gray.opacity(0.7)))
+        Text(title)
+          .foregroundColor(.white)
+          .bold()
+          .padding()
       }
+      .fixedSize(horizontal: true, vertical: false)
+      .frame(height: 50)
     }
   }
 }

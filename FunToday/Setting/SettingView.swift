@@ -10,9 +10,8 @@ import ComposableArchitecture
 
 struct SettingView: View {
   var body: some View {
-    
     NavigationView {
-    List {
+      List {
         Section(header: Text("사용자")) {
           NavigationLink {
             InstructionView()
@@ -43,9 +42,10 @@ struct SettingView: View {
           }
         }
       }
+      .navigationBarHidden(true)
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationTitle("설정")
     }
-    .navigationBarHidden(true)
-    .navigationBarTitleDisplayMode(.inline)
   }
 }
 
