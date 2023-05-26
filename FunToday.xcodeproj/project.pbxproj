@@ -15,6 +15,7 @@
 		1B2118C82A1600FC009E09FF /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C72A1600FC009E09FF /* FirebaseDatabaseSwift */; };
 		1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F942A03691900C7966C /* ProgressCircle.swift */; };
 		1B396F972A03695F00C7966C /* CommonPushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */; };
+		1B48E8F32A20D0F00019E035 /* ActivityContainerPresetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48E8F22A20D0F00019E035 /* ActivityContainerPresetList.swift */; };
 		1B5CD5E82A14A68F00160B96 /* GoalListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */; };
 		1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
@@ -94,6 +95,7 @@
 		1B1696122A09C5A000D827FB /* CustomTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTable.swift; sourceTree = "<group>"; };
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
+		1B48E8F22A20D0F00019E035 /* ActivityContainerPresetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContainerPresetList.swift; sourceTree = "<group>"; };
 		1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListFeature.swift; sourceTree = "<group>"; };
 		1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalItemFeature.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				1B6C37722A0D21A600BA731B /* RoutineInputView.swift */,
 				1BD8298A2A1B929400BE1B07 /* RoutineInputFeature.swift */,
 				1B6C37782A0DCFDA00BA731B /* ActivityContainer.swift */,
+				1B48E8F22A20D0F00019E035 /* ActivityContainerPresetList.swift */,
 				1BD8298C2A1B92D000BE1B07 /* ActivityContainerFeature.swift */,
 				1B6C37742A0D21C900BA731B /* ActivityInputView.swift */,
 				1BD8298E2A1B931600BE1B07 /* ActivityInputFeature.swift */,
@@ -499,6 +502,7 @@
 				1BD8298F2A1B931600BE1B07 /* ActivityInputFeature.swift in Sources */,
 				1B6C376B2A0C8FB900BA731B /* InputField.swift in Sources */,
 				1B5CD5E82A14A68F00160B96 /* GoalListFeature.swift in Sources */,
+				1B48E8F32A20D0F00019E035 /* ActivityContainerPresetList.swift in Sources */,
 				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
 				1B6C37732A0D21A600BA731B /* RoutineInputView.swift in Sources */,
 				1B6BDE9A29FA580300FDABA3 /* FunTodayTab.swift in Sources */,

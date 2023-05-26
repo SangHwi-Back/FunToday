@@ -33,7 +33,7 @@ struct SettingView: View {
           }
           NavigationLink {
             SettingActivityPresetView(store: Store(
-              initialState: SettingActivityPresetFeature.State(activities: .init()),
+              initialState: SettingActivityPresetFeature.State(activities: .init(), newActivity: .init(activity: Activity.getDouble())),
               reducer: {
                 SettingActivityPresetFeature()
               }))

@@ -12,7 +12,9 @@ struct RoutineInputFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var id: UUID = .init()
     var routine: Routine
-    var containerState = ActivityContainerFeature.State(activities: .init())
+    var containerState = ActivityContainerFeature.State(
+      activities: .init(),
+      presetActivity: .init(list: []))
   }
   
   enum Action {

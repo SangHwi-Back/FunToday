@@ -15,15 +15,21 @@ struct ActivityContainerFeature: ReducerProtocol {
     }
     var id: UUID = .init()
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
+    var presetActivity: ActivityContainerPresetListFeature.State
   }
   
   enum Action {
     case addActivity
     case removeActivity
     case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
+    case presetElement(action:ActivityContainerPresetListFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
+    Scope(state: \.presetActivity, action: /Action.presetElement(action:)) {
+      ActivityContainerPresetListFeature()
+    }
+    
     Reduce { state, action in
       switch action {
       case .addActivity:
@@ -33,7 +39,13 @@ struct ActivityContainerFeature: ReducerProtocol {
       case .activityElement(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
         return .none
-      case .activityElement:
+      case .presetElement(action: .rowSelected(let activity)):
+        state.activities.append(
+          ActivityInputFeature.State(activity: activity)
+        )
+        
+        return .none
+      case .activityElement, .presetElement:
         return .none
       }
     }.forEach(\.activities, action: /Action.activityElement(id:action:)) {

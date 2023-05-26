@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct ActivityContainer: View {
   let store: StoreOf<ActivityContainerFeature>
+  @State private var showModal = false
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
@@ -24,11 +25,22 @@ struct ActivityContainer: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
+            showModal.toggle()
+          }, label: {
+            Image(systemName: "list.bullet")
+          })
+          .sheet(isPresented: $showModal) {
+            ActivityContainerPresetListView(store: store.scope(
+              state: \.presetActivity,
+              action: ActivityContainerFeature.Action.presetElement(action:))
+            )
+          }
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
             viewstore.send(.addActivity)
           }, label: {
             Image(systemName: "plus")
-              .resizable()
-              .clipShape(Circle())
           })
         }
       }
@@ -111,7 +123,9 @@ struct ActivityInputScrollView: View {
 struct ActivityContainer_Previews: PreviewProvider {
   static var previews: some View {
     let initialStore = Store(
-      initialState: ActivityContainerFeature.State(activities: .init()),
+      initialState: ActivityContainerFeature.State(
+        activities: .init(),
+        presetActivity: .init(list: [])),
       reducer: { ActivityContainerFeature() })
     
     return ActivityContainer(store: initialStore)

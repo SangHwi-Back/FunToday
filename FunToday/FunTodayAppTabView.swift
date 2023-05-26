@@ -12,7 +12,15 @@ struct FunTodayAppTabView: View {
   @State var selectedTab = FunTodayTab.goal
   
   var body: some View {
-    TabView(selection: $selectedTab) {
+    // MARK: Temporary codes
+    let activities = [0,1,2,3].compactMap({
+      try? JSONEncoder()
+        .encode(Activity.getDouble(inx: $0))
+    })
+    
+    UserDefaults.standard.set(activities, forKey: "Activities")
+    
+    return TabView(selection: $selectedTab) {
       GoalListView(store: Store(initialState: GoalListFeature.State(goalList: [
         GoalInputFeature.State(goal: Goal.getDouble(), routines: .init())
       ]), reducer: {

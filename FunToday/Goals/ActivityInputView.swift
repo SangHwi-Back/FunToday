@@ -9,7 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ActivityInputView: View {
+  @Environment(\.presentationMode) var presentationMode
   let store: StoreOf<ActivityInputFeature>
+  
+  var isSetting = false
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
@@ -48,6 +51,26 @@ struct ActivityInputView: View {
             Toggle("달성률을 체크하나요?", isOn: viewstore.binding(get: \.activity.completionUseSwitch, send: ActivityInputFeature.Action.updateUseSwitch))
           }
         }
+        
+        HStack {
+          DecisionButton(
+            action: {
+              presentationMode.wrappedValue.dismiss()
+            },
+            title: "취소"
+          )
+          Spacer()
+          DecisionButton(
+            action: {
+              viewstore.send(.buttonTapped(
+                id: viewstore.id,
+                buttontype: .basic))
+              presentationMode.wrappedValue.dismiss()
+            },
+            title: "등록하기"
+          )
+        }
+        .padding()
       }
     }
   }

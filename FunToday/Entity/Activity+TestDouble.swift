@@ -10,7 +10,7 @@ import Foundation
 extension Activity: TestDouble {
   static func getDouble(inx: Int = 0) -> Activity {
     .init(
-      uniqueID: "\(inx)",
+      uniqueID: UUID().uuidString,
       index: inx,
       name: "testName",
       description: "testDescription",
