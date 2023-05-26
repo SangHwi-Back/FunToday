@@ -52,25 +52,27 @@ struct ActivityInputView: View {
           }
         }
         
-        HStack {
-          DecisionButton(
-            action: {
-              presentationMode.wrappedValue.dismiss()
-            },
-            title: "취소"
-          )
-          Spacer()
-          DecisionButton(
-            action: {
-              viewstore.send(.buttonTapped(
-                id: viewstore.id,
-                buttontype: .basic))
-              presentationMode.wrappedValue.dismiss()
-            },
-            title: "등록하기"
-          )
+        if isSetting {
+          HStack {
+            DecisionButton(
+              action: {
+                presentationMode.wrappedValue.dismiss()
+              },
+              title: "취소"
+            )
+            Spacer()
+            DecisionButton(
+              action: {
+                viewstore.send(.buttonTapped(
+                  id: viewstore.id,
+                  buttontype: .basic))
+                presentationMode.wrappedValue.dismiss()
+              },
+              title: "등록하기"
+            )
+          }
+          .padding()
         }
-        .padding()
       }
     }
   }
