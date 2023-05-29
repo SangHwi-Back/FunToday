@@ -43,11 +43,10 @@ struct ActivityContainerPresetListFeature: ReducerProtocol {
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
     case .setList:
-      let saved = (UserDefaults.standard.object(forKey: "Activities") as? [Data]) ?? []
-      let result = saved.compactMap({
-        try? JSONDecoder().decode(Activity.self, from: $0)
-      })
-      state.list = result
+      state.list = MemoryStore.DP.loadAll()
+        .compactMap({
+          try? JSONDecoder().decode(Activity.self, from: $0)
+        })
       return .none
     case .rowSelected(_):
       return .none

@@ -14,11 +14,12 @@ struct FunTodayAppTabView: View {
   var body: some View {
     TabView(selection: $selectedTab) {
       NavigationView {
-        GoalListView(store: Store(initialState: GoalListFeature.State(goalList: [
-          GoalInputFeature.State(goal: Goal.getDouble(), routines: .init())
-        ]), reducer: {
-          GoalListFeature()
-        }))
+        GoalListView(store: Store(
+          initialState: GoalListFeature.State(goalList: .init()),
+          reducer: {
+            GoalListFeature()
+          }
+        ))
       }
       .tabItem {
         FunTodayTab.goal.getLabel()

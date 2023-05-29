@@ -53,6 +53,9 @@
 		1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37842A12439A00BA731B /* CommonBarChart.swift */; };
 		1B6DE2682A13A8C70069D9EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DE2672A13A8C70069D9EB /* SceneDelegate.swift */; };
 		1B6DE26A2A13A9B60069D9EB /* AppWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DE2692A13A9B60069D9EB /* AppWrapper.swift */; };
+		1B7160DB2A24ABCC004DC4E9 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
+		1B7160DD2A24B6CC004DC4E9 /* MemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* MemoryStore.swift */; };
+		1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -138,6 +141,9 @@
 		1B6DE2672A13A8C70069D9EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B6DE2692A13A9B60069D9EB /* AppWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWrapper.swift; sourceTree = "<group>"; };
 		1B6DE26B2A13A9F90069D9EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDependency.swift; sourceTree = "<group>"; };
+		1B7160DC2A24B6CC004DC4E9 /* MemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStore.swift; sourceTree = "<group>"; };
+		1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInDiskDependency.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -189,6 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				1B1696052A08CD6300D827FB /* Dependency.swift */,
+				1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */,
+				1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */,
+				1B7160DC2A24B6CC004DC4E9 /* MemoryStore.swift */,
 			);
 			path = Dependency;
 			sourceTree = "<group>";
@@ -516,6 +525,7 @@
 				1B6C37792A0DCFDA00BA731B /* ActivityContainer.swift in Sources */,
 				1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */,
 				1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */,
+				1B7160DB2A24ABCC004DC4E9 /* FileDependency.swift in Sources */,
 				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
 				1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */,
 				1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */,
@@ -539,9 +549,11 @@
 				1B8AA76D29FA9010001C3A97 /* Entity.swift in Sources */,
 				1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */,
 				1B8AA76F29FA94F6001C3A97 /* PriorityQueue.swift in Sources */,
+				1B7160DD2A24B6CC004DC4E9 /* MemoryStore.swift in Sources */,
 				1B6BDE6829FA37C300FDABA3 /* FunTodayApp.swift in Sources */,
 				1B6C37712A0CA5DD00BA731B /* CustomSectionView.swift in Sources */,
 				1BD8298D2A1B92D100BE1B07 /* ActivityContainerFeature.swift in Sources */,
+				1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */,
 				1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */,
 				1BD829892A1B923E00BE1B07 /* GoalInputFeature.swift in Sources */,
 				1B8AA76729FA845F001C3A97 /* Routine+TestDouble.swift in Sources */,

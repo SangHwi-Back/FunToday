@@ -27,60 +27,30 @@ struct SettingActivityPresetFeature: ReducerProtocol {
     Reduce { state, action in
       switch action {
       case .activityNewItem(action: .buttonTapped):
-        state.activities.append(state.newActivity)
-        
-        if let saved = UserDefaults.standard.object(forKey: "Activities") as? [Data] {
+        if let data = try? JSONEncoder().encode(state.newActivity.activity) {
           
-          var activities = saved.compactMap({
-            try? JSONDecoder().decode(Activity.self, from: $0)
-          })
-          activities.append(state.newActivity.activity)
+          MemoryStore.DP.save(data: MemoryStore.DP.loadAll() + [data])
           
-          let newSaved = activities.compactMap({
-            try? JSONEncoder().encode($0)
-          })
-          
-          UserDefaults.standard.set(newSaved, forKey: "Activities")
-        }
-        else {
-          if let data = try? JSONEncoder().encode(state.newActivity.activity) {
-            UserDefaults.standard.set([data], forKey: "Activities")
-          }
+          state.activities.append(state.newActivity)
+          state.newActivity = .init(activity: Activity.getDouble())
         }
         
         state.newActivity = .init(activity: Activity.getDouble())
         return .none
       case .activityItems(id: let id, action: .removeActivity):
-        if
-          let removed = state.activities.remove(id: id),
-          let saved = UserDefaults.standard.object(forKey: "Activities") as? [Data] {
-          
-          var activities = saved.compactMap({
-            try? JSONDecoder().decode(Activity.self, from: $0)
-          })
-          
-          for (index, activity) in activities.enumerated() {
-            if activity.id == removed.activity.id {
-              activities.remove(at: index)
-              break
-            }
-          }
-          
-          let newSaved = activities.compactMap({
-            try? JSONEncoder().encode($0)
-          })
-          
-          UserDefaults.standard.set(newSaved, forKey: "Activities")
-        }
+        state.activities.remove(id: id)
+        MemoryStore.DP.save(data: state
+          .activities
+          .map({ $0.activity })
+          .compactMap({ try? JSONEncoder().encode($0) })
+        )
         
         return .none
-      case .activityNewItem, .activityItems:
-        return .none
       case .setList:
-        let saved = (UserDefaults.standard.object(forKey: "Activities") as? [Data]) ?? []
-        let activities = saved.compactMap({
-          try? JSONDecoder().decode(Activity.self, from: $0)
-        })
+        let activities = MemoryStore.DP.loadAll()
+          .compactMap({
+            try? JSONDecoder().decode(Activity.self, from: $0)
+          })
         var result = IdentifiedArrayOf<ActivityInputFeature.State>.init()
         for activity in activities {
           result.append(ActivityInputFeature.State(activity: activity))
@@ -88,7 +58,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
         
         state.activities = result
         return .none
-      case .itemAdded:
+      case .activityNewItem, .activityItems, .itemAdded:
         return .none
       }
     }
