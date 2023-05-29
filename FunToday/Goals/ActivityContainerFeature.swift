@@ -20,7 +20,6 @@ struct ActivityContainerFeature: ReducerProtocol {
   
   enum Action {
     case addActivity
-    case removeActivity
     case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
     case presetElement(action:ActivityContainerPresetListFeature.Action)
   }
@@ -33,8 +32,6 @@ struct ActivityContainerFeature: ReducerProtocol {
     Reduce { state, action in
       switch action {
       case .addActivity:
-        return .none
-      case .removeActivity:
         return .none
       case .activityElement(id: let id, action: .removeActivity):
         state.activities.remove(id: id)

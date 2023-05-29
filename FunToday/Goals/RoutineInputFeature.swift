@@ -38,14 +38,13 @@ struct RoutineInputFeature: ReducerProtocol {
       case .updateDescription(let txt):
         state.routine.description = txt
         return .none
-      case .removeRoutine:
-        return .none
-      case .activityElements:
+      case .activityElements(id: let id, action: .removeActivity):
+        state.containerState.activities.remove(id: id)
         return .none
       case .activityContainerElement(action: .addActivity):
         state.containerState.activities.append(.init(activity: Activity.getDouble()))
         return .none
-      case .activityContainerElement:
+      case .removeRoutine, .activityElements, .activityContainerElement:
         return .none
       }
     }.forEach(\.containerState.activities, action: /Action.activityElements(id:action:)) {

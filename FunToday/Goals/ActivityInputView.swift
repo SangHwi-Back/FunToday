@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct ActivityInputView: View {
   @Environment(\.presentationMode) var presentationMode
+  @State var showAlert = false
   let store: StoreOf<ActivityInputFeature>
   
   var isSetting = false
@@ -73,6 +74,30 @@ struct ActivityInputView: View {
           }
           .padding()
         }
+      }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            showAlert.toggle()
+          } label: {
+            Image(systemName: "xmark")
+              .resizable()
+              .accentColor(.red)
+          }
+        }
+      }
+      .alert(isPresented: $showAlert) {
+        Alert(
+          title: Text("활동 삭제"),
+          message: Text("활동이 삭제됩니다. 진행하시겠습니까?"),
+          primaryButton: .default(Text("예")) {
+            viewstore.send(.removeActivity)
+            presentationMode.wrappedValue.dismiss()
+          },
+          secondaryButton: .cancel(Text("아니오")) {
+            showAlert.toggle()
+          }
+        )
       }
     }
   }

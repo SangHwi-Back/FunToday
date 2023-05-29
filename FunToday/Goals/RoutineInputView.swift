@@ -70,6 +70,10 @@ struct ActivityElementInRoutine: View {
     WithViewStore(store) { viewstore in
       ZStack {
         CommonRectangle(color: Binding.constant(Color.cell))
+          .overlay(FloatingMinusButton(width: 24) {
+            viewstore.send(.removeActivity)
+          }.offset(x: -24, y: -24),
+          alignment: .topLeading)
         Text(viewstore.activity.name)
           .frame(maxWidth: .infinity, alignment: .leading)
           .foregroundColor(Color.label)
