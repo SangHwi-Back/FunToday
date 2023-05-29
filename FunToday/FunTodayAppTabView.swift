@@ -13,24 +13,30 @@ struct FunTodayAppTabView: View {
   
   var body: some View {
     TabView(selection: $selectedTab) {
-      GoalListView(store: Store(initialState: GoalListFeature.State(goalList: [
-        GoalInputFeature.State(goal: Goal.getDouble(), routines: .init())
-      ]), reducer: {
-        GoalListFeature()
-      }))
-        .tabItem {
-          FunTodayTab.goal.getLabel()
-        }
+      NavigationView {
+        GoalListView(store: Store(initialState: GoalListFeature.State(goalList: [
+          GoalInputFeature.State(goal: Goal.getDouble(), routines: .init())
+        ]), reducer: {
+          GoalListFeature()
+        }))
+      }
+      .tabItem {
+        FunTodayTab.goal.getLabel()
+      }
       
-      ReviewView()
-        .tabItem {
-          FunTodayTab.review.getLabel()
-        }
+      NavigationView {
+        ReviewView()
+      }
+      .tabItem {
+        FunTodayTab.review.getLabel()
+      }
       
-      SettingView()
-        .tabItem {
-          FunTodayTab.setting.getLabel()
-        }
+      NavigationView {
+        SettingView()
+      }
+      .tabItem {
+        FunTodayTab.setting.getLabel()
+      }
     }
   }
 }

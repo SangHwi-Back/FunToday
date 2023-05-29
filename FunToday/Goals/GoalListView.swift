@@ -13,37 +13,38 @@ struct GoalListView: View {
   
   let store: StoreOf<GoalListFeature>
   
-  var body: some View
-  { WithViewStore(store, observe: { $0 }) { viewstore in NavigationView {
-    ZStack(alignment: .bottomTrailing) {
-      ScrollView {
-        LazyVStack {
-          ForEachStore(
-            store.scope(state: \.goalList, action: GoalListFeature.Action.inputItems(id:action:))
-          ) {
-            let store = $0
-            GoalItem(store: store) {
-              NavigationLink {
-                GoalInputView(store: store)
-              } label: {
-                GoalItemContents(store: store)
+  var body: some View {
+    WithViewStore(store, observe: { $0 }) { viewstore in
+      ZStack(alignment: .bottomTrailing) {
+        ScrollView {
+          LazyVStack {
+            ForEachStore(
+              store.scope(state: \.goalList, action: GoalListFeature.Action.inputItems(id:action:))
+            ) {
+              let store = $0
+              GoalItem(store: store) {
+                NavigationLink {
+                  GoalInputView(store: store)
+                } label: {
+                  GoalItemContents(store: store)
+                }
               }
+              .navigationBarHidden(true)
             }
-            .navigationBarHidden(true)
           }
         }
-      }
-      NavigationLink {
-        GoalInputView(
-          store: store.scope(
-            state: \.newGoal,
-            action: GoalListFeature.Action.inputNewItem(action:))
-        )
-      } label: {
-        FloatingPlusButton(width: 54)
+        NavigationLink {
+          GoalInputView(
+            store: store.scope(
+              state: \.newGoal,
+              action: GoalListFeature.Action.inputNewItem(action:))
+          )
+        } label: {
+          FloatingPlusButton(width: 54)
+        }
       }
     }
-  }}.padding(.vertical, 0.1)}
+    .padding(.vertical, 0.1)}
 }
 
 struct GoalsView_Previews: PreviewProvider {
