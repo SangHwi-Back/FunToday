@@ -21,6 +21,7 @@ struct FunTodayAppTabView: View {
           }
         ))
       }
+      .navigationViewStyle(StackNavigationViewStyle())
       .tabItem {
         FunTodayTab.goal.getLabel()
       }
@@ -28,6 +29,7 @@ struct FunTodayAppTabView: View {
       NavigationView {
         ReviewView()
       }
+      .navigationViewStyle(StackNavigationViewStyle())
       .tabItem {
         FunTodayTab.review.getLabel()
       }
@@ -35,6 +37,7 @@ struct FunTodayAppTabView: View {
       NavigationView {
         SettingView()
       }
+      .navigationViewStyle(StackNavigationViewStyle())
       .tabItem {
         FunTodayTab.setting.getLabel()
       }
