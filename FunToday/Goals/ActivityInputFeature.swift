@@ -36,6 +36,7 @@ struct ActivityInputFeature: ReducerProtocol {
     case updateActive
     case updateUseSwitch
     case removeActivity
+    case addActivity
     case buttonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
   }
   
@@ -72,6 +73,8 @@ struct ActivityInputFeature: ReducerProtocol {
       state.activity.completionUseSwitch.toggle()
       return .none
     case .removeActivity:
+      return .none
+    case .addActivity:
       return .none
     case .buttonTapped:
       return .none

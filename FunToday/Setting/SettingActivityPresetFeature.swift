@@ -16,9 +16,9 @@ struct SettingActivityPresetFeature: ReducerProtocol {
   enum Action {
     case activityNewItem(action:ActivityInputFeature.Action)
     case activityItems(id:ActivityInputFeature.State.ID,action:ActivityInputFeature.Action)
-    case setList
-    case itemAdded
+    case setList, itemAdded
   }
+  
   var body: some ReducerProtocol<State, Action> {
     Scope(state: \.newActivity, action: /Action.activityNewItem(action:)) {
       ActivityInputFeature()
@@ -26,7 +26,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
     
     Reduce { state, action in
       switch action {
-      case .activityNewItem(action: .buttonTapped):
+      case .activityNewItem(action: .addActivity):
         if let data = try? JSONEncoder().encode(state.newActivity.activity) {
           
           MemoryStore.DP.save(data: MemoryStore.DP.loadAll() + [data])
