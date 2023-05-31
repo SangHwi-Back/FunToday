@@ -8,10 +8,14 @@
 import XCTest
 
 final class FunTodayTests: XCTestCase {
+  override func setUp() async throws {
+    DiskStoreTestFixture().overwrite(data: [])
+  }
+  
   func test_diskStore() throws {
     // Arrange
-    var sut = TDiskStore(0)
-    sut.willReturn(1)
+    var sut = DiskStoreTestFixture()
+    sut.willReturn(4)
     
     // Act
     for _ in 1...4 {
@@ -19,10 +23,6 @@ final class FunTodayTests: XCTestCase {
     }
     
     // Assert
-    XCTAssertTrue(sut.verify({
-      let res = $0.loadAll().count
-      print("Test Result ::: \(res)")
-      return res
-    }))
+    XCTAssertTrue(sut.verify({ $0.loadAll().count }))
   }
 }

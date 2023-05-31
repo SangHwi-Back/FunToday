@@ -10,41 +10,36 @@ import Foundation
 class DiskStore: StoreInKeyValueDependency {
   static let DP = DiskStore()
   let keyName = "Activities"
+  lazy var path: (String) -> String = {
+    if $0.isEmpty {
+      return self.keyName
+    } else {
+      return self.keyName + "/" + $0
+    }
+  }
   
   func getStorage() -> UserDefaults {
     return UserDefaults.standard
   }
   
-  func save(data: Data) {
-    saveData(data, at: keyName)
+  func save(at name: String = "", data: Data) {
+    let store = loadData(at: path(name)) + [data]
+    saveData(store, at: path(name))
+  }
+  func overwrite(at name: String = "", data: Data) {
+    saveData(data, at: path(name))
   }
   
-  func save(data: [Data]) {
-    saveData(data, at: keyName)
+  func save(at name: String = "", data: [Data]) {
+    let store = loadData(at: path(name)) + data
+    saveData(store, at: path(name))
+  }
+  func overwrite(at name: String = "", data: [Data]) {
+    saveData(data, at: path(name))
   }
   
-  func save(name: String, data: Data) {
-    saveData(data, at: addContextPath([name], after: keyName))
-  }
-  
-  func save(name: String, data: [Data]) {
-    saveData(data, at: addContextPath([name], after: keyName))
-  }
-  
-  func save(contextPath: [String], data: Data) {
-    saveData([data], at: addContextPath(contextPath, after: keyName))
-  }
-  
-  func save(contextPath: [String], data: [Data]) {
-    saveData(data, at: addContextPath(contextPath, after: keyName))
-  }
-  
-  func load(name: String) -> [Data] {
-    loadData(at: keyName + "/" + name)
-  }
-  
-  func load(contextPath: [String]) -> [Data] {
-    loadData(at: addContextPath(contextPath, after: keyName))
+  func load(at name: String = "") -> [Data] {
+    loadData(at: path(name))
   }
   
   func loadAll() -> [Data] {
@@ -71,12 +66,5 @@ class DiskStore: StoreInKeyValueDependency {
     else {
       return []
     }
-  }
-}
-
-extension DiskStore {
-  func addContextPath(_ contextPath: [String], after name: String) -> String {
-    ([keyName] + contextPath)
-      .reduce("", {$0 + "/" + $1})
   }
 }

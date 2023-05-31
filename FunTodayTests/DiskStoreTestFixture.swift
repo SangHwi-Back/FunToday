@@ -7,23 +7,15 @@
 
 import Foundation
 
-final class TDiskStore: DiskStore, Mock {
-  typealias VALUE = Int
-  typealias T = DiskStore
-  
-  var result: VALUE
+final class DiskStoreTestFixture: DiskStore, Mock {
+  var result: Int = 0
   var userDefaults = UserDefaults()
 
-  init(_ res: VALUE) {
-    self.result = res
-  }
-
   override func getStorage() -> UserDefaults {
-    return self.userDefaults
+    userDefaults
   }
 
-  func verify(_ handler: (DiskStore) -> VALUE) -> Bool {
-    
-    return result == handler(self as DiskStore)
+  func verify(_ handler: (DiskStore) -> Int) -> Bool {
+    result == handler(self as DiskStore)
   }
 }
