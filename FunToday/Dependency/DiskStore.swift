@@ -1,5 +1,5 @@
 //
-//  MemoryStore.swift
+//  DiskStore.swift
 //  FunToday
 //
 //  Created by 백상휘 on 2023/05/29.
@@ -7,9 +7,13 @@
 
 import Foundation
 
-class MemoryStore: StoreInKeyValueDependency {
-  static let DP = MemoryStore()
+class DiskStore: StoreInKeyValueDependency {
+  static let DP = DiskStore()
   let keyName = "Activities"
+  
+  func getStorage() -> UserDefaults {
+    return UserDefaults.standard
+  }
   
   func save(data: Data) {
     saveData(data, at: keyName)
@@ -48,15 +52,15 @@ class MemoryStore: StoreInKeyValueDependency {
   }
   
   private func saveData(_ data: [Data], at path: String) {
-    UserDefaults.standard.set(data, forKey: path)
+    getStorage().set(data, forKey: path)
   }
   
   private func saveData(_ data: Data, at path: String) {
-    UserDefaults.standard.set(data, forKey: path)
+    getStorage().set(data, forKey: path)
   }
   
   private func loadData(at path: String) -> [Data] {
-    let ret = UserDefaults.standard.object(forKey: path)
+    let ret = getStorage().object(forKey: path)
     
     if let ret = ret as? Data {
       return [ret]
@@ -70,7 +74,7 @@ class MemoryStore: StoreInKeyValueDependency {
   }
 }
 
-extension MemoryStore {
+extension DiskStore {
   func addContextPath(_ contextPath: [String], after name: String) -> String {
     ([keyName] + contextPath)
       .reduce("", {$0 + "/" + $1})

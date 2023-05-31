@@ -43,7 +43,7 @@ struct ActivityContainerPresetListFeature: ReducerProtocol {
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
     case .setList:
-      state.list = MemoryStore.DP.loadAll()
+      state.list = DiskStore.DP.loadAll()
         .compactMap({
           try? JSONDecoder().decode(Activity.self, from: $0)
         })

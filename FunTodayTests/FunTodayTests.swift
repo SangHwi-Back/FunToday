@@ -8,31 +8,21 @@
 import XCTest
 
 final class FunTodayTests: XCTestCase {
-  let data = [
-    5,4,8,19,1,3,2,7,3
-  ]
-  
-  func test_queue() throws {
-    let queue = PriorityQueue<Int>()
+  func test_diskStore() throws {
+    // Arrange
+    var sut = TDiskStore(0)
+    sut.willReturn(1)
     
-    measure {
-      for _ in 0...200 {
-        for datum in data {
-          queue.enqueue(datum)
-        }
-      }
+    // Act
+    for _ in 1...4 {
+      sut.save(data: Data())
     }
-  }
-  
-  func test_array() throws {
-    measure {
-      var arr = [Int]()
-      for _ in 0...200 {
-        for datum in data {
-          arr.append(datum)
-          arr.sort()
-        }
-      }
-    }
+    
+    // Assert
+    XCTAssertTrue(sut.verify({
+      let res = $0.loadAll().count
+      print("Test Result ::: \(res)")
+      return res
+    }))
   }
 }
