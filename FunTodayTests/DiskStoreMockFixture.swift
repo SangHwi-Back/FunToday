@@ -1,5 +1,5 @@
 //
-//  DiskStoreTestFixture.swift
+//  DiskStoreMockFixture.swift
 //  FunTodayTests
 //
 //  Created by 백상휘 on 2023/05/31.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DiskStoreTestFixture: DiskStore, Mock {
+final class DiskStoreMockFixture: DiskStore, Mock {
   var result: Int = 0
   var userDefaults = UserDefaults()
 

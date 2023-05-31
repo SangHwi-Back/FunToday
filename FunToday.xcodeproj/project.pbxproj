@@ -21,7 +21,7 @@
 		1B5CD5EC2A14C09E00160B96 /* GoalItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */; };
 		1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */; };
 		1B5F3A572A27135D00E1B454 /* MockAndStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F3A562A27135D00E1B454 /* MockAndStub.swift */; };
-		1B5F3A5F2A271D3000E1B454 /* DiskStoreTestFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F3A5E2A271D3000E1B454 /* DiskStoreTestFixture.swift */; };
+		1B5F3A5F2A271D3000E1B454 /* DiskStoreMockFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F3A5E2A271D3000E1B454 /* DiskStoreMockFixture.swift */; };
 		1B5F3A602A271D3A00E1B454 /* DiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */; };
 		1B6A61A82A1F405100B5DF48 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A72A1F405100B5DF48 /* InstructionView.swift */; };
 		1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */; };
@@ -60,6 +60,7 @@
 		1B7160DD2A24B6CC004DC4E9 /* DiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */; };
 		1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */; };
 		1B84945A2A273879008067D7 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
+		1B84945E2A274BA7008067D7 /* DiskStoreStubFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -109,7 +110,7 @@
 		1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalItemFeature.swift; sourceTree = "<group>"; };
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
 		1B5F3A562A27135D00E1B454 /* MockAndStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAndStub.swift; sourceTree = "<group>"; };
-		1B5F3A5E2A271D3000E1B454 /* DiskStoreTestFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreTestFixture.swift; sourceTree = "<group>"; };
+		1B5F3A5E2A271D3000E1B454 /* DiskStoreMockFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreMockFixture.swift; sourceTree = "<group>"; };
 		1B6A61A72A1F405100B5DF48 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewInShortView.swift; sourceTree = "<group>"; };
 		1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewView.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDependency.swift; sourceTree = "<group>"; };
 		1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStore.swift; sourceTree = "<group>"; };
 		1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInDiskDependency.swift; sourceTree = "<group>"; };
+		1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreStubFixture.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -255,7 +257,8 @@
 			children = (
 				1B6BDE7829FA37C500FDABA3 /* FunTodayTests.swift */,
 				1B5F3A562A27135D00E1B454 /* MockAndStub.swift */,
-				1B5F3A5E2A271D3000E1B454 /* DiskStoreTestFixture.swift */,
+				1B5F3A5E2A271D3000E1B454 /* DiskStoreMockFixture.swift */,
+				1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */,
 			);
 			path = FunTodayTests;
 			sourceTree = "<group>";
@@ -573,11 +576,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B84945A2A273879008067D7 /* FileDependency.swift in Sources */,
-				1B5F3A5F2A271D3000E1B454 /* DiskStoreTestFixture.swift in Sources */,
+				1B5F3A5F2A271D3000E1B454 /* DiskStoreMockFixture.swift in Sources */,
 				1B5F3A602A271D3A00E1B454 /* DiskStore.swift in Sources */,
 				1B6BDE7929FA37C500FDABA3 /* FunTodayTests.swift in Sources */,
 				1B8AA77029FA95D0001C3A97 /* PriorityQueue.swift in Sources */,
 				1B5F3A572A27135D00E1B454 /* MockAndStub.swift in Sources */,
+				1B84945E2A274BA7008067D7 /* DiskStoreStubFixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

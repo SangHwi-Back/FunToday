@@ -16,19 +16,25 @@ protocol Mock {
 }
 
 extension Mock {
-  mutating func willReturn(_ res: VALUE) {
+  mutating func mockReturns(_ res: VALUE) {
     result = res
   }
 }
 
 protocol Stub {
-  associatedtype TestResult
-  var _mock: any Mock { get set }
+  associatedtype VALUE: Comparable
+  associatedtype TARGET
+  var result: VALUE { get set }
+  var stubTarget: TARGET? { get set }
+  func verify() -> Bool
 }
 
 extension Stub {
-  mutating func toStubEnabled(_ mock: any Mock) -> Self {
-    self._mock = mock
-    return self
+  mutating func setUp(_ target: TARGET) {
+    stubTarget = target
+  }
+  
+  mutating func stubReturns(_ res: VALUE) {
+    result = res
   }
 }

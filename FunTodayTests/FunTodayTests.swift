@@ -9,13 +9,14 @@ import XCTest
 
 final class FunTodayTests: XCTestCase {
   override func setUp() async throws {
-    DiskStoreTestFixture().overwrite(data: [])
+    DiskStoreMockFixture().overwrite(data: [])
+    DiskStoreStubFixture().overwrite(data: [])
   }
   
-  func test_diskStore() throws {
+  func test_diskStoreMock() throws {
     // Arrange
-    var sut = DiskStoreTestFixture()
-    sut.willReturn(4)
+    var sut = DiskStoreMockFixture()
+    sut.mockReturns(4)
     
     // Act
     for _ in 1...4 {
@@ -24,5 +25,20 @@ final class FunTodayTests: XCTestCase {
     
     // Assert
     XCTAssertTrue(sut.verify({ $0.loadAll().count }))
+  }
+  
+  func test_diskStoreStub() throws {
+    // Arrange
+    var sut = DiskStoreStubFixture()
+    sut.setUp(sut.loadAll)
+    sut.stubReturns(4)
+    
+    // Act
+    for _ in 1...4 {
+      sut.save(data: Data())
+    }
+    
+    // Assert
+    XCTAssertTrue(sut.verify())
   }
 }
