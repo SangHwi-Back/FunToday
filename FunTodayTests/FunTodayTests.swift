@@ -10,13 +10,13 @@ import ComposableArchitecture
 
 final class FunTodayTests: XCTestCase {
   override func setUp() async throws {
-    DiskStoreMockFixture().overwrite(data: [])
-    DiskStoreStubFixture().overwrite(data: [])
+    DiskStoreMockFixture(keyName: "Test").overwrite(data: [])
+    DiskStoreStubFixture(keyName: "Test").overwrite(data: [])
   }
   
   func test_diskStoreMock() throws {
     // Arrange
-    var sut = DiskStoreMockFixture()
+    var sut = DiskStoreMockFixture(keyName: "Test")
     sut.mockReturns(4)
     
     // Act
@@ -30,7 +30,7 @@ final class FunTodayTests: XCTestCase {
   
   func test_diskStoreStub() throws {
     // Arrange
-    var sut = DiskStoreStubFixture()
+    var sut = DiskStoreStubFixture(keyName: "Test")
     sut.setUp(sut.loadAll)
     sut.stubReturns(4)
     
@@ -54,5 +54,16 @@ final class FunTodayTests: XCTestCase {
     }
     
     XCTAssertFalse(store.state.goal.isFold)
+  }
+  
+  @MainActor
+  func test_goalListReducer() async throws {
+    let store = TestStore(initialState: GoalListFeature.State(goalList: .init())) {
+      GoalListFeature()
+    }
+    
+    await store.send(.setList)
+    
+    XCTAssertEqual(store.state.goalList.count, GoalStore.DP.loadAll().count)
   }
 }
