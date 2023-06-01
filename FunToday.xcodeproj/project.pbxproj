@@ -61,6 +61,23 @@
 		1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */; };
 		1B84945A2A273879008067D7 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
 		1B84945E2A274BA7008067D7 /* DiskStoreStubFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */; };
+		1B84945F2A28947E008067D7 /* GoalListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */; };
+		1B8494602A289584008067D7 /* GoalInputFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD829882A1B923E00BE1B07 /* GoalInputFeature.swift */; };
+		1B8494612A289611008067D7 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75E29FA842C001C3A97 /* Goal.swift */; };
+		1B8494622A289617008067D7 /* Goal+TestDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76429FA8458001C3A97 /* Goal+TestDouble.swift */; };
+		1B8494632A28A053008067D7 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76C29FA9010001C3A97 /* Entity.swift */; };
+		1B8494642A28A057008067D7 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76029FA8430001C3A97 /* Routine.swift */; };
+		1B8494652A28A05D008067D7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76229FA8437001C3A97 /* Activity.swift */; };
+		1B8494662A28A073008067D7 /* TestDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76A29FA849D001C3A97 /* TestDouble.swift */; };
+		1B8494672A28A07F008067D7 /* RoutineInputFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8298A2A1B929400BE1B07 /* RoutineInputFeature.swift */; };
+		1B8494682A28A08A008067D7 /* ActivityInputFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8298E2A1B931600BE1B07 /* ActivityInputFeature.swift */; };
+		1B8494692A28A092008067D7 /* ActivityContainerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8298C2A1B92D000BE1B07 /* ActivityContainerFeature.swift */; };
+		1B84946C2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B84946B2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift */; };
+		1B84946D2A28ACBB008067D7 /* ActivityContainerPresetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48E8F22A20D0F00019E035 /* ActivityContainerPresetList.swift */; };
+		1B84946E2A28ACF4008067D7 /* Routine+TestDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76629FA845F001C3A97 /* Routine+TestDouble.swift */; };
+		1B84946F2A28AD12008067D7 /* ActivityContainerPresetListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B84946B2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift */; };
+		1B8494702A28AD3D008067D7 /* Activity+TestDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA76829FA8464001C3A97 /* Activity+TestDouble.swift */; };
+		1B8494712A28AD59008067D7 /* GoalItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5EB2A14C09E00160B96 /* GoalItemFeature.swift */; };
 		1B8AA75529FA5B9B001C3A97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */; };
 		1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */; };
 		1B8AA75929FA6217001C3A97 /* View+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8AA75829FA6217001C3A97 /* View+List.swift */; };
@@ -152,6 +169,7 @@
 		1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStore.swift; sourceTree = "<group>"; };
 		1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInDiskDependency.swift; sourceTree = "<group>"; };
 		1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreStubFixture.swift; sourceTree = "<group>"; };
+		1B84946B2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContainerPresetListFeature.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B8AA75629FA5FC7001C3A97 /* GoalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetail.swift; sourceTree = "<group>"; };
 		1B8AA75829FA6217001C3A97 /* View+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+List.swift"; sourceTree = "<group>"; };
@@ -286,6 +304,7 @@
 				1BD8298A2A1B929400BE1B07 /* RoutineInputFeature.swift */,
 				1B6C37782A0DCFDA00BA731B /* ActivityContainer.swift */,
 				1B48E8F22A20D0F00019E035 /* ActivityContainerPresetList.swift */,
+				1B84946B2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift */,
 				1BD8298C2A1B92D000BE1B07 /* ActivityContainerFeature.swift */,
 				1B6C37742A0D21C900BA731B /* ActivityInputView.swift */,
 				1BD8298E2A1B931600BE1B07 /* ActivityInputFeature.swift */,
@@ -555,6 +574,7 @@
 				1B8AA75729FA5FC7001C3A97 /* GoalDetail.swift in Sources */,
 				1B6BDE6A29FA37C300FDABA3 /* FunTodayAppTabView.swift in Sources */,
 				1B8AA76929FA8464001C3A97 /* Activity+TestDouble.swift in Sources */,
+				1B84946C2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift in Sources */,
 				1B48E8F72A21000C0019E035 /* SettingActivityPresetFeature.swift in Sources */,
 				1B6C37832A1240A100BA731B /* DottedLine.swift in Sources */,
 				1B8AA76D29FA9010001C3A97 /* Entity.swift in Sources */,
@@ -576,11 +596,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B84945A2A273879008067D7 /* FileDependency.swift in Sources */,
+				1B8494642A28A057008067D7 /* Routine.swift in Sources */,
+				1B8494652A28A05D008067D7 /* Activity.swift in Sources */,
 				1B5F3A5F2A271D3000E1B454 /* DiskStoreMockFixture.swift in Sources */,
+				1B84946F2A28AD12008067D7 /* ActivityContainerPresetListFeature.swift in Sources */,
+				1B8494602A289584008067D7 /* GoalInputFeature.swift in Sources */,
 				1B5F3A602A271D3A00E1B454 /* DiskStore.swift in Sources */,
+				1B84946D2A28ACBB008067D7 /* ActivityContainerPresetList.swift in Sources */,
+				1B8494672A28A07F008067D7 /* RoutineInputFeature.swift in Sources */,
+				1B84945F2A28947E008067D7 /* GoalListFeature.swift in Sources */,
 				1B6BDE7929FA37C500FDABA3 /* FunTodayTests.swift in Sources */,
+				1B8494702A28AD3D008067D7 /* Activity+TestDouble.swift in Sources */,
 				1B8AA77029FA95D0001C3A97 /* PriorityQueue.swift in Sources */,
+				1B84946E2A28ACF4008067D7 /* Routine+TestDouble.swift in Sources */,
+				1B8494712A28AD59008067D7 /* GoalItemFeature.swift in Sources */,
+				1B8494662A28A073008067D7 /* TestDouble.swift in Sources */,
+				1B8494622A289617008067D7 /* Goal+TestDouble.swift in Sources */,
+				1B8494632A28A053008067D7 /* Entity.swift in Sources */,
 				1B5F3A572A27135D00E1B454 /* MockAndStub.swift in Sources */,
+				1B8494612A289611008067D7 /* Goal.swift in Sources */,
+				1B8494692A28A092008067D7 /* ActivityContainerFeature.swift in Sources */,
+				1B8494682A28A08A008067D7 /* ActivityInputFeature.swift in Sources */,
 				1B84945E2A274BA7008067D7 /* DiskStoreStubFixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

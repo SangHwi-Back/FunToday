@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ComposableArchitecture
 
 final class FunTodayTests: XCTestCase {
   override func setUp() async throws {
@@ -40,5 +41,18 @@ final class FunTodayTests: XCTestCase {
     
     // Assert
     XCTAssertTrue(sut.verify())
+  }
+  
+  @MainActor
+  func test_goalInputReducer() async throws {
+    let store = TestStore(initialState: GoalInputFeature.State(goal: .getDouble(), routines: .init())) {
+      GoalInputFeature()
+    }
+    
+    await store.send(.setFold) {
+      $0.goal.isFold = !$0.goal.isFold
+    }
+    
+    XCTAssertFalse(store.state.goal.isFold)
   }
 }
