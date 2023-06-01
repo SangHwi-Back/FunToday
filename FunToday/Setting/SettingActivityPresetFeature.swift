@@ -29,7 +29,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
       case .activityNewItem(action: .addActivity):
         if let data = try? JSONEncoder().encode(state.newActivity.activity) {
           
-          DiskStore.DP.save(data: data)
+          ActivityStore.DP.save(data: data)
           
           state.activities.append(state.newActivity)
           state.newActivity = .init(activity: Activity.getDouble())
@@ -39,7 +39,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
         return .none
       case .activityItems(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
-        DiskStore.DP.overwrite(data: state
+        ActivityStore.DP.overwrite(data: state
           .activities
           .map({ $0.activity })
           .compactMap({ try? JSONEncoder().encode($0) })
@@ -47,7 +47,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
         
         return .none
       case .setList:
-        let activities = DiskStore.DP.loadAll()
+        let activities = ActivityStore.DP.loadAll()
           .compactMap({
             try? JSONDecoder().decode(Activity.self, from: $0)
           })

@@ -8,14 +8,18 @@
 import Foundation
 
 class DiskStore: StoreInKeyValueDependency {
-  static let DP = DiskStore()
-  let keyName = "Activities"
   lazy var path: (String) -> String = {
     if $0.isEmpty {
       return self.keyName
     } else {
       return self.keyName + "/" + $0
     }
+  }
+  
+  let keyName: String
+  
+  init(keyName: String) {
+    self.keyName = keyName
   }
   
   func getStorage() -> UserDefaults {
@@ -67,4 +71,12 @@ class DiskStore: StoreInKeyValueDependency {
       return []
     }
   }
+}
+
+class ActivityStore: DiskStore {
+  static let DP = ActivityStore(keyName: "Activities")
+}
+
+class GoalStore: DiskStore {
+  static let DP = GoalStore(keyName: "Goals")
 }

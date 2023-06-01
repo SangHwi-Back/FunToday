@@ -43,6 +43,9 @@ struct GoalListView: View {
           FloatingPlusButton(width: 54)
         }
       }
+      .onAppear {
+        viewstore.send(.setList)
+      }
     }
     .padding(.vertical, 0.1)}
 }
