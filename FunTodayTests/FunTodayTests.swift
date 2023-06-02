@@ -85,4 +85,24 @@ final class FunTodayTests: XCTestCase {
 
     XCTAssertEqual(store.state.containerState.activities.count, 1)
   }
+  
+  @MainActor
+  func test_activityContainerReducer() async throws {
+    let preset = Activity.getDouble()
+    let inputState = ActivityInputFeature.State(activity: Activity.getDouble(inx: 1))
+    let store = TestStore(initialState: ActivityContainerFeature.State(
+      activities: IdentifiedArrayOf(arrayLiteral: inputState),
+      presetActivity: .init(list: []))) {
+        ActivityContainerFeature()
+      }
+    
+    await store.send(.presetElement(action: .rowSelected(preset)))
+    
+    XCTAssertEqual(store.state.activities.count, 2)
+    
+    await store.send(.presetElement(action: .rowSelected(inputState.activity)))
+    await store.send(.activityElement(id: inputState.id, action: .removeActivity))
+    
+    XCTAssertEqual(store.state.activities.count, 2)
+  }
 }
