@@ -66,4 +66,23 @@ final class FunTodayTests: XCTestCase {
     
     XCTAssertEqual(store.state.goalList.count, GoalStore.DP.loadAll().count)
   }
+  
+  @MainActor
+  func test_routineListReducer() async throws {
+    let store = TestStore(initialState: RoutineInputFeature.State(routine: Routine.getDouble())) {
+      RoutineInputFeature()
+    }
+    
+    await store.send(.updateName("Unit Test Routines")) {
+      $0.routine.name = "Unit Test Routines"
+    }
+    
+    await store.send(.updateDescription("Unit Test Routine Description Inputs")) {
+      $0.routine.description = "Unit Test Routine Description Inputs"
+    }
+    
+    await store.send(.activityContainerElement(action: .addActivity))
+
+    XCTAssertEqual(store.state.containerState.activities.count, 1)
+  }
 }

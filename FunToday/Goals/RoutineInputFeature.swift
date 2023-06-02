@@ -52,3 +52,21 @@ struct RoutineInputFeature: ReducerProtocol {
     }
   }
 }
+
+extension RoutineInputFeature.Action: Equatable {
+  typealias Action = RoutineInputFeature.Action
+  static func == (lhs: Action, rhs: Action) -> Bool {
+    switch (lhs, rhs) {
+    case (.updateName(let leftText), .updateName(let rightText)):
+      return leftText == rightText
+    case (.updateDescription(let leftText), .updateDescription(let rightText)):
+      return leftText == rightText
+    case (.removeRoutine, .removeRoutine):
+      return true
+    case (.activityElements(id: let leftId, action: .removeActivity), .activityElements(id: let rightId, action: .removeActivity)):
+      return leftId == rightId
+    default:
+      return true
+    }
+  }
+}
