@@ -44,6 +44,17 @@ struct GoalListFeature: ReducerProtocol {
         
         state.newGoal = .init(goal: .getDouble(), routines: .init(), isNew: true)
         return .none
+      case .inputItems(id: let id, action: .removeGoal):
+        guard
+          let removed = state.goalList.remove(id: id)?.goal,
+          let data = try? JSONEncoder().encode(removed)
+        else {
+          return .none
+        }
+        
+        GoalStore.DP.remove(data: data)
+        
+        return .none
       case .setList:
         let goals = GoalStore.DP.loadAll()
           .compactMap({

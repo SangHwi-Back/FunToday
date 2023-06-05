@@ -13,7 +13,8 @@ struct GoalInputView: View {
   
   let store: StoreOf<GoalInputFeature>
   
-  @State var showAlert = false
+  @State var showRemoveAlert = false
+  @State var showAddAlert = false
   @GestureState var dragstate: CGFloat = 0
   
   var body: some View {
@@ -62,7 +63,7 @@ struct GoalInputView: View {
               RoundedRectangle(cornerRadius: 8)
                 .strokeBorder(Color.gray)
                 .background(Color.labelReversed)
-                .alert(isPresented: $showAlert) {
+                .alert(isPresented: $showAddAlert) {
                   Alert(
                     title: Text("목표 추가"),
                     message: Text("정말로 목표를 추가하시겠습니까?"),
@@ -71,7 +72,7 @@ struct GoalInputView: View {
                       presentationMode.wrappedValue.dismiss()
                     },
                     secondaryButton: .cancel(Text("아니오")) {
-                      showAlert.toggle()
+                      showAddAlert.toggle()
                     }
                   )
                 }
@@ -82,7 +83,7 @@ struct GoalInputView: View {
                 .allowsHitTesting(false)
             }
             .onTapGesture {
-              showAlert.toggle()
+              showAddAlert.toggle()
             }
           }
         }.padding()
@@ -97,6 +98,24 @@ struct GoalInputView: View {
         
         presentationMode.wrappedValue.dismiss()
       }.buttonStyle(CommonPushButtonStyle()))
+      .if(viewstore.isNew == false) {
+        $0.navigationBarItems(trailing: Button("삭제하기") {
+          showRemoveAlert.toggle()
+        }.alert(isPresented: $showRemoveAlert, content: {
+          Alert(
+            title: Text("목표 삭제"),
+            message: Text("정말로 목표를 삭제하시겠습니까?"),
+            primaryButton: .default(Text("예")) {
+              viewstore.send(.removeGoal)
+              presentationMode.wrappedValue.dismiss()
+            },
+            secondaryButton: .cancel(Text("아니오")) {
+              showRemoveAlert.toggle()
+            }
+          )
+        })
+        )
+      }
       .gesture(DragGesture().updating($dragstate, body: { value, state, transaction in
         if (value.startLocation.x < 15 && value.translation.width > 70) {
           viewstore.send(.resetGoal)

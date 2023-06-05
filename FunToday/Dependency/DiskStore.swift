@@ -50,6 +50,19 @@ class DiskStore: StoreInKeyValueDependency {
     loadData(at: keyName)
   }
   
+  func remove(at name: String = "", data target: Data) {
+    var allData = loadAll()
+    
+    for (index, data) in allData.enumerated() {
+      if data == target {
+        allData.remove(at: index)
+        break
+      }
+    }
+    
+    overwrite(data: allData)
+  }
+  
   private func saveData(_ data: [Data], at path: String) {
     getStorage().set(data, forKey: path)
   }
