@@ -9,10 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 
 struct FunTodayAppTabView: View {
-  @State var selectedTab = FunTodayTab.goal
-  
   var body: some View {
-    TabView(selection: $selectedTab) {
+    TabView {
       NavigationView {
         GoalListView(store: Store(
           initialState: GoalListFeature.State(goalList: .init()),
