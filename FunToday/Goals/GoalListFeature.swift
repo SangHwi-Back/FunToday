@@ -65,6 +65,15 @@ struct GoalListFeature: ReducerProtocol {
         GoalStore.DP.remove(data: data)
         
         return .none
+      case .inputItems(id: _, action: .saveGoal):
+        let data = state.goalList.elements
+          .map({$0.goal})
+          .compactMap {
+            try? JSONEncoder().encode($0)
+          }
+        GoalStore.DP.overwrite(data: data)
+        
+        return .none
       case .setList:
         state.goalList = getGoalListFromStore()
         return .none

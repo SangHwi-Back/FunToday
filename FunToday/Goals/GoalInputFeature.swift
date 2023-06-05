@@ -21,6 +21,7 @@ struct GoalInputFeature: ReducerProtocol {
   enum Action {
     case addGoal
     case removeGoal
+    case saveGoal
     case addRoutine
     case resetGoal
     case setFold
@@ -32,10 +33,6 @@ struct GoalInputFeature: ReducerProtocol {
   var body: some ReducerProtocol<State, Action> {
     Reduce { state, action in
       switch action {
-      case .addGoal:
-        return .none
-      case .removeGoal:
-        return .none
       case .addRoutine:
         let routine = Routine.getDouble()
         state.routines.append(RoutineInputFeature.State(routine: routine))
@@ -64,7 +61,7 @@ struct GoalInputFeature: ReducerProtocol {
         
         state.goal.routines.remove(at: inx)
         return .none
-      case .routineElement:
+      case .addGoal, .removeGoal, .saveGoal, .routineElement:
         return .none
       }
     }.forEach(\State.routines, action: /Action.routineElement(id:action:)) {

@@ -94,6 +94,8 @@ struct GoalInputView: View {
       .navigationBarItems(leading: Button(viewstore.isNew ? "취소" : "뒤로가기") {
         if viewstore.isNew {
           viewstore.send(.resetGoal)
+        } else {
+          viewstore.send(.saveGoal)
         }
         
         presentationMode.wrappedValue.dismiss()
@@ -101,7 +103,8 @@ struct GoalInputView: View {
       .if(viewstore.isNew == false) {
         $0.navigationBarItems(trailing: Button("삭제하기") {
           showRemoveAlert.toggle()
-        }.alert(isPresented: $showRemoveAlert, content: {
+        }.buttonStyle(CommonPushButtonStyle()))
+        .alert(isPresented: $showRemoveAlert, content: {
           Alert(
             title: Text("목표 삭제"),
             message: Text("정말로 목표를 삭제하시겠습니까?"),
@@ -114,7 +117,6 @@ struct GoalInputView: View {
             }
           )
         })
-        )
       }
       .gesture(DragGesture().updating($dragstate, body: { value, state, transaction in
         if (value.startLocation.x < 15 && value.translation.width > 70) {
