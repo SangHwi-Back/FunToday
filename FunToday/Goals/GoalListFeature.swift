@@ -42,7 +42,7 @@ struct GoalListFeature: ReducerProtocol {
           GoalStore.DP.save(data: data)
         }
         
-        state.newGoal = .init(goal: .getDouble(), routines: .init())
+        state.newGoal = .init(goal: .getDouble(), routines: .init(), isNew: true)
         return .none
       case .setList:
         let goals = GoalStore.DP.loadAll()
