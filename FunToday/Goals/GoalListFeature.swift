@@ -21,6 +21,16 @@ struct GoalListFeature: ReducerProtocol {
     case setList
   }
   
+  func getGoalListFromStore() -> IdentifiedArrayOf<GoalInputFeature.State> {
+    let goals = GoalStore.DP.loadAll().compactMap {
+      try? JSONDecoder().decode(Goal.self, from: $0)
+    }
+    
+    return IdentifiedArrayOf<GoalInputFeature.State>(
+      uniqueElements: goals.map({$0.toState()})
+    )
+  }
+  
   var body: some ReducerProtocol<State, Action> {
     Scope(state: \.newGoal, action: /Action.inputNewItem(action:)) {
       GoalInputFeature()
@@ -56,22 +66,7 @@ struct GoalListFeature: ReducerProtocol {
         
         return .none
       case .setList:
-        let goals = GoalStore.DP.loadAll()
-          .compactMap({
-            try? JSONDecoder().decode(Goal.self, from: $0)
-          })
-        var result = IdentifiedArrayOf<GoalInputFeature.State>()
-        for goal in goals {
-          var routineResult = IdentifiedArrayOf<RoutineInputFeature.State>()
-          
-          for routine in goal.routines {
-            routineResult.append(RoutineInputFeature.State(routine: routine))
-          }
-          
-          result.append(GoalInputFeature.State(goal: goal, routines: routineResult))
-        }
-        
-        state.goalList = result
+        state.goalList = getGoalListFromStore()
         return .none
       case .goalItem, .inputItems, .inputNewItem:
         return .none

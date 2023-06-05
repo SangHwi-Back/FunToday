@@ -62,7 +62,9 @@ final class FunTodayTests: XCTestCase {
       GoalListFeature()
     }
     
-    await store.send(.setList)
+    await store.send(.setList) { state in
+      state.goalList = GoalListFeature().getGoalListFromStore()
+    }
     
     XCTAssertEqual(store.state.goalList.count, GoalStore.DP.loadAll().count)
   }

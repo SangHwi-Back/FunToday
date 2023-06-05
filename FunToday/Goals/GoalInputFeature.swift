@@ -11,7 +11,9 @@ import ComposableArchitecture
 struct GoalInputFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var goal: Goal
-    var id: UUID = .init()
+    var id: String {
+      goal.id
+    }
     var routines: IdentifiedArrayOf<RoutineInputFeature.State>
     var isNew: Bool = false
   }

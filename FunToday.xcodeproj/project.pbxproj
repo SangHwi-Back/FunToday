@@ -23,6 +23,8 @@
 		1B5F3A572A27135D00E1B454 /* MockAndStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F3A562A27135D00E1B454 /* MockAndStub.swift */; };
 		1B5F3A5F2A271D3000E1B454 /* DiskStoreMockFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F3A5E2A271D3000E1B454 /* DiskStoreMockFixture.swift */; };
 		1B5F3A602A271D3A00E1B454 /* DiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */; };
+		1B6978852A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6978842A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift */; };
+		1B6978862A2E1C2800DB2041 /* Goal+GoalInputFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6978842A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift */; };
 		1B6A61A82A1F405100B5DF48 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A72A1F405100B5DF48 /* InstructionView.swift */; };
 		1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */; };
 		1B6A61AC2A1F406D00B5DF48 /* SettingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */; };
@@ -131,6 +133,7 @@
 		1B5EB2E82A08B92C00029256 /* CommonRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRectangle.swift; sourceTree = "<group>"; };
 		1B5F3A562A27135D00E1B454 /* MockAndStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAndStub.swift; sourceTree = "<group>"; };
 		1B5F3A5E2A271D3000E1B454 /* DiskStoreMockFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreMockFixture.swift; sourceTree = "<group>"; };
+		1B6978842A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+GoalInputFeature.swift"; sourceTree = "<group>"; };
 		1B6A61A72A1F405100B5DF48 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		1B6A61A92A1F406400B5DF48 /* SettingReviewInShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewInShortView.swift; sourceTree = "<group>"; };
 		1B6A61AB2A1F406D00B5DF48 /* SettingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReviewView.swift; sourceTree = "<group>"; };
@@ -388,6 +391,7 @@
 			children = (
 				1B8AA75E29FA842C001C3A97 /* Goal.swift */,
 				1B8AA76429FA8458001C3A97 /* Goal+TestDouble.swift */,
+				1B6978842A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift */,
 				1B8AA76029FA8430001C3A97 /* Routine.swift */,
 				1B8AA76629FA845F001C3A97 /* Routine+TestDouble.swift */,
 				1B8AA76229FA8437001C3A97 /* Activity.swift */,
@@ -599,6 +603,7 @@
 				1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */,
 				1B6A61AA2A1F406400B5DF48 /* SettingReviewInShortView.swift in Sources */,
 				1BD829892A1B923E00BE1B07 /* GoalInputFeature.swift in Sources */,
+				1B6978852A2E1B7D00DB2041 /* Goal+GoalInputFeature.swift in Sources */,
 				1B8AA76729FA845F001C3A97 /* Routine+TestDouble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +615,7 @@
 				1B84945A2A273879008067D7 /* FileDependency.swift in Sources */,
 				1B8494642A28A057008067D7 /* Routine.swift in Sources */,
 				1B8494652A28A05D008067D7 /* Activity.swift in Sources */,
+				1B6978862A2E1C2800DB2041 /* Goal+GoalInputFeature.swift in Sources */,
 				1B5F3A5F2A271D3000E1B454 /* DiskStoreMockFixture.swift in Sources */,
 				1B84946F2A28AD12008067D7 /* ActivityContainerPresetListFeature.swift in Sources */,
 				1B8494602A289584008067D7 /* GoalInputFeature.swift in Sources */,
