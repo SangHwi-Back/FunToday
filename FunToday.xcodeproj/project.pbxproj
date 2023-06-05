@@ -59,6 +59,9 @@
 		1B7160DB2A24ABCC004DC4E9 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
 		1B7160DD2A24B6CC004DC4E9 /* DiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */; };
 		1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */; };
+		1B7D44922A2DA21A002337AC /* ReviewMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D44912A2DA21A002337AC /* ReviewMainController.swift */; };
+		1B7D44942A2DA396002337AC /* ReviewViewMainRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D44932A2DA396002337AC /* ReviewViewMainRoutineView.swift */; };
+		1B7D44962A2DA5BD002337AC /* ReviewViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D44952A2DA5BD002337AC /* ReviewViewState.swift */; };
 		1B84945A2A273879008067D7 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
 		1B84945E2A274BA7008067D7 /* DiskStoreStubFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */; };
 		1B84945F2A28947E008067D7 /* GoalListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5CD5E72A14A68F00160B96 /* GoalListFeature.swift */; };
@@ -168,6 +171,9 @@
 		1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDependency.swift; sourceTree = "<group>"; };
 		1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStore.swift; sourceTree = "<group>"; };
 		1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInDiskDependency.swift; sourceTree = "<group>"; };
+		1B7D44912A2DA21A002337AC /* ReviewMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMainController.swift; sourceTree = "<group>"; };
+		1B7D44932A2DA396002337AC /* ReviewViewMainRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewMainRoutineView.swift; sourceTree = "<group>"; };
+		1B7D44952A2DA5BD002337AC /* ReviewViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewState.swift; sourceTree = "<group>"; };
 		1B84945D2A274BA7008067D7 /* DiskStoreStubFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStoreStubFixture.swift; sourceTree = "<group>"; };
 		1B84946B2A28AC7A008067D7 /* ActivityContainerPresetListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityContainerPresetListFeature.swift; sourceTree = "<group>"; };
 		1B8AA75429FA5B9B001C3A97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -316,6 +322,9 @@
 			isa = PBXGroup;
 			children = (
 				1B6BDE9529FA552200FDABA3 /* ReviewView.swift */,
+				1B7D44952A2DA5BD002337AC /* ReviewViewState.swift */,
+				1B7D44912A2DA21A002337AC /* ReviewMainController.swift */,
+				1B7D44932A2DA396002337AC /* ReviewViewMainRoutineView.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -535,6 +544,7 @@
 				1B6A61AC2A1F406D00B5DF48 /* SettingReviewView.swift in Sources */,
 				1B1696062A08CD6300D827FB /* Dependency.swift in Sources */,
 				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
+				1B7D44942A2DA396002337AC /* ReviewViewMainRoutineView.swift in Sources */,
 				1B8AA76129FA8431001C3A97 /* Routine.swift in Sources */,
 				1B8AA77229FAA983001C3A97 /* Routine+CustomTableRow.swift in Sources */,
 				1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */,
@@ -544,6 +554,7 @@
 				1BD8298F2A1B931600BE1B07 /* ActivityInputFeature.swift in Sources */,
 				1B6C376B2A0C8FB900BA731B /* InputField.swift in Sources */,
 				1B5CD5E82A14A68F00160B96 /* GoalListFeature.swift in Sources */,
+				1B7D44922A2DA21A002337AC /* ReviewMainController.swift in Sources */,
 				1B48E8F32A20D0F00019E035 /* ActivityContainerPresetList.swift in Sources */,
 				1B6BDE9629FA552200FDABA3 /* ReviewView.swift in Sources */,
 				1B6C37732A0D21A600BA731B /* RoutineInputView.swift in Sources */,
@@ -559,6 +570,7 @@
 				1B5EB2E92A08B92C00029256 /* CommonRectangle.swift in Sources */,
 				1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */,
 				1B6C37772A0D30DB00BA731B /* View+If.swift in Sources */,
+				1B7D44962A2DA5BD002337AC /* ReviewViewState.swift in Sources */,
 				1B8AA76529FA8458001C3A97 /* Goal+TestDouble.swift in Sources */,
 				1B6C37752A0D21C900BA731B /* ActivityInputView.swift in Sources */,
 				1B6BDE9F29FA5A7C00FDABA3 /* GoalItem.swift in Sources */,
