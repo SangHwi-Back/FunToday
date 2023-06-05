@@ -15,22 +15,31 @@ struct ReviewViewMainRoutineView: View {
       VStack(spacing: 8) {
         if let routines = currentGoal?.routines {
           ForEach(routines) { routine in
-            ForEach(routine.activities) { activity in
-              VStack(spacing: 8) {
-                Text(activity.name)
-                  .frame(maxWidth: .infinity, alignment: .leading)
-                Divider()
-                HStack {
-                  Text(activity.time_s.split(separator: "-").last ?? "0")
-                    .frame(maxWidth: 20)
-                    .minimumScaleFactor(0.2)
-                    .font(.title2)
+            CustomSectionView(title: routine.name) {
+              ForEach(routine.activities) { activity in
+                VStack(spacing: 8) {
+                  Text(activity.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                   Divider()
-                  Rectangle()
-                    .fill((activity.category?.color ?? .secondary).opacity(0.8))
-                    
+                  HStack {
+                    Text(activity.time_s.split(separator: "-").last ?? "0")
+                      .frame(maxWidth: 20)
+                      .minimumScaleFactor(0.2)
+                      .font(.title2)
+                    Divider()
+                    GeometryReader { proxy in
+                      ZStack(alignment: .leading) {
+                        Rectangle()
+                          .fill(Color.shadow.opacity(0.3))
+                        Rectangle()
+                          .fill((activity.category?.color ?? .secondary).opacity(0.8))
+                          .frame(width: proxy.size.width * 0.78)
+                      }
+                    }
+                  }
+                  .frame(height: 40)
+                  Divider()
                 }
-                .frame(height: 40)
               }
             }
           }

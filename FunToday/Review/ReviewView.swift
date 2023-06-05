@@ -34,28 +34,25 @@ struct ReviewView: View {
       .padding(.top)
       
       CustomSectionView {
-        ScrollView(.horizontal) {
-          HStack {
-            ForEach(currentCategories) { category in
-              VStack {
-                ProgressCircle(status: Binding.constant(ProgressStatus(value: CGFloat.random(in: 0.0...1.0), color: category.color, text: "")))
-                Text(String(describing: category))
-                  .minimumScaleFactor(0.2)
-                  .font(.caption)
-              }
-              .padding(.trailing)
+        HStack(spacing: 16) {
+          ForEach(currentCategories) { category in
+            VStack {
+              ProgressCircle(status: Binding.constant(ProgressStatus(value: CGFloat.random(in: 0.0...1.0), color: category.color, text: "")))
+              Text(String(describing: category))
+                .minimumScaleFactor(0.2)
+                .font(.caption)
             }
           }
         }
       }
       .frame(height: 120)
-      .padding()
+      .padding(.horizontal)
       
       ReviewViewMainRoutineView(currentGoal: $currentGoal)
         .padding()
       
       ReviewMainController(goals: $goals, currentGoal: $currentGoal)
-        .padding()
+        .padding(.horizontal)
     }
     .navigationBarTitleDisplayMode(.inline)
     .navigationBarTitle(Text(currentGoal?.name ?? "none"))
