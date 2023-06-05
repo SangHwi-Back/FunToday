@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ReviewViewMainRoutineView: View {
-  @Binding var currentGoal: Goal?
+  @Binding var goals: [Goal]
+  var currentGoal: Goal?
   
   var body: some View {
     ScrollView {
@@ -56,7 +57,7 @@ struct ReviewViewMainRoutineView_Previews: PreviewProvider {
     let activity = Activity.getDouble()
     routine.activities = [activity]
     goal.routines = [routine]
-    return ReviewViewMainRoutineView(currentGoal: Binding.constant(goal)).padding()
+    return ReviewViewMainRoutineView(goals: Binding.constant([goal])).padding()
   }
 }
 

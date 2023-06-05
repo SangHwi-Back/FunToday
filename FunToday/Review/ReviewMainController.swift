@@ -10,7 +10,7 @@ import SwiftUI
 struct ReviewMainController: View {
   
   @Binding var goals: [Goal]
-  @Binding var currentGoal: Goal?
+  var currentGoal: Goal?
   
   var body: some View {
     HStack(spacing: 8) {
@@ -29,8 +29,14 @@ struct ReviewMainController: View {
       .contextMenu(ContextMenu(menuItems: {
         VStack(spacing: 16) {
           ForEach(goals) { goal in
-            Button(goal.name, action: { currentGoal = goal })
-              .disabled(goal == currentGoal)
+            Button {
+              guard let inx = goals.firstIndex(of: goal) else { return }
+              let removed = goals.remove(at: inx)
+              goals.insert(removed, at: 0)
+            } label: {
+              Text(goal.name)
+            }
+            .disabled(goal == currentGoal)
           }
         }
       }))
@@ -47,7 +53,7 @@ struct ReviewMainHeader_Previews: PreviewProvider {
       Spacer()
       ReviewMainController(
         goals: Binding.constant(goals),
-        currentGoal: Binding.constant(goals.first))
+        currentGoal: goals.first)
       .padding()
     }
   }

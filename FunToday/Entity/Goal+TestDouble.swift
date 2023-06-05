@@ -13,7 +13,7 @@ extension Goal: TestDouble {
     formatter.dateFormat = "yyyy-MM-dd"
     
     return .init(
-      uniqueID: "\(inx)",
+      uniqueID: UUID().uuidString,
       index: inx,
       name: "testName",
       description: "testDescription",
