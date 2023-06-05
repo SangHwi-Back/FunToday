@@ -37,7 +37,9 @@ struct GoalInputFeature: ReducerProtocol {
       case .removeGoal:
         return .none
       case .addRoutine:
-        state.routines.append(RoutineInputFeature.State(routine: Routine.getDouble()))
+        let routine = Routine.getDouble()
+        state.routines.append(RoutineInputFeature.State(routine: routine))
+        state.goal.routines.append(routine)
         return .none
       case .resetGoal:
         state.goal = Goal.getDouble()
@@ -53,7 +55,14 @@ struct GoalInputFeature: ReducerProtocol {
         state.goal.description = txt
         return .none
       case .routineElement(id: let id, action: .removeRoutine):
-        state.routines.remove(id: id)
+        guard
+          let removed = state.routines.remove(id: id),
+          let inx = state.goal.routines.firstIndex(of: removed.routine)
+        else {
+          return .none
+        }
+        
+        state.goal.routines.remove(at: inx)
         return .none
       case .routineElement:
         return .none
