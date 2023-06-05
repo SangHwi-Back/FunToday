@@ -15,7 +15,6 @@ struct GoalListFeature: ReducerProtocol {
   }
   
   enum Action {
-    case goalItem(id: GoalItemFeature.State.ID, action: GoalItemFeature.Action)
     case inputNewItem(action: GoalInputFeature.Action)
     case inputItems(id: GoalInputFeature.State.ID, action: GoalInputFeature.Action)
     case setList
@@ -37,14 +36,6 @@ struct GoalListFeature: ReducerProtocol {
     }
     Reduce { state, action in
       switch action {
-      case .goalItem(id: _, action: .setGoal(let goal)):
-        guard let inx = state.goalList.firstIndex(where: { $0.goal.id == goal.id }) else {
-          return .none
-        }
-        
-        state.goalList[inx].goal = goal
-        
-        return .none
       case .inputNewItem(action: .addGoal):
         state.goalList.append(state.newGoal)
         
@@ -77,7 +68,7 @@ struct GoalListFeature: ReducerProtocol {
       case .setList:
         state.goalList = getGoalListFromStore()
         return .none
-      case .goalItem, .inputItems, .inputNewItem:
+      case .inputItems, .inputNewItem:
         return .none
       }
     }
