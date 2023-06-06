@@ -33,6 +33,11 @@ struct GoalInputFeature: ReducerProtocol {
   var body: some ReducerProtocol<State, Action> {
     Reduce { state, action in
       switch action {
+      case .removeGoal:
+        return .none
+      case .saveGoal:
+        state.goal.routines = state.routines.elements.map({$0.routine})
+        return .none
       case .addRoutine:
         let routine = Routine.getDouble()
         state.routines.append(RoutineInputFeature.State(routine: routine))
@@ -52,19 +57,13 @@ struct GoalInputFeature: ReducerProtocol {
         state.goal.description = txt
         return .none
       case .routineElement(id: let id, action: .removeRoutine):
-        guard
-          let removed = state.routines.remove(id: id),
-          let inx = state.goal.routines.firstIndex(of: removed.routine)
-        else {
-          return .none
-        }
-        
-        state.goal.routines.remove(at: inx)
-        return .none
-      case .addGoal, .removeGoal, .saveGoal, .routineElement:
-        return .none
+        state.routines.remove(id: id)
+        return .run { await $0(.saveGoal) }
+      case .addGoal, .routineElement:
+        return .run { await $0(.saveGoal) }
       }
-    }.forEach(\State.routines, action: /Action.routineElement(id:action:)) {
+    }
+    .forEach(\.routines, action: /Action.routineElement(id:action:)) {
       RoutineInputFeature()
     }
   }

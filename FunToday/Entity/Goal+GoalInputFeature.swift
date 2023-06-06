@@ -12,7 +12,9 @@ extension Goal {
   func toState() -> GoalInputFeature.State {
     var routineResult = IdentifiedArrayOf<RoutineInputFeature.State>()
     routines.forEach {
-      routineResult.append(RoutineInputFeature.State(routine: $0))
+      var container = RoutineInputFeature.State(routine: $0)
+      container.routine.activities = $0.activities
+      routineResult.append(container)
     }
     
     return GoalInputFeature.State(goal: self, routines: routineResult)

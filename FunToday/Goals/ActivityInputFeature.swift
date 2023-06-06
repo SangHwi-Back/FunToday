@@ -11,7 +11,9 @@ import ComposableArchitecture
 struct ActivityInputFeature: ReducerProtocol {
   
   struct State: Equatable, Identifiable {
-    var id: UUID = .init()
+    var id: String {
+      activity.id
+    }
     var activity: Activity
     
     let dateFormatter: DateFormatter = {

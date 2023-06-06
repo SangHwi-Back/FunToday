@@ -40,20 +40,20 @@ struct GoalInputView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom)
           
-          VStack(spacing: 8) {
-            ForEachStore(
-              store.scope(state: \.routines, action: GoalInputFeature.Action.routineElement(id:action:))
-            ) { storescoped in
-              RoutineInputView(store: storescoped)
-            }
-            
-            ZStack {
-              RoundedRectangle(cornerRadius: 8)
-                .strokeBorder(Color.gray)
-              FloatingPlusButton(width: 24, bgColor: .gray)
-            }.onTapGesture {
-              viewstore.send(.addRoutine)
-            }
+          ForEachStore(
+            store.scope(
+              state: \.routines,
+              action: GoalInputFeature.Action.routineElement(id:action:))
+          ) {
+            RoutineInputView(store: $0)
+          }
+          
+          ZStack {
+            RoundedRectangle(cornerRadius: 8)
+              .strokeBorder(Color.gray)
+            FloatingPlusButton(width: 24, bgColor: .gray)
+          }.onTapGesture {
+            viewstore.send(.addRoutine)
           }
           
           if viewstore.isNew {

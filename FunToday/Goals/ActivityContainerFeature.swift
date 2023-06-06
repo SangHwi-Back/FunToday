@@ -10,9 +10,6 @@ import ComposableArchitecture
 
 struct ActivityContainerFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
-    static func == (lhs: ActivityContainerFeature.State, rhs: ActivityContainerFeature.State) -> Bool {
-      lhs.id == rhs.id
-    }
     var id: UUID = .init()
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
     var presetActivity: ActivityContainerPresetListFeature.State
@@ -20,6 +17,7 @@ struct ActivityContainerFeature: ReducerProtocol {
   
   enum Action {
     case addActivity
+    case saveContainer
     case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
     case presetElement(action:ActivityContainerPresetListFeature.Action)
   }
@@ -31,8 +29,6 @@ struct ActivityContainerFeature: ReducerProtocol {
     
     Reduce { state, action in
       switch action {
-      case .addActivity:
-        return .none
       case .activityElement(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
         return .none
@@ -42,7 +38,7 @@ struct ActivityContainerFeature: ReducerProtocol {
         )
         
         return .none
-      case .activityElement, .presetElement:
+      case .addActivity, .saveContainer, .activityElement, .presetElement:
         return .none
       }
     }.forEach(\.activities, action: /Action.activityElement(id:action:)) {
