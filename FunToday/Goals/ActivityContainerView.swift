@@ -8,7 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct ActivityContainer: View {
+struct ActivityContainerView: View {
   let store: StoreOf<ActivityContainerFeature>
   @State private var showModal = false
   
@@ -30,7 +30,7 @@ struct ActivityContainer: View {
             Image(systemName: "list.bullet")
           })
           .sheet(isPresented: $showModal) {
-            ActivityContainerPresetListView(store: store.scope(
+            ActivityPresetListView(store: store.scope(
               state: \.presetActivity,
               action: ActivityContainerFeature.Action.presetElement(action:))
             )
@@ -128,6 +128,6 @@ struct ActivityContainer_Previews: PreviewProvider {
         presetActivity: .init(list: [])),
       reducer: { ActivityContainerFeature() })
     
-    return ActivityContainer(store: initialStore)
+    return ActivityContainerView(store: initialStore)
   }
 }

@@ -43,7 +43,7 @@ struct RoutineInputView: View {
             .padding(.vertical)
             
             NavigationLink {
-              ActivityContainer(
+              ActivityContainerView(
                 store: store.scope(
                   state: \.containerState,
                   action: RoutineInputFeature.Action.activityContainerElement(action:))

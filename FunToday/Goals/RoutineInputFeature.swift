@@ -59,6 +59,15 @@ struct RoutineInputFeature: ReducerProtocol {
         
         state.routine.activities.remove(at: inx)
         return .none
+        
+      case .activityElements(id: let id, action: _):
+        guard let inx = state.containerState.activities.firstIndex(where: { $0.id == id }) else {
+          return .none
+        }
+        
+        let activity = state.containerState.activities[inx].activity
+        state.routine.activities[inx] = activity
+        return .none
       
       case .activityContainerElement(action: .addActivity):
         let activity = Activity.getDouble()
@@ -71,7 +80,7 @@ struct RoutineInputFeature: ReducerProtocol {
         state.routine.activities = state.containerState.activities.elements.map({$0.activity})
         return .none
         
-      case .removeRoutine, .activityElements, .activityContainerElement:
+      case .removeRoutine, .activityContainerElement:
         return .none
       }
     }.forEach(\.containerState.activities, action: /Action.activityElements(id:action:)) {

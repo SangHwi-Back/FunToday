@@ -12,19 +12,19 @@ struct ActivityContainerFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var id: UUID = .init()
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
-    var presetActivity: ActivityContainerPresetListFeature.State
+    var presetActivity: ActivityPresetListFeature.State
   }
   
   enum Action {
     case addActivity
     case saveContainer
     case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
-    case presetElement(action:ActivityContainerPresetListFeature.Action)
+    case presetElement(action:ActivityPresetListFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
     Scope(state: \.presetActivity, action: /Action.presetElement(action:)) {
-      ActivityContainerPresetListFeature()
+      ActivityPresetListFeature()
     }
     
     Reduce { state, action in

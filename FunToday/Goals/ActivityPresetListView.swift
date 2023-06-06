@@ -1,5 +1,5 @@
 //
-//  ActivityContainerPresetList.swift
+//  ActivityPresetListView.swift
 //  FunToday
 //
 //  Created by 백상휘 on 2023/05/26.
@@ -8,8 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct ActivityContainerPresetListView: View {
-  let store: StoreOf<ActivityContainerPresetListFeature>
+struct ActivityPresetListView: View {
+  let store: StoreOf<ActivityPresetListFeature>
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
