@@ -25,6 +25,7 @@ struct ActivityInputFeature: ReducerProtocol {
     var startDate: Date = Date()
     var endDate: Date = Date()
     var category = ActivityCategory.health
+    var countAlertPresented = false
   }
   
   enum Action {
@@ -37,6 +38,10 @@ struct ActivityInputFeature: ReducerProtocol {
     case updateWeekendActive
     case updateActive
     case updateUseSwitch
+    case updateSlider(Float)
+    /// true : +, false : -
+    case updateCount(Bool)
+    case showCountAlert
     case removeActivity
     case addActivity
     case buttonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
@@ -73,6 +78,19 @@ struct ActivityInputFeature: ReducerProtocol {
       return .none
     case .updateUseSwitch:
       state.activity.completionUseSwitch.toggle()
+      return .none
+    case .updateSlider(let ratio):
+      state.activity.ratio = ratio
+      return .none
+    case .updateCount(let willPlus):
+      if willPlus == false, state.activity.completionCount == 0 {
+        return .run { send in await send(.showCountAlert) }
+      }
+      
+      state.activity.completionCount += (willPlus ? 1 : -1)
+      return .none
+    case .showCountAlert:
+      state.countAlertPresented.toggle()
       return .none
     case .removeActivity:
       return .none

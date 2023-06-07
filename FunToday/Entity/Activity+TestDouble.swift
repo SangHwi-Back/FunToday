@@ -23,6 +23,7 @@ extension Activity: TestDouble {
       isWeekendActive: false,
       isActive: true,
       completionRatio: 0,
+      completionCount: 0,
       completionUseSwitch: false)
   }
 }

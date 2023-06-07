@@ -9,7 +9,6 @@ import Foundation
 
 struct Activity: Identifiable, Entity, Hashable {
   var uniqueID: String
-  
   var id: String {
     uniqueID
   }
@@ -48,6 +47,7 @@ struct Activity: Identifiable, Entity, Hashable {
   var isActive: Bool = true
   
   var completionRatio: Int
+  var completionCount: Int
   var completionUseSwitch: Bool = false
   
   // MARK: - Not Decoding. Just setter.
@@ -91,19 +91,19 @@ extension Int {
 }
 
 @propertyWrapper
-struct Percentage {
+struct NoMinusInteger {
   private var value: Int
   
   var wrappedValue: Int {
     get {
-      wrappedValue
+      value
     }
     set {
-      guard wrappedValue >= 0 else {
-        wrappedValue = 0
+      guard newValue >= 0 else {
+        value = 0
         return
       }
-      wrappedValue = min(wrappedValue, 100)
+      value = newValue
     }
   }
 }
