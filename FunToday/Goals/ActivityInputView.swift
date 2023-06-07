@@ -14,7 +14,7 @@ struct ActivityInputView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       CustomSectionView {
-        VStack(spacing: 4) {
+        ScrollView {
           InputField(title: "이름 :", isEssential: true,
                      text: viewstore.binding(get: \.activity.name, send: ActivityInputFeature.Action.updateName))
           InputField(title: "설명 :", isEssential: false,
@@ -47,7 +47,7 @@ struct ActivityInputView: View {
           Toggle("달성률을 체크하나요?", isOn: viewstore.binding(get: \.activity.completionUseSwitch, send: ActivityInputFeature.Action.updateUseSwitch))
         }
       }
-      .scaledToFit()
+      .navigationBarTitleDisplayMode(.inline)
     }
   }
 }

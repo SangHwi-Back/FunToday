@@ -57,11 +57,12 @@ struct ActivityButtonScrollView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
-        HStack(spacing: 18) {
+        HStack(spacing: 6) {
           ForEachStore(
             store.scope(state: \.activities, action: ActivityContainerFeature.Action.activityElement(id:action:))
           ) {
             ActivityButton(store: $0)
+              .padding([.top, .leading], 12)
           }
         }
       }
@@ -114,7 +115,7 @@ struct ActivityInputScrollView: View {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: viewstore.activities.isEmpty ? .never : .always))
         .navigationBarTitleDisplayMode(.inline)
-        .frame(width: size.width, height: size.height - 16)
+        .frame(width: size.width)
       }
     }
   }
@@ -122,12 +123,10 @@ struct ActivityInputScrollView: View {
 
 struct ActivityContainer_Previews: PreviewProvider {
   static var previews: some View {
-    let initialStore = Store(
-      initialState: ActivityContainerFeature.State(
-        activities: .init(),
-        presetActivity: .init(list: [])),
-      reducer: { ActivityContainerFeature() })
+    let routineFeature = Store(initialState: RoutineInputFeature.State(routine: Routine.getDouble()), reducer: RoutineInputFeature())
     
-    return ActivityContainerView(store: initialStore)
+    return NavigationView {
+      ActivityContainerView(store: routineFeature.scope(state: \.containerState, action: RoutineInputFeature.Action.activityContainerElement(action:)))
+    }
   }
 }
