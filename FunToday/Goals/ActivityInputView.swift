@@ -14,7 +14,7 @@ struct ActivityInputView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       CustomSectionView {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
           InputField(title: "이름 :", isEssential: true,
                      text: viewstore.binding(get: \.activity.name, send: ActivityInputFeature.Action.updateName))
           InputField(title: "설명 :", isEssential: false,
@@ -38,20 +38,24 @@ struct ActivityInputView: View {
             Text("기간")
             Spacer()
             DatePicker("", selection: viewstore.binding(get: \.startDate, send: ActivityInputFeature.Action.updateStartDate), displayedComponents: [.hourAndMinute])
+              .scaledToFit()
             Text("~")
             DatePicker("", selection: viewstore.binding(get: \.endDate, send: ActivityInputFeature.Action.updateEndDate), displayedComponents: [.hourAndMinute])
+              .scaledToFit()
           }
           .padding(.vertical, 4)
           
           ActivityInputViewDailyHandler(viewstore: viewstore)
-          
+            .padding(4)
           ActivityInputViewWeekendHandler(viewstore: viewstore)
-          
+            .padding(4)
           ActivityInputViewIsActiveHandler(viewstore: viewstore)
-          
+            .padding(4)
           ActivityInputViewCompletionValueHandler(viewstore: viewstore)
+            .padding(4)
         }
       }
+      .minimumScaleFactor(0.2)
       .animation(.default, value: viewstore.activity)
       .navigationBarTitleDisplayMode(.inline)
     }
@@ -68,30 +72,19 @@ private struct ActivityInputViewDailyHandler: View {
       if viewstore.activity.isDailyActive == false {
           Divider()
           HStack(spacing: 0) {
-            getText("월요일", isActive: viewstore.activity.activeWeekDays.contains(.mon))
-              .onTapGesture { viewstore.send(.updateWeekDay(.mon)) }
-            Divider()
-            getText("화요일", isActive: viewstore.activity.activeWeekDays.contains(.tue))
-              .onTapGesture { viewstore.send(.updateWeekDay(.tue)) }
-            Divider()
-            getText("수요일", isActive: viewstore.activity.activeWeekDays.contains(.wed))
-              .onTapGesture { viewstore.send(.updateWeekDay(.wed)) }
-            Divider()
-            getText("목요일", isActive: viewstore.activity.activeWeekDays.contains(.thu))
-              .onTapGesture { viewstore.send(.updateWeekDay(.thu)) }
-            Divider()
-            getText("금요일", isActive: viewstore.activity.activeWeekDays.contains(.fri))
-              .onTapGesture { viewstore.send(.updateWeekDay(.fri)) }
+            ForEach(Activity.Weekday.allCases) { weekday in
+              getButton(weekday: weekday) { viewstore.send(.updateWeekDay(weekday)) }
+              Divider()
+            }
           }
           .clipShape(RoundedRectangle(cornerRadius: 8))
-          Divider()
       }
     }
   }
   
-  private func getText(_ txt: String, isActive: Bool) -> some View {
-    Text(txt)
-      .minimumScaleFactor(0.2)
+  private func getButton(weekday: Activity.Weekday, action: @escaping ()->Void) -> some View {
+    let isActive = viewstore.activity.isActive(weekday: weekday)
+    return Button(weekday.name, action: action)
       .padding(.horizontal).padding(.vertical, 12)
       .scaledToFill()
       .foregroundColor(isActive ? .white : .label)
@@ -112,27 +105,26 @@ private struct ActivityInputViewWeekendHandler: View {
           HStack {
             Spacer()
             HStack(spacing: 0) {
-              Button(action: { viewstore.send(.updateWeekend(.sat)) }) {
-                Text("토요일")
-                  .padding(.horizontal).padding(.vertical, 12)
-                  .foregroundColor(viewstore.activity.isSaturdayActive ? .white : .label)
+              ForEach(Activity.Weekend.allCases) { weekend in
+                getButton(weekend: weekend) { viewstore.send(.updateWeekend(weekend)) }
+                Divider()
               }
-              .background(viewstore.activity.isSaturdayActive ? Color.green : Color.element)
-              Divider()
-              Button(action: { viewstore.send(.updateWeekend(.sun)) }) {
-                Text("일요일")
-                  .padding(.horizontal).padding(.vertical, 12)
-                  .foregroundColor(viewstore.activity.isSundayActive ? .white : .label)
-              }
-              .background(viewstore.activity.isSundayActive ? Color.green : Color.element)
             }
             .clipShape(RoundedRectangle(cornerRadius: 8))
           }
-          Divider()
         }
         .padding(.leading)
       }
     }
+  }
+  
+  private func getButton(weekend: Activity.Weekend, action: @escaping ()->Void) -> some View {
+    let isActive = viewstore.activity.isActive(weekend: weekend)
+    return Button(weekend.name, action: action)
+      .padding(.horizontal).padding(.vertical, 12)
+      .scaledToFill()
+      .foregroundColor(isActive ? .white : .label)
+      .background(isActive ? Color.green : Color.element)
   }
 }
 
@@ -196,13 +188,7 @@ private struct ActivityInputViewCompletionValueHandler: View {
           
           HStack {
             Text("달성률 \(viewstore.activity.completionRatio)%")
-            Slider(
-              value: viewstore
-                .binding(
-                  get: {$0.activity.ratio},
-                  send: {ActivityInputFeature.Action.updateSlider($0)}
-                )
-            )
+            Slider(value: viewstore.binding(get: \.activity.ratio, send: ActivityInputFeature.Action.updateSlider))
           }
           
           Divider()

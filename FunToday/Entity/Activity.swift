@@ -45,12 +45,6 @@ struct Activity: Identifiable, Entity, Hashable {
   /// 주말에는 활성화되지 않을지 여부
   var isWeekendActive: Bool
   var activeWeekends: Set<Weekend> = [.sat, .sun]
-  var isSaturdayActive: Bool {
-    activeWeekends.contains(.sat)
-  }
-  var isSundayActive: Bool {
-    activeWeekends.contains(.sun)
-  }
   /// 활동을 활성 혹은 정지할지 여부
   var isActive: Bool = true
   
@@ -73,17 +67,50 @@ struct Activity: Identifiable, Entity, Hashable {
     }
   }
   
-  enum Weekday: Int, CaseIterable {
+  func isActive(weekday: Weekday) -> Bool {
+    activeWeekDays.contains(weekday)
+  }
+  
+  func isActive(weekend: Weekend) -> Bool {
+    activeWeekends.contains(weekend)
+  }
+  
+  enum Weekday: Int, CaseIterable, Identifiable {
+    var id: Self {
+      self
+    }
+    
     case mon = 0
     case tue = 1
     case wed = 2
     case thu = 3
     case fri = 4
+    
+    var name: String {
+      switch self {
+      case .mon: return "월요일"
+      case .tue: return "화요일"
+      case .wed: return "수요일"
+      case .thu: return "목요일"
+      case .fri: return "금요일"
+      }
+    }
   }
   
-  enum Weekend: Int, CaseIterable {
+  enum Weekend: Int, CaseIterable, Identifiable {
+    var id: Self {
+      self
+    }
+    
     case sat = 5
     case sun = 6
+    
+    var name: String {
+      switch self {
+      case .sat: return "토요일"
+      case .sun: return "일요일"
+      }
+    }
   }
   
   enum Category: Int, Codable, CaseIterable, Identifiable {
