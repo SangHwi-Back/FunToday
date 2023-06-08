@@ -61,7 +61,7 @@ struct ReviewViewMainRoutineView_Previews: PreviewProvider {
   }
 }
 
-extension ActivityCategory {
+extension Activity.Category {
   var color: Color {
     switch self {
     case .health: return .green

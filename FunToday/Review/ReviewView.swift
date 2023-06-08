@@ -10,7 +10,7 @@ import SwiftUI
 struct ReviewView: View {
   
   @State var goals: [Goal] = []
-  var currentCategories: [ActivityCategory] {
+  var currentCategories: [Activity.Category] {
     guard let goal = goals.first?.activeRoutine else { return [] }
     return goal.activities.compactMap({ $0.category })
   }

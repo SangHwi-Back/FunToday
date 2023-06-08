@@ -24,19 +24,23 @@ struct ActivityInputFeature: ReducerProtocol {
     
     var startDate: Date = Date()
     var endDate: Date = Date()
-    var category = ActivityCategory.health
+    var category = Activity.Category.health
     var countAlertPresented = false
+    var activeToday = true
   }
   
   enum Action {
     case updateName(String)
     case updateDescription(String)
-    case updateCategory(ActivityCategory)
+    case updateCategory(Activity.Category)
     case updateStartDate(Date)
     case updateEndDate(Date)
     case updateDailyActive
+    case updateWeekDay(Activity.Weekday)
     case updateWeekendActive
+    case updateWeekend(Activity.Weekend)
     case updateActive
+    case updateActiveToday
     case updateUseSwitch
     case updateSlider(Float)
     /// true : +, false : -
@@ -70,11 +74,30 @@ struct ActivityInputFeature: ReducerProtocol {
     case .updateDailyActive:
       state.activity.isDailyActive.toggle()
       return .none
+    case .updateWeekDay(let val):
+      if state.activity.activeWeekDays.contains(val) {
+        state.activity.activeWeekDays.remove(val)
+      }
+      else {
+        state.activity.activeWeekDays.insert(val)
+      }
+      return .none
     case .updateWeekendActive:
       state.activity.isWeekendActive.toggle()
       return .none
+    case .updateWeekend(let val):
+      if state.activity.activeWeekends.contains(val) {
+        state.activity.activeWeekends.remove(val)
+      }
+      else {
+        state.activity.activeWeekends.insert(val)
+      }
+      return .none
     case .updateActive:
       state.activity.isActive.toggle()
+      return .none
+    case .updateActiveToday:
+      state.activeToday.toggle()
       return .none
     case .updateUseSwitch:
       state.activity.completionUseSwitch.toggle()

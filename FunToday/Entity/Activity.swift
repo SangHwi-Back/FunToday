@@ -20,7 +20,7 @@ struct Activity: Identifiable, Entity, Hashable {
   var updateDate: String?
   
   var categoryValue: Int
-  var category: ActivityCategory? {
+  var category: Category? {
     return categoryValue.getType()
   }
   
@@ -41,8 +41,16 @@ struct Activity: Identifiable, Entity, Hashable {
   
   /// 매일 진행할지 여부
   var isDailyActive: Bool
+  var activeWeekDays: Set<Weekday> = [.mon, .tue, .wed, .thu, .fri]
   /// 주말에는 활성화되지 않을지 여부
   var isWeekendActive: Bool
+  var activeWeekends: Set<Weekend> = [.sat, .sun]
+  var isSaturdayActive: Bool {
+    activeWeekends.contains(.sat)
+  }
+  var isSundayActive: Bool {
+    activeWeekends.contains(.sun)
+  }
   /// 활동을 활성 혹은 정지할지 여부
   var isActive: Bool = true
   
@@ -64,18 +72,114 @@ struct Activity: Identifiable, Entity, Hashable {
       completionRatio = Int(floor(newValue * 100))
     }
   }
-}
-
-enum ActivityCategory: Int, Codable, CaseIterable, Identifiable {
-  var id: Self {
-    self
+  
+  enum Weekday: Int, CaseIterable {
+    case mon = 0
+    case tue = 1
+    case wed = 2
+    case thu = 3
+    case fri = 4
   }
   
-  case health, concentrate, normal, custom
+  enum Weekend: Int, CaseIterable {
+    case sat = 5
+    case sun = 6
+  }
+  
+  enum Category: Int, Codable, CaseIterable, Identifiable {
+    var id: Self {
+      self
+    }
+    
+    case health, concentrate, normal, custom
+  }
+  
+  enum CodingKeys: CodingKey {
+    case uniqueID, index, name, description, regDate, updateDate, categoryValue, time_s, time_e, isDailyActive, activeWeekDays, isWeekendActive, activeWeekends, isActive, completionRatio, completionCount, completionUseSwitch
+  }
+  
+  init(uniqueID: String,
+       index: Int,
+       name: String,
+       description: String,
+       regDate: String,
+       updateDate: String? = nil,
+       categoryValue: Int,
+       time_s: String,
+       time_e: String,
+       isDailyActive: Bool,
+       isWeekendActive: Bool,
+       isActive: Bool,
+       completionRatio: Int,
+       completionCount: Int,
+       completionUseSwitch: Bool) {
+    
+    self.uniqueID = uniqueID
+    self.index = index
+    self.name = name
+    self.description = description
+    self.regDate = regDate
+    self.updateDate = updateDate
+    self.categoryValue = categoryValue
+    self.time_s = time_s
+    self.time_e = time_e
+    self.isDailyActive = isDailyActive
+    self.isWeekendActive = isWeekendActive
+    self.isActive = isActive
+    self.completionRatio = completionRatio
+    self.completionCount = completionCount
+    self.completionUseSwitch = completionUseSwitch
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    
+    uniqueID = try container.decode(String.self, forKey: .uniqueID)
+    index = try container.decode(Int.self, forKey: .index)
+    name = try container.decode(String.self, forKey: .name)
+    description = try container.decode(String.self, forKey: .description)
+    regDate = try container.decode(String.self, forKey: .regDate)
+    updateDate = try container.decodeIfPresent(String.self, forKey: .updateDate)
+    categoryValue = try container.decode(Int.self, forKey: .categoryValue)
+    time_s = try container.decode(String.self, forKey: .time_s)
+    time_e = try container.decode(String.self, forKey: .time_e)
+    isDailyActive = try container.decode(Bool.self, forKey: .isDailyActive)
+    let _activeWeekDays = try container.decode(Array<Int>.self, forKey: .activeWeekDays)
+    activeWeekDays = Set(_activeWeekDays.sorted().compactMap({$0.toWeekDay()}))
+    isWeekendActive = try container.decode(Bool.self, forKey: .isWeekendActive)
+    let _activeWeekends = try container.decode(Array<Int>.self, forKey: .activeWeekends)
+    activeWeekends = Set(_activeWeekends.sorted().compactMap({$0.toWeekend()}))
+    isActive = try container.decode(Bool.self, forKey: .isActive)
+    completionRatio = try container.decode(Int.self, forKey: .completionRatio)
+    completionCount = try container.decode(Int.self, forKey: .completionCount)
+    completionUseSwitch = try container.decode(Bool.self, forKey: .completionUseSwitch)
+  }
+  
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    
+    try container.encode(uniqueID, forKey: .uniqueID)
+    try container.encode(index, forKey: .index)
+    try container.encode(name, forKey: .name)
+    try container.encode(description, forKey: .description)
+    try container.encode(regDate, forKey: .regDate)
+    try container.encode(updateDate, forKey: .updateDate)
+    try container.encode(categoryValue, forKey: .categoryValue)
+    try container.encode(time_s, forKey: .time_s)
+    try container.encode(time_e, forKey: .time_e)
+    try container.encode(isDailyActive, forKey: .isDailyActive)
+    try container.encode(Array(activeWeekDays.map({$0.rawValue}).sorted()), forKey: .activeWeekDays)
+    try container.encode(isWeekendActive, forKey: .isWeekendActive)
+    try container.encode(Array(activeWeekends.map({$0.rawValue}).sorted()), forKey: .activeWeekends)
+    try container.encode(isActive, forKey: .isActive)
+    try container.encode(completionRatio, forKey: .completionRatio)
+    try container.encode(completionCount, forKey: .completionCount)
+    try container.encode(completionUseSwitch, forKey: .completionUseSwitch)
+  }
 }
 
 extension Int {
-  func getType() -> ActivityCategory? {
+  func getType() -> Activity.Category? {
     guard (1...4) ~= self else { return nil }
     
     if self == 1 {
@@ -86,6 +190,32 @@ extension Int {
       return .normal
     } else {
       return .custom
+    }
+  }
+  
+  func toWeekDay() -> Activity.Weekday? {
+    if self == 0 {
+      return .mon
+    } else if self == 1 {
+      return .tue
+    } else if self == 2 {
+      return .wed
+    } else if self == 3 {
+      return .thu
+    } else if self == 4 {
+      return .fri
+    } else {
+      return nil
+    }
+  }
+  
+  func toWeekend() -> Activity.Weekend? {
+    if self == 5 {
+      return .sat
+    } else if self == 6 {
+      return .sun
+    } else {
+      return nil
     }
   }
 }
