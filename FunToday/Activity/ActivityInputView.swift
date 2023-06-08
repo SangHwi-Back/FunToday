@@ -55,6 +55,7 @@ struct ActivityInputView: View {
             .padding(4)
         }
       }
+      .onTapGesture { hideKeyboard() }
       .minimumScaleFactor(0.2)
       .animation(.default, value: viewstore.activity)
       .navigationBarTitleDisplayMode(.inline)

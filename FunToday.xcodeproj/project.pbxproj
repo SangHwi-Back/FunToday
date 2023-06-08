@@ -58,6 +58,7 @@
 		1B6C37852A12439A00BA731B /* CommonBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C37842A12439A00BA731B /* CommonBarChart.swift */; };
 		1B6DE2682A13A8C70069D9EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DE2672A13A8C70069D9EB /* SceneDelegate.swift */; };
 		1B6DE26A2A13A9B60069D9EB /* AppWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DE2692A13A9B60069D9EB /* AppWrapper.swift */; };
+		1B6F8E252A31A8EA002F0B22 /* View+ResignFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6F8E242A31A8EA002F0B22 /* View+ResignFirstResponder.swift */; };
 		1B7160DB2A24ABCC004DC4E9 /* FileDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */; };
 		1B7160DD2A24B6CC004DC4E9 /* DiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */; };
 		1B7160DF2A24BCE9004DC4E9 /* StoreInDiskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */; };
@@ -171,6 +172,7 @@
 		1B6DE2672A13A8C70069D9EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B6DE2692A13A9B60069D9EB /* AppWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWrapper.swift; sourceTree = "<group>"; };
 		1B6DE26B2A13A9F90069D9EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1B6F8E242A31A8EA002F0B22 /* View+ResignFirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ResignFirstResponder.swift"; sourceTree = "<group>"; };
 		1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDependency.swift; sourceTree = "<group>"; };
 		1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStore.swift; sourceTree = "<group>"; };
 		1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInDiskDependency.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				1B6BDE6929FA37C300FDABA3 /* FunTodayAppTabView.swift */,
 				1B6BDE9929FA580300FDABA3 /* FunTodayTab.swift */,
 				1B6BDE9B29FA585800FDABA3 /* Goals */,
+				1B6F8E212A31A6B2002F0B22 /* Activity */,
 				1B6BDE9C29FA585E00FDABA3 /* Review */,
 				1B6BDE9D29FA586400FDABA3 /* Setting */,
 				1B6BDE6B29FA37C500FDABA3 /* Assets.xcassets */,
@@ -311,12 +314,6 @@
 				1BD829882A1B923E00BE1B07 /* GoalInputFeature.swift */,
 				1B6C37722A0D21A600BA731B /* RoutineInputView.swift */,
 				1BD8298A2A1B929400BE1B07 /* RoutineInputFeature.swift */,
-				1B6C37782A0DCFDA00BA731B /* ActivityContainerView.swift */,
-				1B48E8F22A20D0F00019E035 /* ActivityPresetListView.swift */,
-				1B84946B2A28AC7A008067D7 /* ActivityPresetListFeature.swift */,
-				1BD8298C2A1B92D000BE1B07 /* ActivityContainerFeature.swift */,
-				1B6C37742A0D21C900BA731B /* ActivityInputView.swift */,
-				1BD8298E2A1B931600BE1B07 /* ActivityInputFeature.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -374,8 +371,22 @@
 				1B6C37702A0CA5DD00BA731B /* CustomSectionView.swift */,
 				1B6C37822A1240A100BA731B /* DottedLine.swift */,
 				1B6C37842A12439A00BA731B /* CommonBarChart.swift */,
+				1B6F8E242A31A8EA002F0B22 /* View+ResignFirstResponder.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1B6F8E212A31A6B2002F0B22 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				1B6C37782A0DCFDA00BA731B /* ActivityContainerView.swift */,
+				1B48E8F22A20D0F00019E035 /* ActivityPresetListView.swift */,
+				1B84946B2A28AC7A008067D7 /* ActivityPresetListFeature.swift */,
+				1BD8298C2A1B92D000BE1B07 /* ActivityContainerFeature.swift */,
+				1B6C37742A0D21C900BA731B /* ActivityInputView.swift */,
+				1BD8298E2A1B931600BE1B07 /* ActivityInputFeature.swift */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		1B8AA75329FA5B9B001C3A97 /* Preview Content */ = {
@@ -546,6 +557,7 @@
 			files = (
 				1B8AA76B29FA849D001C3A97 /* TestDouble.swift in Sources */,
 				1B6A61AC2A1F406D00B5DF48 /* SettingReviewView.swift in Sources */,
+				1B6F8E252A31A8EA002F0B22 /* View+ResignFirstResponder.swift in Sources */,
 				1B1696062A08CD6300D827FB /* Dependency.swift in Sources */,
 				1B6BDEA329FA5AB800FDABA3 /* View+Shadow.swift in Sources */,
 				1B7D44942A2DA396002337AC /* ReviewViewMainRoutineView.swift in Sources */,
