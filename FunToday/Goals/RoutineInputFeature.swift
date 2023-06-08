@@ -76,11 +76,11 @@ struct RoutineInputFeature: ReducerProtocol {
         
         return .none
         
-      case .activityContainerElement(action: .saveContainer):
+      case .activityContainerElement:
         state.routine.activities = state.containerState.activities.elements.map({$0.activity})
         return .none
         
-      case .removeRoutine, .activityContainerElement:
+      case .removeRoutine:
         return .none
       }
     }.forEach(\.containerState.activities, action: /Action.activityElements(id:action:)) {
