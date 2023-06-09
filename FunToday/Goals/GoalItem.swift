@@ -35,8 +35,8 @@ struct GoalItem<ContentsView: View>: View {
                 if viewStore.goal.isFold == false {
                   HStack
                   {
-                    ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
-                    ProgressCircle(status: Binding.constant(ProgressStatus.getDouble()))
+                    ProgressCircle(ProgressStatus.getDouble())
+                    ProgressCircle(ProgressStatus.getDouble())
                   }
                   
                   CustomTable([viewStore.goal]) { _ in

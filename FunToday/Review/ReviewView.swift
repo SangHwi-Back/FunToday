@@ -10,37 +10,20 @@ import SwiftUI
 struct ReviewView: View {
   
   @State var goals: [Goal] = []
-  var currentCategories: [Activity.Category] {
-    guard let goal = goals.first?.activeRoutine else { return [] }
-    return goal.activities.compactMap({ $0.category })
+  var currentGoal: Goal? {
+    goals.first
   }
   
   var body: some View {
     VStack(spacing: 8) {
-      ProgressCircle(
-        status: Binding.constant(
-          ProgressStatus(value: 0.7, color: .blue, text: "현재 달성률")))
-      .padding(.top)
+      ProgressCircle(ProgressStatus(value: 0.7, color: .blue))
+        .frame(height: 150)
+        .padding(.top)
       
-      CustomSectionView {
-        HStack(spacing: 16) {
-          ForEach(currentCategories) { category in
-            VStack {
-              ProgressCircle(status: Binding.constant(ProgressStatus(value: CGFloat.random(in: 0.0...1.0), color: category.color, text: "")))
-              Text(String(describing: category))
-                .minimumScaleFactor(0.2)
-                .font(.caption)
-            }
-          }
-        }
-      }
-      .frame(height: 120)
-      .padding(.horizontal)
-      
-      ReviewViewMainRoutineView(goals: $goals, currentGoal: goals.first)
+      ReviewViewMainRoutineView(goals: $goals, currentGoal: currentGoal)
         .padding()
       
-      ReviewMainController(goals: $goals, currentGoal: goals.first)
+      ReviewMainController(goals: $goals, currentGoal: currentGoal)
         .padding(.horizontal)
         .padding(.bottom)
     }

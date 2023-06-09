@@ -31,8 +31,7 @@ struct ReviewMainController: View {
           ForEach(goals) { goal in
             Button {
               guard let inx = goals.firstIndex(of: goal) else { return }
-              let removed = goals.remove(at: inx)
-              goals.insert(removed, at: 0)
+              goals.swapAt(0, inx)
             } label: {
               Text(goal.name)
             }

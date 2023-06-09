@@ -20,8 +20,8 @@ struct Activity: Identifiable, Entity, Hashable {
   var updateDate: String?
   
   var categoryValue: Int
-  var category: Category? {
-    return categoryValue.getType()
+  var category: Category {
+    categoryValue.getType()
   }
   
   /// 활동 시작 시간
@@ -44,7 +44,7 @@ struct Activity: Identifiable, Entity, Hashable {
   var activeWeekDays: Set<Weekday> = [.mon, .tue, .wed, .thu, .fri]
   /// 주말에는 활성화되지 않을지 여부
   var isWeekendActive: Bool
-  var activeWeekends: Set<Weekend> = [.sat, .sun]
+  var activeWeekends: Set<Weekend> = []
   /// 활동을 활성 혹은 정지할지 여부
   var isActive: Bool = true
   
@@ -95,6 +95,9 @@ struct Activity: Identifiable, Entity, Hashable {
       case .fri: return "금요일"
       }
     }
+    var shortName: String {
+      String(self.name.first ?? Character(""))
+    }
   }
   
   enum Weekend: Int, CaseIterable, Identifiable {
@@ -111,6 +114,9 @@ struct Activity: Identifiable, Entity, Hashable {
       case .sun: return "일요일"
       }
     }
+    var shortName: String {
+      String(self.name.first ?? Character(""))
+    }
   }
   
   enum Category: Int, Codable, CaseIterable, Identifiable {
@@ -119,6 +125,19 @@ struct Activity: Identifiable, Entity, Hashable {
     }
     
     case health, concentrate, normal, custom
+    
+    var name: String {
+      switch self {
+      case .health:
+        return "건강"
+      case .concentrate:
+        return "집중"
+      case .normal:
+        return "일반"
+      case .custom:
+        return "그 외"
+      }
+    }
   }
   
   enum CodingKeys: CodingKey {
@@ -206,9 +225,7 @@ struct Activity: Identifiable, Entity, Hashable {
 }
 
 extension Int {
-  func getType() -> Activity.Category? {
-    guard (1...4) ~= self else { return nil }
-    
+  func getType() -> Activity.Category {
     if self == 1 {
       return .health
     } else if self == 2 {
