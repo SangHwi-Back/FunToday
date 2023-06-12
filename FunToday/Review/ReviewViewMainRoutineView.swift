@@ -82,12 +82,31 @@ private struct VerticalActivityStackView: View {
           OneWeekHStackView(activity: activity)
             .cornerRadius(8)
           Divider()
-          titledBarChart(activity)
-            .frame(height: 40)
+          
+          if let completionAs = activity.completionAs.toCompletionType() {
+            switch completionAs {
+            case .count:
+              countStack(activity)
+            case .slider:
+              titledBarChart(activity)
+                .frame(height: 40)
+            }
+          }
+          
           Divider()
             .padding(.bottom)
         }
       }
+    }
+  }
+  
+  private func countStack(_ activity: Activity) -> some View {
+    HStack {
+      Text("\(activity.completionCountInReal)")
+        .font(.headline)
+        .frame(alignment: .centerLastTextBaseline)
+      Text(" / \(activity.completionCount)")
+        .font(.title)
     }
   }
   
@@ -98,7 +117,7 @@ private struct VerticalActivityStackView: View {
           .fill(Color.shadow.opacity(0.3))
         Rectangle()
           .fill((activity.category.color).opacity(0.8))
-          .frame(width: proxy.size.width * 0.78)
+          .frame(width: proxy.size.width * CGFloat(activity.ratio))
       }
     }
   }

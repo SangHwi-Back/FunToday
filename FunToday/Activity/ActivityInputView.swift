@@ -52,7 +52,8 @@ struct ActivityInputView: View {
           ActivityInputViewIsActiveHandler(viewstore: viewstore)
             .padding(4)
           ActivityInputViewCompletionValueHandler(viewstore: viewstore)
-            .padding(4)
+            .padding([.horizontal, .top], 4)
+            .padding(.bottom)
         }
       }
       .onTapGesture { hideKeyboard() }
@@ -71,14 +72,14 @@ private struct ActivityInputViewDailyHandler: View {
       Toggle("매일 진행하나요?", isOn: viewstore.binding(get: \.activity.isDailyActive, send: ActivityInputFeature.Action.updateDailyActive))
       
       if viewstore.activity.isDailyActive == false {
-          Divider()
-          HStack(spacing: 0) {
-            ForEach(Activity.Weekday.allCases) { weekday in
-              getButton(weekday: weekday) { viewstore.send(.updateWeekDay(weekday)) }
-              Divider()
-            }
+        Divider()
+        HStack(spacing: 0) {
+          ForEach(Activity.Weekday.allCases) { weekday in
+            getButton(weekday: weekday) { viewstore.send(.updateWeekDay(weekday)) }
+            Divider()
           }
-          .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
       }
     }
   }
@@ -150,51 +151,81 @@ private struct ActivityInputViewIsActiveHandler: View {
 }
 
 private struct ActivityInputViewCompletionValueHandler: View {
-  let viewstore: ViewStore<ActivityInputFeature.State, ActivityInputFeature.Action>
+  let viewstore: ViewStoreOf<ActivityInputFeature>
   
   var body: some View {
     VStack {
-      Toggle("달성률을 체크하나요?", isOn: viewstore.binding(get: \.activity.completionUseSwitch, send: ActivityInputFeature.Action.updateUseSwitch))
+      Text("달성률을...")
+        .frame(maxWidth: .infinity, alignment: .leading)
       
-      if viewstore.activity.completionUseSwitch {
+      HStack {
+        Toggle("횟수로", isOn: viewstore.binding(
+          get: { $0.completionAs == .count },
+          send: { ActivityInputFeature.Action.completionAsTapped($0 ? .count : nil) }))
+        Spacer()
+        Toggle("%로", isOn: viewstore.binding(
+          get: { $0.completionAs == .slider },
+          send: { ActivityInputFeature.Action.completionAsTapped($0 ? .slider : nil) }))
+      }
+      
+      if let completionAs = viewstore.completionAs {
         VStack {
           Divider()
-          HStack(spacing: 16) {
-            Text("횟수")
-            Spacer()
-            Text(String(viewstore.activity.completionCount))
-            
-            HStack(spacing: 0) {
-              Button(action: { viewstore.send(.updateCount(false)) }) {
-                Image(systemName: "minus").padding(.horizontal).padding(.vertical, 8)
-              }
-              Divider()
-              Button(action: { viewstore.send(.updateCount(true)) }) {
-                Image(systemName: "plus").padding(.horizontal).padding(.vertical, 8)
-              }
-            }
-            .background(Color.element)
-            .foregroundColor(Color.black)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-          }
-          .alert(isPresented: Binding.constant(viewstore.countAlertPresented)) {
-            Alert(
-              title: Text("경고"),
-              message: Text("0 아래의 값은 설정할 수 없습니다."),
-              dismissButton: .cancel(Text("확인")) {
-                viewstore.send(.showCountAlert)
-              }
-            )
-          }
           
-          HStack {
-            Text("달성률 \(viewstore.activity.completionRatio)%")
-            Slider(value: viewstore.binding(get: \.activity.ratio, send: ActivityInputFeature.Action.updateSlider))
+          switch completionAs {
+          case .count: CountView(viewstore: viewstore)
+          case .slider: SliderView(viewstore: viewstore)
           }
           
           Divider()
         }
         .padding(.leading)
+      }
+    }
+  }
+  
+  struct CountView: View {
+    let viewstore: ViewStoreOf<ActivityInputFeature>
+    
+    var body: some View {
+      HStack(spacing: 16) {
+        Spacer()
+        Text(String(viewstore.activity.completionCount))
+        
+        HStack(spacing: 0) {
+          Button(action: { viewstore.send(.updateCount(false)) }) {
+            Image(systemName: "minus").padding(.horizontal).padding(.vertical, 8)
+          }
+          Divider()
+          Button(action: { viewstore.send(.updateCount(true)) }) {
+            Image(systemName: "plus").padding(.horizontal).padding(.vertical, 8)
+          }
+        }
+        .background(Color.element)
+        .foregroundColor(Color.black)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+      }
+      .alert(isPresented: Binding.constant(viewstore.countAlertPresented)) {
+        Alert(
+          title: Text("경고"),
+          message: Text("0 아래의 값은 설정할 수 없습니다."),
+          dismissButton: .cancel(Text("확인")) {
+            viewstore.send(.showCountAlert)
+          }
+        )
+      }
+    }
+  }
+  
+  struct SliderView: View {
+    let viewstore: ViewStoreOf<ActivityInputFeature>
+    
+    var body: some View {
+      HStack {
+        Text("\(viewstore.activity.completionRatio)%")
+        Slider(value: viewstore.binding(get: \.activity.ratio, send: ActivityInputFeature.Action.updateSlider)) {
+          Text("\(viewstore.activity.ratio)%")
+        }
       }
     }
   }

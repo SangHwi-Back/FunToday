@@ -27,6 +27,9 @@ struct ActivityInputFeature: ReducerProtocol {
     var category = Activity.Category.health
     var countAlertPresented = false
     var activeToday = true
+    var completionAs: CompletionAs? {
+      activity.completionAs.toCompletionType()
+    }
   }
   
   enum Action {
@@ -41,7 +44,6 @@ struct ActivityInputFeature: ReducerProtocol {
     case updateWeekend(Activity.Weekend)
     case updateActive
     case updateActiveToday
-    case updateUseSwitch
     case updateSlider(Float)
     /// true : +, false : -
     case updateCount(Bool)
@@ -49,6 +51,7 @@ struct ActivityInputFeature: ReducerProtocol {
     case removeActivity
     case addActivity
     case buttonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
+    case completionAsTapped(CompletionAs?)
   }
   
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -99,9 +102,6 @@ struct ActivityInputFeature: ReducerProtocol {
     case .updateActiveToday:
       state.activeToday.toggle()
       return .none
-    case .updateUseSwitch:
-      state.activity.completionUseSwitch.toggle()
-      return .none
     case .updateSlider(let ratio):
       state.activity.ratio = ratio
       return .none
@@ -115,16 +115,29 @@ struct ActivityInputFeature: ReducerProtocol {
     case .showCountAlert:
       state.countAlertPresented.toggle()
       return .none
-    case .removeActivity:
+    case .completionAsTapped(let completionAs):
+      state.activity.completionAs = completionAs?.rawValue ?? 0
       return .none
-    case .addActivity:
-      return .none
-    case .buttonTapped:
+    case .removeActivity, .addActivity, .buttonTapped:
       return .none
     }
   }
   
   enum ActivityHeaderButtonType {
     case basic, minus
+  }
+}
+
+enum CompletionAs: Int {
+  case count = 1, slider = 2
+}
+
+extension Int {
+  func toCompletionType() -> CompletionAs? {
+    switch self {
+    case 1: return .count
+    case 2: return .slider
+    default: return nil
+    }
   }
 }

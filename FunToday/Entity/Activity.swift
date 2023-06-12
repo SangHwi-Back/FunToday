@@ -49,8 +49,9 @@ struct Activity: Identifiable, Entity, Hashable {
   var isActive: Bool = true
   
   var completionRatio: Int
+  var completionCountInReal: Int
   var completionCount: Int
-  var completionUseSwitch: Bool = false
+  var completionAs: Int
   
   // MARK: - Not Decoding. Just setter.
   /// yyyy-MM-dd ~ yyyy-MM-dd
@@ -141,7 +142,7 @@ struct Activity: Identifiable, Entity, Hashable {
   }
   
   enum CodingKeys: CodingKey {
-    case uniqueID, index, name, description, regDate, updateDate, categoryValue, time_s, time_e, isDailyActive, activeWeekDays, isWeekendActive, activeWeekends, isActive, completionRatio, completionCount, completionUseSwitch
+    case uniqueID, index, name, description, regDate, updateDate, categoryValue, time_s, time_e, isDailyActive, activeWeekDays, isWeekendActive, activeWeekends, isActive, completionRatio, completionCountInReal, completionCount, completionAs
   }
   
   init(uniqueID: String,
@@ -156,9 +157,9 @@ struct Activity: Identifiable, Entity, Hashable {
        isDailyActive: Bool,
        isWeekendActive: Bool,
        isActive: Bool,
-       completionRatio: Int,
        completionCount: Int,
-       completionUseSwitch: Bool) {
+       completionRatio: Int,
+       completionAs: Int = 0) {
     
     self.uniqueID = uniqueID
     self.index = index
@@ -173,8 +174,9 @@ struct Activity: Identifiable, Entity, Hashable {
     self.isWeekendActive = isWeekendActive
     self.isActive = isActive
     self.completionRatio = completionRatio
+    self.completionCountInReal = 0
     self.completionCount = completionCount
-    self.completionUseSwitch = completionUseSwitch
+    self.completionAs = completionAs
   }
   
   init(from decoder: Decoder) throws {
@@ -197,8 +199,9 @@ struct Activity: Identifiable, Entity, Hashable {
     activeWeekends = Set(_activeWeekends.sorted().compactMap({$0.toWeekend()}))
     isActive = try container.decode(Bool.self, forKey: .isActive)
     completionRatio = try container.decode(Int.self, forKey: .completionRatio)
+    completionCountInReal = try container.decode(Int.self, forKey: .completionCountInReal)
     completionCount = try container.decode(Int.self, forKey: .completionCount)
-    completionUseSwitch = try container.decode(Bool.self, forKey: .completionUseSwitch)
+    completionAs = try container.decode(Int.self, forKey: .completionAs)
   }
   
   func encode(to encoder: Encoder) throws {
@@ -219,8 +222,9 @@ struct Activity: Identifiable, Entity, Hashable {
     try container.encode(Array(activeWeekends.map({$0.rawValue}).sorted()), forKey: .activeWeekends)
     try container.encode(isActive, forKey: .isActive)
     try container.encode(completionRatio, forKey: .completionRatio)
+    try container.encode(completionCountInReal, forKey: .completionCountInReal)
     try container.encode(completionCount, forKey: .completionCount)
-    try container.encode(completionUseSwitch, forKey: .completionUseSwitch)
+    try container.encode(completionAs, forKey: .completionAs)
   }
 }
 
