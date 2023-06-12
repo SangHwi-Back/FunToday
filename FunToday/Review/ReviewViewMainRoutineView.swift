@@ -120,9 +120,9 @@ private struct OneWeekHStackView: View {
   
   private func getButton(_ txt: String, isActive: Bool) -> some View {
     return Text(txt)
-      .padding(.horizontal).padding(.vertical, 12)
-      .scaledToFill()
       .minimumScaleFactor(0.2)
+      .padding(12)
+      .scaledToFill()
       .foregroundColor(isActive ? .white : .label)
       .background(isActive ? activity.category.color : Color.element)
   }
