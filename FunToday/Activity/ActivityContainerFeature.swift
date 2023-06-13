@@ -11,6 +11,7 @@ import ComposableArchitecture
 struct ActivityContainerFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var id: UUID = .init()
+    var currentIndex: ActivityInputFeature.State.ID = ""
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
     var presetActivity: ActivityPresetListFeature.State
   }
@@ -18,6 +19,8 @@ struct ActivityContainerFeature: ReducerProtocol {
   enum Action {
     case addActivity
     case saveContainer
+    case setIndex(ActivityInputFeature.State.ID)
+    case buttonTapped(ActivityInputFeature.State.ID)
     
     case fromActivityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
     case fromPresetElements(action:ActivityPresetListFeature.Action)
@@ -30,6 +33,9 @@ struct ActivityContainerFeature: ReducerProtocol {
     
     Reduce { state, action in
       switch action {
+      case .setIndex(let id), .buttonTapped(id: let id):
+        state.currentIndex = id
+        return .none
       case .fromActivityElements(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
         return .none
@@ -45,10 +51,5 @@ struct ActivityContainerFeature: ReducerProtocol {
     }.forEach(\.activities, action: /Action.fromActivityElements(id:action:)) {
       ActivityInputFeature()
     }
-  }
-  
-  // MARK: - Inner State
-  enum ActivityHeaderButtonType {
-    case basic, minus
   }
 }

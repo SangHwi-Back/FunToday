@@ -49,7 +49,7 @@ struct ActivityInputFeature: ReducerProtocol {
     case addActivity
     case completionSwitchTapped(CompletionAs?)
     
-    case fromHeaderButtonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
+    case fromContainerHeaderButtonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
   }
   
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -119,7 +119,7 @@ struct ActivityInputFeature: ReducerProtocol {
     case .completionSwitchTapped(let completionAs):
       state.activity.completionAs = completionAs?.rawValue ?? 0
       return .none
-    case .removeActivity, .addActivity, .fromHeaderButtonTapped:
+    case .removeActivity, .addActivity, .fromContainerHeaderButtonTapped:
       return .none
     }
   }

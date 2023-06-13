@@ -56,40 +56,25 @@ struct ActivityButtonScrollView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
         HStack(spacing: 6) {
-          ForEachStore(
-            store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
-          ) {
-            ActivityButton(store: $0)
-              .padding([.top, .leading], 12)
-          }
-        }
-      }
-    }
-  }
-  
-  struct ActivityButton: View {
-    let store: StoreOf<ActivityInputFeature>
-    
-    var body: some View {
-      WithViewStore(store, observe: { $0 }) { viewstore in
-        Button {
-          viewstore.send(.fromHeaderButtonTapped(id: viewstore.id, buttontype: .basic))
-        } label: {
-          ZStack {
-            RoundedRectangle(cornerRadius: 8)
-              .strokeBorder(Color.gray, lineWidth: 2)
-            Text(viewstore.activity.name)
-              .foregroundColor(Color.label)
-              .padding()
-          }
-          .overlay({
-            GeometryReader { proxy in
-              FloatingMinusButton(width: 24) {
-                viewstore.send(.fromHeaderButtonTapped(id: viewstore.id, buttontype: .minus))
+          ForEach(viewstore.activities, id: \.id) { inpuState in
+            Button {
+              viewstore.send(.buttonTapped(inpuState.id))
+            } label: {
+              CustomSectionView {
+                Text(inpuState.activity.name)
+                  .foregroundColor(Color.label)
               }
-              .offset(x: -24, y: -24)
+              .overlay({
+                GeometryReader { proxy in
+                  FloatingMinusButton(width: 24) {
+                    viewstore.send(.fromActivityElements(id: inpuState.activity.id, action: .removeActivity))
+                  }
+                  .offset(x: -24, y: -24)
+                }
+              }())
             }
-          }())
+            .padding([.top, .leading], 12)
+          }
         }
       }
     }
@@ -98,20 +83,23 @@ struct ActivityButtonScrollView: View {
 
 struct ActivityInputScrollView: View {
   let store: StoreOf<ActivityContainerFeature>
-  
   var size: CGSize
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
-        TabView {
+        TabView(selection: viewstore.binding(
+          get: \.currentIndex,
+          send: { ActivityContainerFeature.Action.setIndex($0) })
+        ) {
           ForEachStore(
             store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
           ) {
             ActivityInputView(store: $0)
+              .tag(ViewStoreOf<ActivityInputFeature>($0).id)
           }
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: viewstore.activities.isEmpty ? .never : .always))
+        .tabViewStyle(PageTabViewStyle())
         .navigationBarTitleDisplayMode(.inline)
         .frame(width: size.width)
       }
