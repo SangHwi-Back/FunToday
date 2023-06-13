@@ -15,9 +15,10 @@ struct GoalListFeature: ReducerProtocol {
   }
   
   enum Action {
-    case inputNewItem(action: GoalInputFeature.Action)
-    case inputItems(id: GoalInputFeature.State.ID, action: GoalInputFeature.Action)
     case setList
+    
+    case fromNewItem(action: GoalInputFeature.Action)
+    case fromItems(id: GoalInputFeature.State.ID, action: GoalInputFeature.Action)
   }
   
   func getGoalListFromStore() -> IdentifiedArrayOf<GoalInputFeature.State> {
@@ -31,12 +32,12 @@ struct GoalListFeature: ReducerProtocol {
   }
   
   var body: some ReducerProtocol<State, Action> {
-    Scope(state: \.newGoal, action: /Action.inputNewItem(action:)) {
+    Scope(state: \.newGoal, action: /Action.fromNewItem(action:)) {
       GoalInputFeature()
     }
     Reduce { state, action in
       switch action {
-      case .inputNewItem(action: .addGoal):
+      case .fromNewItem(action: .addGoal):
         state.goalList.append(state.newGoal)
         
         if let data = try? JSONEncoder().encode(state.newGoal.goal) {
@@ -45,7 +46,7 @@ struct GoalListFeature: ReducerProtocol {
         
         state.newGoal = .init(goal: .getDouble(), routines: .init(), isNew: true)
         return .none
-      case .inputItems(id: let id, action: .removeGoal):
+      case .fromItems(id: let id, action: .removeGoal):
         guard
           let removed = state.goalList.remove(id: id)?.goal,
           let data = try? JSONEncoder().encode(removed)
@@ -56,7 +57,7 @@ struct GoalListFeature: ReducerProtocol {
         GoalStore.DP.remove(data: data)
         
         return .none
-      case .inputItems(id: _, action: .saveGoal):
+      case .fromItems(id: _, action: .saveGoal):
         let data = state.goalList.elements
           .map({$0.goal})
           .compactMap {
@@ -68,11 +69,11 @@ struct GoalListFeature: ReducerProtocol {
       case .setList:
         state.goalList = getGoalListFromStore()
         return .none
-      case .inputItems, .inputNewItem:
+      case .fromItems, .fromNewItem:
         return .none
       }
     }
-    .forEach(\.goalList, action: /Action.inputItems(id:action:)) {
+    .forEach(\.goalList, action: /Action.fromItems(id:action:)) {
       GoalInputFeature()
     }
   }

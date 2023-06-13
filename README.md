@@ -46,6 +46,53 @@
 * iOS 14
 * iPadOS 14
 
+## Coding Convention
+
+> 모든 Convention 은 상황에 따라 달라질 수 있습니다. Convention 에 의해 코드 가독성이 떨어지는 일은 없도록 합니다.
+
+* 함수 호출 시 전달해야 할 파라미터가 3 개 이상이라면, 첫번째 파라미터 이후로는 줄바꿈으로 구분할 수 있도록 한다.
+```swift
+@State var name: String
+InputField(title: "Name : ",
+           isEssential: true,
+           text: _name)
+```
+
+* ChildView 에게 자신의 Store 를 전달하는 경우, ChildView 의 액션에 반응하는 액션 타입 앞에는 `from` 을 붙인다.
+```swift
+struct TestFeature: ReducerProtocol {
+  enum Action {
+    case .updateName
+    case .fromChildElement(id: ChildFeature.State.ID, action: ChildFeature.Action) // #1
+  }
+}
+```
+   * 위의 상황에서 Store 의 scope 함수를 사용하는 경우 한 줄에 적는다. (잘 읽어봐야 하는 내용이라는 의미로 특출나게 길게 적음)
+   
+     ```swift
+     let store: StoreOf<TestFeature>
+     // ...
+     store.scope(state: \.entities, action: TestFeature.Action.fromChildElement(id:action:)) // #2 
+     ```
+     
+* Feature(Reducer) 내부에 Action 을 나열할 때는 뷰 내부의 액션을 모두 나열한 후, ChildView 와 관련된 액션을 나열한다.
+```swift
+enum Action {
+  csase .updateTextField
+  case .buttonTapped
+  case .switchTapped
+  
+  case .fromElements(id: ChildFeature.State.ID, action: ChildFeature.Action) // #1
+}
+```
+
+* ViewStore 의 binding 함수를 사용하는 경우 다음과 같이 get, send 를 줄바꿈으로 분류한다.
+```swift
+viewstore.binding(
+  get: \.name,
+  send: TestFeature.Action.updateName)
+```
+
 ## 개발 진행 순서
 
 ### Chapter 1

@@ -9,8 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct GoalListView: View {
-  @Environment(\.presentationMode) var presentationMode
-  
   let store: StoreOf<GoalListFeature>
   
   var body: some View {
@@ -19,7 +17,7 @@ struct GoalListView: View {
         ScrollView {
           LazyVStack {
             ForEachStore(
-              store.scope(state: \.goalList, action: GoalListFeature.Action.inputItems(id:action:))
+              store.scope(state: \.goalList, action: GoalListFeature.Action.fromItems(id:action:))
             ) {
               let store = $0
               GoalItem(store: store) {
@@ -37,7 +35,7 @@ struct GoalListView: View {
           GoalInputView(
             store: store.scope(
               state: \.newGoal,
-              action: GoalListFeature.Action.inputNewItem(action:))
+              action: GoalListFeature.Action.fromNewItem(action:))
           )
         } label: {
           FloatingPlusButton(width: 54)

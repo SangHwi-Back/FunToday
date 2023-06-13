@@ -18,30 +18,31 @@ struct ActivityContainerFeature: ReducerProtocol {
   enum Action {
     case addActivity
     case saveContainer
-    case activityElement(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
-    case presetElement(action:ActivityPresetListFeature.Action)
+    
+    case fromActivityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
+    case fromPresetElements(action:ActivityPresetListFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
-    Scope(state: \.presetActivity, action: /Action.presetElement(action:)) {
+    Scope(state: \.presetActivity, action: /Action.fromPresetElements(action:)) {
       ActivityPresetListFeature()
     }
     
     Reduce { state, action in
       switch action {
-      case .activityElement(id: let id, action: .removeActivity):
+      case .fromActivityElements(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
         return .none
-      case .presetElement(action: .rowSelected(let activity)):
+      case .fromPresetElements(action: .rowSelected(let activity)):
         state.activities.append(
           ActivityInputFeature.State(activity: activity)
         )
         
         return .none
-      case .addActivity, .saveContainer, .activityElement, .presetElement:
+      case .addActivity, .saveContainer, .fromActivityElements, .fromPresetElements:
         return .none
       }
-    }.forEach(\.activities, action: /Action.activityElement(id:action:)) {
+    }.forEach(\.activities, action: /Action.fromActivityElements(id:action:)) {
       ActivityInputFeature()
     }
   }

@@ -31,12 +31,12 @@ struct RoutineInputFeature: ReducerProtocol {
     case updateDescription(String)
     case removeRoutine
     
-    case activityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
-    case activityContainerElement(action: ActivityContainerFeature.Action)
+    case fromActivityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
+    case fromActivityContainerElements(action: ActivityContainerFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
-    Scope(state: \.containerState, action: /Action.activityContainerElement(action:)) {
+    Scope(state: \.containerState, action: /Action.fromActivityContainerElements(action:)) {
       ActivityContainerFeature()
     }
     Reduce { state, action in
@@ -49,7 +49,7 @@ struct RoutineInputFeature: ReducerProtocol {
         state.routine.description = txt
         return .none
         
-      case .activityElements(id: let id, action: .removeActivity):
+      case .fromActivityElements(id: let id, action: .removeActivity):
         guard
           let removed = state.containerState.activities.remove(id: id),
           let inx = state.routine.activities.firstIndex(of: removed.activity)
@@ -60,7 +60,7 @@ struct RoutineInputFeature: ReducerProtocol {
         state.routine.activities.remove(at: inx)
         return .none
         
-      case .activityElements(id: let id, action: _):
+      case .fromActivityElements(id: let id, action: _):
         guard let inx = state.containerState.activities.firstIndex(where: { $0.id == id }) else {
           return .none
         }
@@ -69,40 +69,40 @@ struct RoutineInputFeature: ReducerProtocol {
         state.routine.activities[inx] = activity
         return .none
       
-      case .activityContainerElement(action: .addActivity):
+      case .fromActivityContainerElements(action: .addActivity):
         let activity = Activity.getDouble()
         state.containerState.activities.append(.init(activity: activity))
         state.routine.activities.append(activity)
         
         return .none
         
-      case .activityContainerElement:
+      case .fromActivityContainerElements:
         state.routine.activities = state.containerState.activities.elements.map({$0.activity})
         return .none
         
       case .removeRoutine:
         return .none
       }
-    }.forEach(\.containerState.activities, action: /Action.activityElements(id:action:)) {
+    }.forEach(\.containerState.activities, action: /Action.fromActivityElements(id:action:)) {
       ActivityInputFeature()
     }
   }
 }
 
-extension RoutineInputFeature.Action: Equatable {
-  typealias Action = RoutineInputFeature.Action
-  static func == (lhs: Action, rhs: Action) -> Bool {
-    switch (lhs, rhs) {
-    case (.updateName(let leftText), .updateName(let rightText)):
-      return leftText == rightText
-    case (.updateDescription(let leftText), .updateDescription(let rightText)):
-      return leftText == rightText
-    case (.removeRoutine, .removeRoutine):
-      return true
-    case (.activityElements(id: let leftId, action: .removeActivity), .activityElements(id: let rightId, action: .removeActivity)):
-      return leftId == rightId
-    default:
-      return true
-    }
-  }
-}
+//extension RoutineInputFeature.Action: Equatable {
+//  typealias Action = RoutineInputFeature.Action
+//  static func == (lhs: Action, rhs: Action) -> Bool {
+//    switch (lhs, rhs) {
+//    case (.updateName(let leftText), .updateName(let rightText)):
+//      return leftText == rightText
+//    case (.updateDescription(let leftText), .updateDescription(let rightText)):
+//      return leftText == rightText
+//    case (.removeRoutine, .removeRoutine):
+//      return true
+//    case (.fromActivityElements(id: let leftId, action: .removeActivity), .fromActivityElements(id: let rightId, action: .removeActivity)):
+//      return leftId == rightId
+//    default:
+//      return true
+//    }
+//  }
+//}

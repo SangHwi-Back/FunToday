@@ -14,38 +14,19 @@ struct SettingActivityPresetFeature: ReducerProtocol {
     var newActivity: ActivityInputFeature.State
   }
   enum Action {
-    case activityNewItem(action:ActivityInputFeature.Action)
-    case activityItems(id:ActivityInputFeature.State.ID,action:ActivityInputFeature.Action)
     case setList, itemAdded
+    
+    case fromActivityNewItem(action:ActivityInputFeature.Action)
+    case fromActivityItems(id:ActivityInputFeature.State.ID,action:ActivityInputFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
-    Scope(state: \.newActivity, action: /Action.activityNewItem(action:)) {
+    Scope(state: \.newActivity, action: /Action.fromActivityNewItem(action:)) {
       ActivityInputFeature()
     }
     
     Reduce { state, action in
       switch action {
-      case .activityNewItem(action: .addActivity):
-        if let data = try? JSONEncoder().encode(state.newActivity.activity) {
-          
-          ActivityStore.DP.save(data: data)
-          
-          state.activities.append(state.newActivity)
-          state.newActivity = .init(activity: Activity.getDouble())
-        }
-        
-        state.newActivity = .init(activity: Activity.getDouble())
-        return .none
-      case .activityItems(id: let id, action: .removeActivity):
-        state.activities.remove(id: id)
-        ActivityStore.DP.overwrite(data: state
-          .activities
-          .map({ $0.activity })
-          .compactMap({ try? JSONEncoder().encode($0) })
-        )
-        
-        return .none
       case .setList:
         let activities = ActivityStore.DP.loadAll()
           .compactMap({
@@ -58,11 +39,31 @@ struct SettingActivityPresetFeature: ReducerProtocol {
         
         state.activities = result
         return .none
-      case .activityNewItem, .activityItems, .itemAdded:
+      case .fromActivityNewItem(action: .addActivity):
+        if let data = try? JSONEncoder().encode(state.newActivity.activity) {
+          
+          ActivityStore.DP.save(data: data)
+          
+          state.activities.append(state.newActivity)
+          state.newActivity = .init(activity: Activity.getDouble())
+        }
+        
+        state.newActivity = .init(activity: Activity.getDouble())
+        return .none
+      case .fromActivityItems(id: let id, action: .removeActivity):
+        state.activities.remove(id: id)
+        ActivityStore.DP.overwrite(data: state
+          .activities
+          .map({ $0.activity })
+          .compactMap({ try? JSONEncoder().encode($0) })
+        )
+        
+        return .none
+      case .fromActivityNewItem, .fromActivityItems, .itemAdded:
         return .none
       }
     }
-    .forEach(\.activities, action: /Action.activityItems(id:action:)) {
+    .forEach(\.activities, action: /Action.fromActivityItems(id:action:)) {
       ActivityInputFeature()
     }
   }

@@ -31,7 +31,7 @@ struct RoutineInputView: View {
             
             VStack(spacing: 8) {
               ForEachStore(
-                store.scope(state: \.containerState.activities, action: RoutineInputFeature.Action.activityElements(id:action:))
+                store.scope(state: \.containerState.activities, action: RoutineInputFeature.Action.fromActivityElements(id:action:))
               ) { store in
                 NavigationLink {
                   ActivityInputView(store: store).padding()
@@ -46,7 +46,7 @@ struct RoutineInputView: View {
               ActivityContainerView(
                 store: store.scope(
                   state: \.containerState,
-                  action: RoutineInputFeature.Action.activityContainerElement(action:))
+                  action: RoutineInputFeature.Action.fromActivityContainerElements(action:))
               )
             } label: {
               Text("활동 추가하기")

@@ -16,7 +16,7 @@ struct SettingActivityPresetView: View {
       ZStack(alignment: .bottomTrailing) {
         List {
           ForEachStore(
-            store.scope(state: \.activities, action: SettingActivityPresetFeature.Action.activityItems(id:action:))
+            store.scope(state: \.activities, action: SettingActivityPresetFeature.Action.fromActivityItems(id:action:))
           ) { detailStore in
             NavigationLink {
               SettingActivityPresetDetail(store: detailStore)
@@ -31,7 +31,7 @@ struct SettingActivityPresetView: View {
         NavigationLink {
           SettingActivityPresetInsert(store: store.scope(
             state: \.newActivity,
-            action: SettingActivityPresetFeature.Action.activityNewItem(action:)))
+            action: SettingActivityPresetFeature.Action.fromActivityNewItem(action:)))
         } label: {
           FloatingPlusButton(width: 54)
         }

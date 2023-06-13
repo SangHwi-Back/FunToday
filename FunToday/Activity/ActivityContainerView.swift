@@ -30,10 +30,8 @@ struct ActivityContainerView: View {
             Image(systemName: "list.bullet")
           })
           .sheet(isPresented: $showModal) {
-            ActivityPresetListView(store: store.scope(
-              state: \.presetActivity,
-              action: ActivityContainerFeature.Action.presetElement(action:))
-            )
+            let childStore = store.scope(state: \.presetActivity, action: ActivityContainerFeature.Action.fromPresetElements(action:))
+            ActivityPresetListView(store: childStore)
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,7 +57,7 @@ struct ActivityButtonScrollView: View {
       ScrollView(.horizontal) {
         HStack(spacing: 6) {
           ForEachStore(
-            store.scope(state: \.activities, action: ActivityContainerFeature.Action.activityElement(id:action:))
+            store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
           ) {
             ActivityButton(store: $0)
               .padding([.top, .leading], 12)
@@ -75,7 +73,7 @@ struct ActivityButtonScrollView: View {
     var body: some View {
       WithViewStore(store, observe: { $0 }) { viewstore in
         Button {
-          viewstore.send(.buttonTapped(id: viewstore.id, buttontype: .basic))
+          viewstore.send(.fromHeaderButtonTapped(id: viewstore.id, buttontype: .basic))
         } label: {
           ZStack {
             RoundedRectangle(cornerRadius: 8)
@@ -87,7 +85,7 @@ struct ActivityButtonScrollView: View {
           .overlay({
             GeometryReader { proxy in
               FloatingMinusButton(width: 24) {
-                viewstore.send(.buttonTapped(id: viewstore.id, buttontype: .minus))
+                viewstore.send(.fromHeaderButtonTapped(id: viewstore.id, buttontype: .minus))
               }
               .offset(x: -24, y: -24)
             }
@@ -108,7 +106,7 @@ struct ActivityInputScrollView: View {
       ScrollView(.horizontal) {
         TabView {
           ForEachStore(
-            store.scope(state: \.activities, action: ActivityContainerFeature.Action.activityElement(id:action:))
+            store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
           ) {
             ActivityInputView(store: $0)
           }
@@ -126,7 +124,7 @@ struct ActivityContainer_Previews: PreviewProvider {
     let routineFeature = Store(initialState: RoutineInputFeature.State(routine: Routine.getDouble()), reducer: RoutineInputFeature())
     
     return NavigationView {
-      ActivityContainerView(store: routineFeature.scope(state: \.containerState, action: RoutineInputFeature.Action.activityContainerElement(action:)))
+      ActivityContainerView(store: routineFeature.scope(state: \.containerState, action: RoutineInputFeature.Action.fromActivityContainerElements(action:)))
     }
   }
 }

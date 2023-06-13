@@ -31,7 +31,9 @@ struct GoalInputView: View {
           InputField(
             title: "설명 :",
             isEssential: false,
-            text: viewstore.binding(get: \.goal.description, send: GoalInputFeature.Action.updateDescription))
+            text: viewstore.binding(
+              get: \.goal.description,
+              send: GoalInputFeature.Action.updateDescription))
           
           Divider().padding(.vertical)
           
@@ -41,9 +43,7 @@ struct GoalInputView: View {
             .padding(.bottom)
           
           ForEachStore(
-            store.scope(
-              state: \.routines,
-              action: GoalInputFeature.Action.routineElement(id:action:))
+            store.scope(state: \.routines, action: GoalInputFeature.Action.fromRoutineElement(id:action:))
           ) {
             RoutineInputView(store: $0)
           }

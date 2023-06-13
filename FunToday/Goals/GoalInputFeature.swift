@@ -27,7 +27,8 @@ struct GoalInputFeature: ReducerProtocol {
     case setFold
     case updateName(String)
     case updateDescription(String)
-    case routineElement(id: RoutineInputFeature.State.ID, action: RoutineInputFeature.Action)
+    
+    case fromRoutineElement(id: RoutineInputFeature.State.ID, action: RoutineInputFeature.Action)
   }
   
   var body: some ReducerProtocol<State, Action> {
@@ -56,14 +57,14 @@ struct GoalInputFeature: ReducerProtocol {
       case .updateDescription(let txt):
         state.goal.description = txt
         return .none
-      case .routineElement(id: let id, action: .removeRoutine):
+      case .fromRoutineElement(id: let id, action: .removeRoutine):
         state.routines.remove(id: id)
         return .run { await $0(.saveGoal) }
-      case .addGoal, .routineElement:
+      case .addGoal, .fromRoutineElement:
         return .run { await $0(.saveGoal) }
       }
     }
-    .forEach(\.routines, action: /Action.routineElement(id:action:)) {
+    .forEach(\.routines, action: /Action.fromRoutineElement(id:action:)) {
       RoutineInputFeature()
     }
   }

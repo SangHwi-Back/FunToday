@@ -10,17 +10,17 @@ import ComposableArchitecture
 
 struct ActivityInputFeature: ReducerProtocol {
   
+  let dateFormatter: DateFormatter = {
+    let format = DateFormatter()
+    format.dateFormat = "yyyy-MM-dd"
+    return format
+  }()
+  
   struct State: Equatable, Identifiable {
     var id: String {
       activity.id
     }
     var activity: Activity
-    
-    let dateFormatter: DateFormatter = {
-      let format = DateFormatter()
-      format.dateFormat = "yyyy-MM-dd"
-      return format
-    }()
     
     var startDate: Date = Date()
     var endDate: Date = Date()
@@ -36,22 +36,20 @@ struct ActivityInputFeature: ReducerProtocol {
     case updateName(String)
     case updateDescription(String)
     case updateCategory(Activity.Category)
-    case updateStartDate(Date)
-    case updateEndDate(Date)
-    case updateDailyActive
+    case updateDate(ActivityDate, Date)
+    case updateActiveStart(Bool)
+    case updateViewActive(ActivityInstants)
     case updateWeekDay(Activity.Weekday)
-    case updateWeekendActive
     case updateWeekend(Activity.Weekend)
-    case updateActive
-    case updateActiveToday
     case updateSlider(Float)
     /// true : +, false : -
     case updateCount(Bool)
     case showCountAlert
     case removeActivity
     case addActivity
-    case buttonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
-    case completionAsTapped(CompletionAs?)
+    case completionSwitchTapped(CompletionAs?)
+    
+    case fromHeaderButtonTapped(id: State.ID, buttontype: ActivityHeaderButtonType)
   }
   
   func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -66,16 +64,15 @@ struct ActivityInputFeature: ReducerProtocol {
       state.activity.categoryValue = category.rawValue
       state.category = category
       return .none
-    case .updateStartDate(let date):
-      state.activity.time_s = state.dateFormatter.string(from: date)
-      state.startDate = date
-      return .none
-    case .updateEndDate(let date):
-      state.activity.time_e = state.dateFormatter.string(from: date)
-      state.endDate = date
-      return .none
-    case .updateDailyActive:
-      state.activity.isDailyActive.toggle()
+    case .updateDate(let dateType, let date):
+      switch dateType {
+      case .start:
+        state.activity.time_s = dateFormatter.string(from: date)
+        state.startDate = date
+      case .end:
+        state.activity.time_e = dateFormatter.string(from: date)
+        state.endDate = date
+      }
       return .none
     case .updateWeekDay(let val):
       if state.activity.activeWeekDays.contains(val) {
@@ -85,9 +82,6 @@ struct ActivityInputFeature: ReducerProtocol {
         state.activity.activeWeekDays.insert(val)
       }
       return .none
-    case .updateWeekendActive:
-      state.activity.isWeekendActive.toggle()
-      return .none
     case .updateWeekend(let val):
       if state.activity.activeWeekends.contains(val) {
         state.activity.activeWeekends.remove(val)
@@ -96,11 +90,18 @@ struct ActivityInputFeature: ReducerProtocol {
         state.activity.activeWeekends.insert(val)
       }
       return .none
-    case .updateActive:
-      state.activity.isActive.toggle()
-      return .none
-    case .updateActiveToday:
+    case .updateActiveStart:
       state.activeToday.toggle()
+      return .none
+    case .updateViewActive(let val):
+      switch val {
+      case .dailySchedule:
+        state.activity.isDailyActive.toggle()
+      case .weekendSchedule:
+        state.activity.isWeekendActive.toggle()
+      case .startNowOrTomorrow:
+        state.activity.isActive.toggle()
+      }
       return .none
     case .updateSlider(let ratio):
       state.activity.ratio = ratio
@@ -115,16 +116,24 @@ struct ActivityInputFeature: ReducerProtocol {
     case .showCountAlert:
       state.countAlertPresented.toggle()
       return .none
-    case .completionAsTapped(let completionAs):
+    case .completionSwitchTapped(let completionAs):
       state.activity.completionAs = completionAs?.rawValue ?? 0
       return .none
-    case .removeActivity, .addActivity, .buttonTapped:
+    case .removeActivity, .addActivity, .fromHeaderButtonTapped:
       return .none
     }
   }
   
   enum ActivityHeaderButtonType {
     case basic, minus
+  }
+  
+  enum ActivityDate {
+    case start, end
+  }
+  
+  enum ActivityInstants {
+    case dailySchedule, weekendSchedule, startNowOrTomorrow
   }
 }
 

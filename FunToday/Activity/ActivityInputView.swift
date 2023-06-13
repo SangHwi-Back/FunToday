@@ -15,33 +15,49 @@ struct ActivityInputView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       CustomSectionView {
         ScrollView(showsIndicators: false) {
-          InputField(title: "이름 :", isEssential: true,
-                     text: viewstore.binding(get: \.activity.name, send: ActivityInputFeature.Action.updateName))
-          InputField(title: "설명 :", isEssential: false,
-                     text: viewstore.binding(get: \.activity.description, send: ActivityInputFeature.Action.updateDescription))
+          InputField(title: "이름 :",
+                     isEssential: true,
+                     text: viewstore.binding(
+                      get: \.activity.name,
+                      send: ActivityInputFeature.Action.updateName))
+          InputField(title: "설명 :",
+                     isEssential: false,
+                     text: viewstore.binding(
+                      get: \.activity.description,
+                      send: ActivityInputFeature.Action.updateDescription))
           
           HStack(spacing: 12) {
             Text("카테고리")
-            Picker("종류", selection: viewstore.binding(get: \.category, send: ActivityInputFeature.Action.updateCategory)) {
-              ForEach(Activity.Category.allCases, id: \.rawValue) { category in
-                Text(String(describing: category))
-                  .tag(category)
+            Picker("종류", selection: viewstore.binding(
+              get: \.category,
+              send: ActivityInputFeature.Action.updateCategory)) {
+                ForEach(Activity.Category.allCases, id: \.rawValue) { category in
+                  Text(String(describing: category))
+                    .tag(category)
+                }
               }
-            }
-            .frame(maxWidth: .infinity)
-            .background(Color.element)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+              .frame(maxWidth: .infinity)
+              .background(Color.element)
+              .clipShape(RoundedRectangle(cornerRadius: 8))
           }
           .padding(.vertical, 4)
           
           HStack {
             Text("기간")
             Spacer()
-            DatePicker("", selection: viewstore.binding(get: \.startDate, send: ActivityInputFeature.Action.updateStartDate), displayedComponents: [.hourAndMinute])
-              .scaledToFit()
+            DatePicker("",
+                       selection: viewstore.binding(
+                        get: \.startDate,
+                        send: { ActivityInputFeature.Action.updateDate(.start, $0) }),
+                       displayedComponents: [.hourAndMinute])
+            .scaledToFit()
             Text("~")
-            DatePicker("", selection: viewstore.binding(get: \.endDate, send: ActivityInputFeature.Action.updateEndDate), displayedComponents: [.hourAndMinute])
-              .scaledToFit()
+            DatePicker("",
+                       selection: viewstore.binding(
+                        get: \.endDate,
+                        send: { ActivityInputFeature.Action.updateDate(.end, $0) }),
+                       displayedComponents: [.hourAndMinute])
+            .scaledToFit()
           }
           .padding(.vertical, 4)
           
@@ -69,7 +85,9 @@ private struct ActivityInputViewDailyHandler: View {
   
   var body: some View {
     VStack {
-      Toggle("매일 진행하나요?", isOn: viewstore.binding(get: \.activity.isDailyActive, send: ActivityInputFeature.Action.updateDailyActive))
+      Toggle("매일 진행하나요?", isOn: viewstore.binding(
+        get: \.activity.isDailyActive,
+        send: ActivityInputFeature.Action.updateViewActive(.dailySchedule)))
       
       if viewstore.activity.isDailyActive == false {
         Divider()
@@ -99,7 +117,9 @@ private struct ActivityInputViewWeekendHandler: View {
   
   var body: some View {
     VStack {
-      Toggle("주말에도 진행하나요?", isOn: viewstore.binding(get: \.activity.isWeekendActive, send: ActivityInputFeature.Action.updateWeekendActive))
+      Toggle("주말에도 진행하나요?", isOn: viewstore.binding(
+        get: \.activity.isWeekendActive,
+        send: ActivityInputFeature.Action.updateViewActive(.weekendSchedule)))
       
       if viewstore.activity.isWeekendActive {
         VStack {
@@ -135,13 +155,19 @@ private struct ActivityInputViewIsActiveHandler: View {
   
   var body: some View {
     VStack {
-      Toggle("바로 시작하나요?", isOn: viewstore.binding(get: \.activity.isActive, send: ActivityInputFeature.Action.updateActive))
+      Toggle("바로 시작하나요?", isOn: viewstore.binding(
+        get: \.activity.isActive,
+        send: ActivityInputFeature.Action.updateViewActive(.startNowOrTomorrow)))
       
       if viewstore.activity.isActive {
         VStack {
           Divider()
-          Toggle("오늘 시작할게요!", isOn: viewstore.binding(get: { $0.activeToday }, send: ActivityInputFeature.Action.updateActiveToday))
-          Toggle("내일 시작할게요!", isOn: viewstore.binding(get: { !$0.activeToday }, send: ActivityInputFeature.Action.updateActiveToday))
+          Toggle("오늘 시작할게요!", isOn: viewstore.binding(
+            get: { $0.activeToday },
+            send: ActivityInputFeature.Action.updateActiveStart))
+          Toggle("내일 시작할게요!", isOn: viewstore.binding(
+            get: { !$0.activeToday },
+            send: ActivityInputFeature.Action.updateActiveStart))
           Divider()
         }
         .padding(.leading)
@@ -161,11 +187,11 @@ private struct ActivityInputViewCompletionValueHandler: View {
       HStack {
         Toggle("횟수로", isOn: viewstore.binding(
           get: { $0.completionAs == .count },
-          send: { ActivityInputFeature.Action.completionAsTapped($0 ? .count : nil) }))
+          send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .count : nil) }))
         Spacer()
         Toggle("%로", isOn: viewstore.binding(
           get: { $0.completionAs == .slider },
-          send: { ActivityInputFeature.Action.completionAsTapped($0 ? .slider : nil) }))
+          send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .slider : nil) }))
       }
       
       if let completionAs = viewstore.completionAs {
@@ -223,7 +249,10 @@ private struct ActivityInputViewCompletionValueHandler: View {
     var body: some View {
       HStack {
         Text("\(viewstore.activity.completionRatio)%")
-        Slider(value: viewstore.binding(get: \.activity.ratio, send: ActivityInputFeature.Action.updateSlider)) {
+        Slider(value: viewstore.binding(
+          get: \.activity.ratio,
+          send: ActivityInputFeature.Action.updateSlider)
+        ) {
           Text("\(viewstore.activity.ratio)%")
         }
       }
