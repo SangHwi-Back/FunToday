@@ -100,6 +100,8 @@ struct ActivityInputScrollView: View {
           }
         }
         .tabViewStyle(PageTabViewStyle())
+        .animation(.easeInOut)
+        .transition(.slide)
         .navigationBarTitleDisplayMode(.inline)
         .frame(width: size.width)
       }
