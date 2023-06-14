@@ -9,22 +9,12 @@ import Foundation
 import ComposableArchitecture
 
 struct ActivityInputFeature: ReducerProtocol {
-  
-  let dateFormatter: DateFormatter = {
-    let format = DateFormatter()
-    format.dateFormat = "yyyy-MM-dd"
-    return format
-  }()
-  
   struct State: Equatable, Identifiable {
     var id: String {
       activity.id
     }
     var activity: Activity
     
-    var startDate: Date = Date()
-    var endDate: Date = Date()
-    var category = Activity.Category.health
     var countAlertPresented = false
     var activeToday = true
     var completionAs: CompletionAs? {
@@ -62,16 +52,11 @@ struct ActivityInputFeature: ReducerProtocol {
       return .none
     case .updateCategory(let category):
       state.activity.categoryValue = category.rawValue
-      state.category = category
       return .none
     case .updateDate(let dateType, let date):
       switch dateType {
-      case .start:
-        state.activity.time_s = dateFormatter.string(from: date)
-        state.startDate = date
-      case .end:
-        state.activity.time_e = dateFormatter.string(from: date)
-        state.endDate = date
+      case .start: state.activity.startDate = date
+      case .end: state.activity.endDate = date
       }
       return .none
     case .updateWeekDay(let val):

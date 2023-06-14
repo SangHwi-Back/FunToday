@@ -29,9 +29,9 @@ struct ActivityInputView: View {
           HStack(spacing: 12) {
             Text("카테고리")
             Picker("종류", selection: viewstore.binding(
-              get: \.category,
+              get: \.activity.category,
               send: ActivityInputFeature.Action.updateCategory)) {
-                ForEach(Activity.Category.allCases, id: \.rawValue) { category in
+                ForEach(Activity.Category.allCases, id: \.id) { category in
                   Text(String(describing: category))
                     .tag(category)
                 }
@@ -47,14 +47,14 @@ struct ActivityInputView: View {
             Spacer()
             DatePicker("",
                        selection: viewstore.binding(
-                        get: \.startDate,
+                        get: \.activity.startDate,
                         send: { ActivityInputFeature.Action.updateDate(.start, $0) }),
                        displayedComponents: [.hourAndMinute])
             .scaledToFit()
             Text("~")
             DatePicker("",
                        selection: viewstore.binding(
-                        get: \.endDate,
+                        get: \.activity.endDate,
                         send: { ActivityInputFeature.Action.updateDate(.end, $0) }),
                        displayedComponents: [.hourAndMinute])
             .scaledToFit()

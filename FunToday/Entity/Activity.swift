@@ -21,22 +21,39 @@ struct Activity: Identifiable, Entity, Hashable {
   
   var categoryValue: Int
   var category: Category {
-    categoryValue.getType()
+    get {
+      categoryValue.getType()
+    }
+    set {
+      categoryValue = newValue.rawValue
+    }
   }
   
   /// 활동 시작 시간
+  let dateFormatter: DateFormatter = {
+    let format = DateFormatter()
+    format.dateFormat = "yyyy-MM-dd HH:mm"
+    return format
+  }()
+  
   var time_s: String
   var startDate: Date {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.date(from: time_s) ?? Date()
+    get {
+      dateFormatter.date(from: time_s) ?? Date()
+    }
+    set {
+      time_s = dateFormatter.string(from: newValue)
+    }
   }
   /// 활동 종료 시간
   var time_e: String
   var endDate: Date {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.date(from: time_e) ?? Date()
+    get {
+      dateFormatter.date(from: time_e) ?? Date()
+    }
+    set {
+      time_e = dateFormatter.string(from: newValue)
+    }
   }
   
   /// 매일 진행할지 여부
@@ -125,7 +142,7 @@ struct Activity: Identifiable, Entity, Hashable {
       self
     }
     
-    case health, concentrate, normal, custom
+    case health = 1, concentrate = 2, normal = 3, custom = 4
     
     var name: String {
       switch self {
