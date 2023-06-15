@@ -39,6 +39,15 @@ struct ActivityContainerFeature: ReducerProtocol {
       case .fromActivityElements(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
         return .none
+      case .fromActivityElements(id: _, action: .updateDate):
+        print(state.activities.map({$0.activity.name}))
+        state.activities = IdentifiedArray(uniqueElements:
+          state.activities.sorted(by: {
+            $0.activity.startDate < $1.activity.startDate
+          })
+        )
+        print(state.activities.map({$0.activity.name}))
+        return .none
       case .fromPresetElements(action: .rowSelected(let activity)):
         state.activities.append(
           ActivityInputFeature.State(activity: activity)

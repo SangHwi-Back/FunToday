@@ -16,9 +16,7 @@ struct ActivityContainerView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       GeometryReader { proxy in
         VStack(spacing: 12) {
-          ActivityButtonScrollView(store: store)
-            .frame(height: 24)
-            .padding(.vertical)
+          ActivityButtonScrollView(store: store, size: proxy.size)
           ActivityInputScrollView(store: store, size: proxy.size)
         }
       }
@@ -44,38 +42,47 @@ struct ActivityContainerView: View {
       }
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("활동 추가")
-      .padding()
+      .padding(.horizontal)
     }
   }
 }
 
 struct ActivityButtonScrollView: View {
   let store: StoreOf<ActivityContainerFeature>
+  let size: CGSize
   
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
-        HStack(spacing: 6) {
-          ForEach(viewstore.activities, id: \.id) { inpuState in
+        TabView(selection: viewstore.binding(
+          get: \.currentIndex,
+          send: ActivityContainerFeature.Action.setIndex)
+        ) {
+          ForEach(viewstore.activities, id: \.id) { inputState in
             Button {
-              viewstore.send(.buttonTapped(inpuState.id))
+              viewstore.send(.buttonTapped(inputState.id))
             } label: {
-              CustomSectionView {
-                Text(inpuState.activity.name)
-                  .foregroundColor(Color.label)
-              }
-              .overlay({
-                GeometryReader { proxy in
-                  FloatingMinusButton(width: 24) {
-                    viewstore.send(.fromActivityElements(id: inpuState.activity.id, action: .removeActivity))
-                  }
-                  .offset(x: -24, y: -24)
+              ZStack(alignment: .topLeading) {
+                CustomSectionView {
+                  Text(inputState.activity.name)
+                    .foregroundColor(Color.label)
+                    .padding(.horizontal, 48)
+                    .truncationMode(.tail)
                 }
-              }())
+                .padding(12)
+                FloatingMinusButton(width: 24) {
+                  viewstore.send(.fromActivityElements(id: inputState.activity.id, action: .removeActivity))
+                }
+                .offset(x: 6, y: 6)
+              }
+              .frame(height: 48)
             }
-            .padding([.top, .leading], 12)
+            .tag(inputState.id)
           }
         }
+        .frame(width: size.width, height: 60)
+        .animation(.easeInOut)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
       }
     }
   }
@@ -90,7 +97,7 @@ struct ActivityInputScrollView: View {
       ScrollView(.horizontal) {
         TabView(selection: viewstore.binding(
           get: \.currentIndex,
-          send: { ActivityContainerFeature.Action.setIndex($0) })
+          send: ActivityContainerFeature.Action.setIndex)
         ) {
           ForEachStore(
             store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
