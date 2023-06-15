@@ -15,7 +15,7 @@ struct ActivityInputFeature: ReducerProtocol {
     }
     var activity: Activity
     
-    var countAlertPresented = false
+    var alertState = Alert()
     var activeToday = true
     var completionAs: CompletionAs? {
       activity.completionAs.toCompletionType()
@@ -34,7 +34,8 @@ struct ActivityInputFeature: ReducerProtocol {
     case updateSlider(Float)
     /// true : +, false : -
     case updateCount(Bool)
-    case showCountAlert
+    case showAlert(WritableKeyPath<Alert, Bool>)
+    
     case removeActivity
     case addActivity
     case completionSwitchTapped(CompletionAs?)
@@ -53,10 +54,20 @@ struct ActivityInputFeature: ReducerProtocol {
     case .updateCategory(let category):
       state.activity.categoryValue = category.rawValue
       return .none
-    case .updateDate(let dateType, let date):
+    case .updateDate(let dateType, let newDate):
       switch dateType {
-      case .start: state.activity.startDate = date
-      case .end: state.activity.endDate = date
+      case .start:
+        guard newDate < state.activity.endDate else {
+          return .run { await $0(.showAlert(\.lessThanEndDate)) }
+        }
+        
+        state.activity.startDate = newDate
+      case .end:
+        guard newDate > state.activity.startDate else {
+          return .run { await $0(.showAlert(\.greaterThanStartDate)) }
+        }
+        
+        state.activity.endDate = newDate
       }
       return .none
     case .updateWeekDay(let val):
@@ -93,13 +104,13 @@ struct ActivityInputFeature: ReducerProtocol {
       return .none
     case .updateCount(let willPlus):
       if willPlus == false, state.activity.completionCount == 0 {
-        return .run { send in await send(.showCountAlert) }
+        return .run { send in await send(.showAlert(\.count)) }
       }
       
       state.activity.completionCount += (willPlus ? 1 : -1)
       return .none
-    case .showCountAlert:
-      state.countAlertPresented.toggle()
+    case .showAlert(let keyPath):
+      state.alertState[keyPath: keyPath].toggle()
       return .none
     case .completionSwitchTapped(let completionAs):
       state.activity.completionAs = completionAs?.rawValue ?? 0
@@ -119,6 +130,12 @@ struct ActivityInputFeature: ReducerProtocol {
   
   enum ActivityInstants {
     case dailySchedule, weekendSchedule, startNowOrTomorrow
+  }
+  
+  struct Alert: Equatable {
+    var count = false
+    var lessThanEndDate = false
+    var greaterThanStartDate = false
   }
 }
 

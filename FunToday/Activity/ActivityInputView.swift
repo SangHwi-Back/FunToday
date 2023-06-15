@@ -43,23 +43,29 @@ struct ActivityInputView: View {
           .padding(.vertical, 4)
           
           HStack {
-            Text("기간")
-            Spacer()
-            DatePicker("",
-                       selection: viewstore.binding(
-                        get: \.activity.startDate,
-                        send: { ActivityInputFeature.Action.updateDate(.start, $0) }),
+            DatePicker("기간",
+                       selection: Binding(
+                        get: { viewstore.activity.startDate },
+                        set: { viewstore.send(.updateDate(.start, $0)) }),
                        displayedComponents: [.hourAndMinute])
-            .scaledToFit()
-            Text("~")
-            DatePicker("",
-                       selection: viewstore.binding(
-                        get: \.activity.endDate,
-                        send: { ActivityInputFeature.Action.updateDate(.end, $0) }),
+            DatePicker("~",
+                       selection: Binding(
+                        get: { viewstore.activity.endDate },
+                        set: { viewstore.send(.updateDate(.end, $0)) }),
                        displayedComponents: [.hourAndMinute])
             .scaledToFit()
           }
           .padding(.vertical, 4)
+          .commonAlert(isPresented: Binding.constant(viewstore.alertState.greaterThanStartDate),
+                       msg: "종료 시간을 시작 시간 이후로 설정해주시기 바랍니다.",
+                       action: {
+            viewstore.send(.showAlert(\.greaterThanStartDate))
+          })
+          .commonAlert(isPresented: Binding.constant(viewstore.alertState.lessThanEndDate),
+                       msg: "시작 시간을 종료 시간 이후로 설정해주시기 바랍니다.",
+                       action: {
+            viewstore.send(.showAlert(\.lessThanEndDate))
+          })
           
           ActivityInputViewDailyHandler(viewstore: viewstore)
             .padding(4)
@@ -231,15 +237,11 @@ private struct ActivityInputViewCompletionValueHandler: View {
         .foregroundColor(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 8))
       }
-      .alert(isPresented: Binding.constant(viewstore.countAlertPresented)) {
-        Alert(
-          title: Text("경고"),
-          message: Text("0 아래의 값은 설정할 수 없습니다."),
-          dismissButton: .cancel(Text("확인")) {
-            viewstore.send(.showCountAlert)
-          }
-        )
-      }
+      .commonAlert(isPresented: Binding.constant(viewstore.alertState.count),
+                   msg: "0 아래의 값은 설정할 수 없습니다.",
+                   action: {
+        viewstore.send(.showAlert(\.count))
+      })
     }
   }
   
@@ -266,5 +268,26 @@ struct ActivityInputView_Previes: PreviewProvider {
       initialState: ActivityInputFeature.State.init(activity: Activity.getDouble()),
       reducer: { ActivityInputFeature() })
     return ActivityInputView(store: initialStore)
+  }
+}
+
+private extension View {
+  func commonAlert(isPresented: Binding<Bool>, msg: String, action: (() -> Void)?) -> some View {
+    modifier(ActivityInputViewAlertModifier(showAlert: isPresented, message: msg, action: action))
+  }
+}
+
+private struct ActivityInputViewAlertModifier: ViewModifier {
+  @Binding var showAlert: Bool
+  let message: String
+  let action: (()->Void)?
+  func body(content: Content) -> some View {
+    content
+      .alert(isPresented: $showAlert) {
+        Alert(
+          title: Text("경고"),
+          message: Text(message),
+          dismissButton: .cancel(Text("확인"), action: action))
+      }
   }
 }
