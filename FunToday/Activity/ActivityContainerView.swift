@@ -54,35 +54,38 @@ struct ActivityButtonScrollView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
-        TabView(selection: viewstore.binding(
-          get: \.currentIndex,
-          send: ActivityContainerFeature.Action.setIndex)
-        ) {
-          ForEach(viewstore.activities, id: \.id) { inputState in
-            Button {
-              viewstore.send(.buttonTapped(inputState.id))
-            } label: {
-              ZStack(alignment: .topLeading) {
-                CustomSectionView {
-                  Text(inputState.activity.name)
-                    .foregroundColor(Color.label)
-                    .padding(.horizontal, 48)
-                    .truncationMode(.tail)
+        if viewstore.activities.isEmpty == false {
+          TabView(selection: viewstore.binding(
+            get: \.currentIndex,
+            send: ActivityContainerFeature.Action.setIndex)
+          ) {
+            ForEach(viewstore.activities, id: \.id) { inputState in
+              Button {
+                viewstore.send(.buttonTapped(inputState.id))
+              } label: {
+                ZStack(alignment: .topLeading) {
+                  CustomSectionView {
+                    Text(inputState.activity.name)
+                      .foregroundColor(Color.label)
+                      .padding(.horizontal, 48)
+                      .truncationMode(.tail)
+                  }
+                  .padding(12)
+                  FloatingMinusButton(width: 24) {
+                    viewstore.send(.fromActivityElements(id: inputState.activity.id, action: .removeActivity))
+                  }
+                  .offset(x: 6, y: 6)
                 }
-                .padding(12)
-                FloatingMinusButton(width: 24) {
-                  viewstore.send(.fromActivityElements(id: inputState.activity.id, action: .removeActivity))
-                }
-                .offset(x: 6, y: 6)
+                .frame(height: 48)
               }
-              .frame(height: 48)
+              .tag(inputState.id)
             }
-            .tag(inputState.id)
           }
+          .animation(.easeIn)
+          .transition(.slide)
+          .frame(width: size.width, height: 60)
+          .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
-        .frame(width: size.width, height: 60)
-        .animation(.easeInOut)
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
       }
     }
   }
@@ -95,22 +98,23 @@ struct ActivityInputScrollView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.horizontal) {
-        TabView(selection: viewstore.binding(
-          get: \.currentIndex,
-          send: ActivityContainerFeature.Action.setIndex)
-        ) {
-          ForEachStore(
-            store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
+        if viewstore.activities.isEmpty == false {
+          TabView(selection: viewstore.binding(
+            get: \.currentIndex,
+            send: ActivityContainerFeature.Action.setIndex)
           ) {
-            ActivityInputView(store: $0)
-              .tag(ViewStoreOf<ActivityInputFeature>($0).id)
+            ForEachStore(
+              store.scope(state: \.activities, action: ActivityContainerFeature.Action.fromActivityElements(id:action:))
+            ) {
+              ActivityInputView(store: $0)
+                .tag(ViewStoreOf<ActivityInputFeature>($0).id)
+            }
           }
+          .animation(.easeIn)
+          .transition(.slide)
+          .frame(width: size.width)
+          .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
-        .tabViewStyle(PageTabViewStyle())
-        .animation(.easeInOut)
-        .transition(.slide)
-        .navigationBarTitleDisplayMode(.inline)
-        .frame(width: size.width)
       }
     }
   }
