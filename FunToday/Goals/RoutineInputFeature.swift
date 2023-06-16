@@ -67,7 +67,7 @@ struct RoutineInputFeature: ReducerProtocol {
         return .none
       case .fromActivityContainerElements(action: .addActivity):
         let activity = Activity.getDouble()
-        state.containerState.activities.append(.init(activity: activity))
+        state.containerState.activities.append(.init(activity: activity, isNew: state.isNew))
         state.routine.activities.append(activity)
         
         return .none
