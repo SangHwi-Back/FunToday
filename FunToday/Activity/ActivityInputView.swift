@@ -242,10 +242,10 @@ private struct ActivityInputViewCompletionValueHandler: View {
         }
         else {
           Text("\(viewstore.activity.countCompletion)")
+            .font(.title)
+          Text("/ \(viewstore.activity.completionCount)")
             .font(.headline)
             .frame(alignment: .centerLastTextBaseline)
-          Text(" / \(viewstore.activity.completionCount)")
-            .font(.title)
         }
         
         HStack(spacing: 0) {

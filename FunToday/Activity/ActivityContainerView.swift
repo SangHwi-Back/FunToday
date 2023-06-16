@@ -71,12 +71,14 @@ struct ActivityButtonScrollView: View {
                       .truncationMode(.tail)
                   }
                   .padding(12)
-                  FloatingMinusButton(width: 24) {
-                    viewstore.send(.fromActivityElements(id: inputState.activity.id, action: .removeActivity))
-                  }
-                  .offset(x: 6, y: 6)
                 }
                 .frame(height: 48)
+                .overlay(
+                  FloatingMinusButton(width: 24) {
+                    viewstore.send(.fromActivityElements(id: inputState.activity.id, action: .removeActivity))
+                  }.offset(x: -12, y: -12),
+                  alignment: .topLeading
+                )
               }
               .tag(inputState.id)
             }
