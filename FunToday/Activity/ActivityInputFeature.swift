@@ -18,8 +18,19 @@ struct ActivityInputFeature: ReducerProtocol {
     var isNew = false
     var alertState = Alert()
     var activeToday = true
+    
     var completionAs: CompletionAs? {
       activity.completionAs.toCompletionType()
+    }
+    var currentRatio: Float {
+      get {
+        Float(isNew ? activity.completionRatio : activity.ratioCompletion) / 100
+      }
+    }
+    var currentCount: Int {
+      get {
+        isNew ? activity.completionCount : activity.countCompletion
+      }
     }
   }
   
@@ -100,15 +111,27 @@ struct ActivityInputFeature: ReducerProtocol {
         state.activity.isActive.toggle()
       }
       return .none
-    case .updateSlider(let ratio):
-      state.activity.ratio = ratio
+    case .updateSlider(let value):
+      let ratio = Int(floor(value * 100))
+      let keyPath: WritableKeyPath<Activity, Int> = state.isNew ? \.completionRatio : \.ratioCompletion
+      state.activity[keyPath: keyPath] = ratio
       return .none
     case .updateCount(let willPlus):
-      if willPlus == false, state.activity.completionCount == 0 {
-        return .run { send in await send(.showAlert(\.count)) }
+      let value = state.currentCount + (willPlus ? 1 : -1)
+      
+      if value < 0 {
+        return .run { send in
+          await send(.showAlert(\.lessThanZeroCount))
+        }
+      }
+      else if state.isNew == false, state.activity.completionCount < value {
+        return .run { send in
+          await send(.showAlert(\.exeededCount))
+        }
       }
       
-      state.activity.completionCount += (willPlus ? 1 : -1)
+      let keyPath: WritableKeyPath<Activity, Int> = state.isNew ? \.completionCount : \.countCompletion
+      state.activity[keyPath: keyPath] = value
       return .none
     case .showAlert(let keyPath):
       state.alertState[keyPath: keyPath].toggle()
@@ -134,7 +157,8 @@ struct ActivityInputFeature: ReducerProtocol {
   }
   
   struct Alert: Equatable {
-    var count = false
+    var lessThanZeroCount = false
+    var exeededCount = false
     var lessThanEndDate = false
     var greaterThanStartDate = false
   }

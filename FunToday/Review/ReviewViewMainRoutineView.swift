@@ -52,7 +52,7 @@ private struct HorizontalProgressScrollView: View {
         HStack {
           ForEach(activities, id: \.id) { activity in
             VStack {
-              ProgressCircle(ProgressStatus(value: CGFloat(activity.ratio), color: activity.category.color))
+              ProgressCircle(ProgressStatus(value: CGFloat(activity.ratioCompletion / 100), color: activity.category.color))
               Text(String(describing: activity.category.name))
                 .minimumScaleFactor(0.2)
                 .font(.caption)
@@ -102,7 +102,7 @@ private struct VerticalActivityStackView: View {
   
   private func countStack(_ activity: Activity) -> some View {
     HStack {
-      Text("\(activity.completionCountInReal)")
+      Text("\(activity.countCompletion)")
         .font(.headline)
         .frame(alignment: .centerLastTextBaseline)
       Text(" / \(activity.completionCount)")
@@ -117,7 +117,7 @@ private struct VerticalActivityStackView: View {
           .fill(Color.shadow.opacity(0.3))
         Rectangle()
           .fill((activity.category.color).opacity(0.8))
-          .frame(width: proxy.size.width * CGFloat(activity.ratio))
+          .frame(width: proxy.size.width * CGFloat(activity.ratioCompletion / 100))
       }
     }
   }

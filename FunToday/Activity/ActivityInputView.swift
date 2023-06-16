@@ -185,19 +185,33 @@ private struct ActivityInputViewIsActiveHandler: View {
 private struct ActivityInputViewCompletionValueHandler: View {
   let viewstore: ViewStoreOf<ActivityInputFeature>
   
+  var viewName: String {
+    if viewstore.isNew {
+      return "달성률을..."
+    }
+    else if viewstore.completionAs == nil {
+      return "달성률 체크 안함"
+    }
+    else {
+      return "달성률 체크"
+    }
+  }
+  
   var body: some View {
     VStack {
-      Text("달성률을...")
+      Text(viewName)
         .frame(maxWidth: .infinity, alignment: .leading)
       
-      HStack {
-        Toggle("횟수로", isOn: viewstore.binding(
-          get: { $0.completionAs == .count },
-          send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .count : nil) }))
-        Spacer()
-        Toggle("%로", isOn: viewstore.binding(
-          get: { $0.completionAs == .slider },
-          send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .slider : nil) }))
+      if viewstore.isNew {
+        HStack {
+          Toggle("횟수로", isOn: viewstore.binding(
+            get: { $0.completionAs == .count },
+            send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .count : nil) }))
+          Spacer()
+          Toggle("%로", isOn: viewstore.binding(
+            get: { $0.completionAs == .slider },
+            send: { ActivityInputFeature.Action.completionSwitchTapped($0 ? .slider : nil) }))
+        }
       }
       
       if let completionAs = viewstore.completionAs {
@@ -222,26 +236,41 @@ private struct ActivityInputViewCompletionValueHandler: View {
     var body: some View {
       HStack(spacing: 16) {
         Spacer()
-        Text(String(viewstore.activity.completionCount))
+        if viewstore.isNew {
+          Text("\(viewstore.activity.completionCount)")
+            .font(.title)
+        }
+        else {
+          Text("\(viewstore.activity.countCompletion)")
+            .font(.headline)
+            .frame(alignment: .centerLastTextBaseline)
+          Text(" / \(viewstore.activity.completionCount)")
+            .font(.title)
+        }
         
         HStack(spacing: 0) {
           Button(action: { viewstore.send(.updateCount(false)) }) {
             Image(systemName: "minus").padding(.horizontal).padding(.vertical, 8)
           }
+          .commonAlert(isPresented: Binding.constant(viewstore.alertState.lessThanZeroCount),
+                       msg: "0 아래의 값은 설정할 수 없습니다.",
+                       action: {
+            viewstore.send(.showAlert(\.lessThanZeroCount))
+          })
           Divider()
           Button(action: { viewstore.send(.updateCount(true)) }) {
             Image(systemName: "plus").padding(.horizontal).padding(.vertical, 8)
           }
+          .commonAlert(isPresented: Binding.constant(viewstore.alertState.exeededCount),
+                       msg: "최대 횟수를 초과하였습니다. 활동 추가하기 창에서 최대 횟수를 바꿀 수 있습니다.",
+                       action: {
+            viewstore.send(.showAlert(\.exeededCount))
+          })
         }
         .background(Color.element)
         .foregroundColor(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 8))
       }
-      .commonAlert(isPresented: Binding.constant(viewstore.alertState.count),
-                   msg: "0 아래의 값은 설정할 수 없습니다.",
-                   action: {
-        viewstore.send(.showAlert(\.count))
-      })
     }
   }
   
@@ -250,12 +279,12 @@ private struct ActivityInputViewCompletionValueHandler: View {
     
     var body: some View {
       HStack {
-        Text("\(viewstore.activity.completionRatio)%")
+        Text("\(Int(viewstore.currentRatio * 100))%")
         Slider(value: viewstore.binding(
-          get: \.activity.ratio,
+          get: \.currentRatio,
           send: ActivityInputFeature.Action.updateSlider)
         ) {
-          Text("\(viewstore.activity.ratio)%")
+          Text("\(viewstore.currentRatio)%")
         }
       }
     }
