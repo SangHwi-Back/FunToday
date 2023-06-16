@@ -41,7 +41,7 @@ struct GoalInputFeature: ReducerProtocol {
         return .none
       case .addRoutine:
         let routine = Routine.getDouble()
-        state.routines.append(RoutineInputFeature.State(routine: routine))
+        state.routines.append(.init(routine: routine, isNew: state.isNew))
         state.goal.routines.append(routine)
         return .none
       case .resetGoal:

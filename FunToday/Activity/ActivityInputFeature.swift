@@ -15,6 +15,7 @@ struct ActivityInputFeature: ReducerProtocol {
     }
     var activity: Activity
     
+    var isNew = false
     var alertState = Alert()
     var activeToday = true
     var completionAs: CompletionAs? {

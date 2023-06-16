@@ -11,9 +11,12 @@ import ComposableArchitecture
 struct ActivityContainerFeature: ReducerProtocol {
   struct State: Equatable, Identifiable {
     var id: UUID = .init()
-    var currentIndex: ActivityInputFeature.State.ID = ""
+    
     var activities: IdentifiedArrayOf<ActivityInputFeature.State>
     var presetActivity: ActivityPresetListFeature.State
+    
+    var isNew: Bool = false
+    var currentIndex: ActivityInputFeature.State.ID = ""
   }
   
   enum Action {
@@ -47,9 +50,9 @@ struct ActivityContainerFeature: ReducerProtocol {
         )
         return .none
       case .fromPresetElements(action: .rowSelected(let activity)):
-        state.activities.append(
-          ActivityInputFeature.State(activity: activity)
-        )
+        var newState = ActivityInputFeature.State(activity: activity)
+        newState.isNew = state.isNew
+        state.activities.append(newState)
         
         return .none
       case .addActivity, .saveContainer, .fromActivityElements, .fromPresetElements:

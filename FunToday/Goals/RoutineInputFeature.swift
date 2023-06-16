@@ -18,11 +18,15 @@ struct RoutineInputFeature: ReducerProtocol {
       activities: .init(),
       presetActivity: .init(list: []))
     
-    init(routine: Routine) {
+    var isNew: Bool = false
+    
+    init(routine: Routine, isNew: Bool = false) {
       self.routine = routine
       self.containerState = ActivityContainerFeature.State(
         activities: IdentifiedArrayOf(uniqueElements: routine.activities.map({ActivityInputFeature.State(activity: $0)})),
         presetActivity: .init(list: []))
+      self.isNew = isNew
+      self.containerState.isNew = isNew
     }
   }
   

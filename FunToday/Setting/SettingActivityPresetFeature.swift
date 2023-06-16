@@ -49,6 +49,7 @@ struct SettingActivityPresetFeature: ReducerProtocol {
         }
         
         state.newActivity = .init(activity: Activity.getDouble())
+        state.newActivity.isNew = true
         return .none
       case .fromActivityItems(id: let id, action: .removeActivity):
         state.activities.remove(id: id)
