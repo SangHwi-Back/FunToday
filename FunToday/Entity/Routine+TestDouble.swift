@@ -14,8 +14,6 @@ extension Routine: TestDouble {
       index: inx,
       name: "testRoutine",
       description: "testDescription",
-      regDate: Date().description,
-      updateDate: nil,
-      activities: [])
+      regDate: Date().description)
   }
 }

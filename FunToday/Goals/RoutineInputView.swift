@@ -17,6 +17,23 @@ struct RoutineInputView: View {
         CustomSectionView {
           VStack(spacing: 4) {
             
+            HStack {
+              Text("기간")
+                .padding(.leading, 8)
+              Spacer()
+              DatePicker("",
+                         selection: Binding(
+                          get: { viewstore.routine.startDate },
+                          set: { viewstore.send(.updateDate(.start, $0)) }),
+                         displayedComponents: [.date])
+              DatePicker("~",
+                         selection: Binding(
+                          get: { viewstore.routine.endDate },
+                          set: { viewstore.send(.updateDate(.end, $0)) }),
+                         displayedComponents: [.date])
+            }
+            .padding(.vertical, 6)
+            
             InputField(title: "이름 :",
                        isEssential: true,
                        text: viewstore.binding(get: \.routine.name, send: RoutineInputFeature.Action.updateName))

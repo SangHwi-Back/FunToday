@@ -33,6 +33,7 @@ struct RoutineInputFeature: ReducerProtocol {
   enum Action {
     case updateName(String)
     case updateDescription(String)
+    case updateDate(ActivityDate, Date)
     case removeRoutine
     
     case fromActivityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
@@ -50,6 +51,10 @@ struct RoutineInputFeature: ReducerProtocol {
         return .none
       case .updateDescription(let txt):
         state.routine.description = txt
+        return .none
+      case .updateDate(let type, let date):
+        let keyPath = type == .start ? \Routine.startDate : \Routine.endDate
+        state.routine[keyPath: keyPath] = date
         return .none
       case .fromActivityElements(id: let id, action: let action):
         guard let inx = state.containerState.activities.firstIndex(where: { $0.id == id }) else {
@@ -80,5 +85,16 @@ struct RoutineInputFeature: ReducerProtocol {
     }.forEach(\.containerState.activities, action: /Action.fromActivityElements(id:action:)) {
       ActivityInputFeature()
     }
+  }
+  
+  enum ActivityDate {
+    case start, end
+  }
+  
+  struct Alert: Equatable {
+    var lessThanZeroCount = false
+    var exeededCount = false
+    var lessThanEndDate = false
+    var greaterThanStartDate = false
   }
 }
