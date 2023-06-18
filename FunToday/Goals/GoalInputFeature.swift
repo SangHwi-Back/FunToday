@@ -25,6 +25,7 @@ struct GoalInputFeature: ReducerProtocol {
     case addRoutine
     case resetGoal
     case setFold
+    case updateDate(DateType, Date)
     case updateName(String)
     case updateDescription(String)
     
@@ -51,6 +52,10 @@ struct GoalInputFeature: ReducerProtocol {
       case .setFold:
         state.goal.isFold.toggle()
         return .none
+      case .updateDate(let type, let date):
+        let keyPath = type == .start ? \Goal.startDate : \Goal.endDate
+        state.goal[keyPath: keyPath] = date
+        return .none
       case .updateName(let txt):
         state.goal.name = txt
         return .none
@@ -67,5 +72,16 @@ struct GoalInputFeature: ReducerProtocol {
     .forEach(\.routines, action: /Action.fromRoutineElement(id:action:)) {
       RoutineInputFeature()
     }
+  }
+  
+  enum DateType {
+    case start, end
+  }
+  
+  struct Alert: Equatable {
+    var lessThanZeroCount = false
+    var exeededCount = false
+    var lessThanEndDate = false
+    var greaterThanStartDate = false
   }
 }

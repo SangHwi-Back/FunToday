@@ -9,20 +9,17 @@ import Foundation
 
 extension Activity: TestDouble {
   static func getDouble(inx: Int = 0) -> Activity {
-    .init(
-      uniqueID: UUID().uuidString,
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let time = formatter.string(from: Date())
+    
+    return .init(
       index: inx,
       name: "testName",
       description: "testDescription",
-      regDate: Date().description,
-      updateDate: nil,
+      regDate: time,
       categoryValue: 1,
-      time_s: "2023-05-10",
-      time_e: "2023-05-13",
-      isDailyActive: true,
-      isWeekendActive: false,
-      isActive: true,
-      completionCount: 0,
-      completionRatio: 0)
+      time_s: time,
+      time_e: time)
   }
 }

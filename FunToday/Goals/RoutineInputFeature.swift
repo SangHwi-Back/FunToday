@@ -33,7 +33,7 @@ struct RoutineInputFeature: ReducerProtocol {
   enum Action {
     case updateName(String)
     case updateDescription(String)
-    case updateDate(ActivityDate, Date)
+    case updateDate(DateType, Date)
     case removeRoutine
     
     case fromActivityElements(id: ActivityInputFeature.State.ID, action: ActivityInputFeature.Action)
@@ -87,7 +87,7 @@ struct RoutineInputFeature: ReducerProtocol {
     }
   }
   
-  enum ActivityDate {
+  enum DateType {
     case start, end
   }
   

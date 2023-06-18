@@ -22,6 +22,23 @@ struct GoalInputView: View {
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 8) {
           
+          HStack {
+            Text("기간")
+              .padding(.leading, 8)
+            Spacer()
+            DatePicker("",
+                       selection: Binding(
+                        get: { viewstore.goal.startDate },
+                        set: { viewstore.send(.updateDate(.start, $0)) }),
+                       displayedComponents: [.date])
+            DatePicker("~",
+                       selection: Binding(
+                        get: { viewstore.goal.endDate },
+                        set: { viewstore.send(.updateDate(.end, $0)) }),
+                       displayedComponents: [.date])
+          }
+          .padding(.vertical, 6)
+          
           // MARK: - Goal Section
           InputField(
             title: "이름 :",

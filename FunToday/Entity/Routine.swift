@@ -9,15 +9,7 @@ import Foundation
 
 struct Routine: Identifiable, Entity, Hashable {
   enum CodingKeys: CodingKey {
-    case uniqueID
-    case index
-    case name
-    case description
-    case regDate
-    case updateDate
-    case time_s
-    case time_e
-    case activities
+    case uniqueID, index, name, description, regDate, updateDate, time_s, time_e, activities
   }
   
   let dateFormatter: DateFormatter = {

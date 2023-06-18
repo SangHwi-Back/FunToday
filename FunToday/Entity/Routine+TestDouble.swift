@@ -9,11 +9,15 @@ import Foundation
 
 extension Routine: TestDouble {
   static func getDouble(inx: Int = 0) -> Routine {
-    .init(
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let time = formatter.string(from: Date())
+    
+    return .init(
       uniqueID: UUID().uuidString,
       index: inx,
       name: "testRoutine",
       description: "testDescription",
-      regDate: Date().description)
+      regDate: time)
   }
 }

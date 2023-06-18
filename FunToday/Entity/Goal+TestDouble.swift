@@ -11,13 +11,14 @@ extension Goal: TestDouble {
   static func getDouble(inx: Int = 0) -> Goal {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
+    let time = formatter.string(from: Date())
     
     return .init(
-      uniqueID: UUID().uuidString,
       index: inx,
       name: "testName",
       description: "testDescription",
-      regDate: formatter.string(from: Date()),
-      routines: [])
+      regDate: time,
+      time_s: time,
+      time_e: time)
   }
 }

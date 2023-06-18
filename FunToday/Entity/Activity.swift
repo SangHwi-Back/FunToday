@@ -154,7 +154,7 @@ struct Activity: Identifiable, Entity, Hashable {
     case uniqueID, index, name, description, regDate, updateDate, categoryValue, time_s, time_e, isDailyActive, activeWeekDays, isWeekendActive, activeWeekends, isActive, ratioCompletion, completionRatio, countCompletion, completionCount, completionAs
   }
   
-  init(uniqueID: String,
+  init(uniqueID: String = UUID().uuidString,
        index: Int,
        name: String,
        description: String,
@@ -163,11 +163,11 @@ struct Activity: Identifiable, Entity, Hashable {
        categoryValue: Int,
        time_s: String,
        time_e: String,
-       isDailyActive: Bool,
-       isWeekendActive: Bool,
-       isActive: Bool,
-       completionCount: Int,
-       completionRatio: Int,
+       isDailyActive: Bool = true,
+       isWeekendActive: Bool = false,
+       isActive: Bool = false,
+       completionCount: Int = 0,
+       completionRatio: Int = 0,
        completionAs: Int = 0) {
     
     self.uniqueID = uniqueID
