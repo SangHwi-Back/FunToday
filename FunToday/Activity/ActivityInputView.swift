@@ -82,6 +82,7 @@ struct ActivityInputView: View {
       .minimumScaleFactor(0.2)
       .animation(.default, value: viewstore.activity)
       .navigationBarTitleDisplayMode(.inline)
+      .navigationTitle(viewstore.routineDateTitle)
     }
   }
 }

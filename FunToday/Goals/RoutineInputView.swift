@@ -15,7 +15,7 @@ struct RoutineInputView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ZStack(alignment: .topLeading) {
         CustomSectionView {
-          VStack(spacing: 4) {
+          VStack(spacing: 8) {
             
             HStack {
               Text("기간")
@@ -32,7 +32,7 @@ struct RoutineInputView: View {
                           set: { viewstore.send(.updateDate(.end, $0)) }),
                          displayedComponents: [.date])
             }
-            .padding(.vertical, 6)
+            .padding(.bottom, 6)
             
             InputField(title: "이름 :",
                        isEssential: true,

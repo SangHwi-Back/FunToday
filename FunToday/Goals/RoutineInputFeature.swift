@@ -14,10 +14,7 @@ struct RoutineInputFeature: ReducerProtocol {
       routine.id
     }
     var routine: Routine
-    var containerState = ActivityContainerFeature.State(
-      activities: .init(),
-      presetActivity: .init(list: []))
-    
+    var containerState: ActivityContainerFeature.State
     var isNew: Bool = false
     
     init(routine: Routine, isNew: Bool = false) {
@@ -25,6 +22,7 @@ struct RoutineInputFeature: ReducerProtocol {
       self.containerState = ActivityContainerFeature.State(
         activities: IdentifiedArrayOf(uniqueElements: routine.activities.map({ActivityInputFeature.State(activity: $0)})),
         presetActivity: .init(list: []))
+      self.containerState.routineDateTitle = routine.dateFromTo()
       self.isNew = isNew
       self.containerState.isNew = isNew
     }
@@ -55,6 +53,7 @@ struct RoutineInputFeature: ReducerProtocol {
       case .updateDate(let type, let date):
         let keyPath = type == .start ? \Routine.startDate : \Routine.endDate
         state.routine[keyPath: keyPath] = date
+        state.containerState.routineDateTitle = state.routine.dateFromTo()
         return .none
       case .fromActivityElements(id: let id, action: let action):
         guard let inx = state.containerState.activities.firstIndex(where: { $0.id == id }) else {

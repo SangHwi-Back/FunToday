@@ -21,38 +21,38 @@ struct GoalInputView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 8) {
-          
-          HStack {
-            Text("기간")
-              .padding(.leading, 8)
-            Spacer()
-            DatePicker("",
-                       selection: Binding(
-                        get: { viewstore.goal.startDate },
-                        set: { viewstore.send(.updateDate(.start, $0)) }),
-                       displayedComponents: [.date])
-            DatePicker("~",
-                       selection: Binding(
-                        get: { viewstore.goal.endDate },
-                        set: { viewstore.send(.updateDate(.end, $0)) }),
-                       displayedComponents: [.date])
+          CustomSectionView {
+            VStack(spacing: 8) {
+              HStack {
+                Text("기간")
+                  .padding(.leading, 8)
+                Spacer()
+                DatePicker("",
+                           selection: Binding(
+                            get: { viewstore.goal.startDate },
+                            set: { viewstore.send(.updateDate(.start, $0)) }),
+                           displayedComponents: [.date])
+                DatePicker("~",
+                           selection: Binding(
+                            get: { viewstore.goal.endDate },
+                            set: { viewstore.send(.updateDate(.end, $0)) }),
+                           displayedComponents: [.date])
+              }
+              .padding(.bottom, 6)
+              
+              // MARK: - Goal Section
+              InputField(
+                title: "이름 :",
+                isEssential: true,
+                text: viewstore.binding(get: \.goal.name, send: GoalInputFeature.Action.updateName))
+              InputField(
+                title: "설명 :",
+                isEssential: false,
+                text: viewstore.binding(
+                  get: \.goal.description,
+                  send: GoalInputFeature.Action.updateDescription))
+            }
           }
-          .padding(.vertical, 6)
-          
-          // MARK: - Goal Section
-          InputField(
-            title: "이름 :",
-            isEssential: true,
-            text: viewstore.binding(get: \.goal.name, send: GoalInputFeature.Action.updateName))
-            .padding(.top)
-          InputField(
-            title: "설명 :",
-            isEssential: false,
-            text: viewstore.binding(
-              get: \.goal.description,
-              send: GoalInputFeature.Action.updateDescription))
-          
-          Divider().padding(.vertical)
           
           // MARK: - Routines Section
           Text("루틴")

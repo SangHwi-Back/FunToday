@@ -41,7 +41,7 @@ struct ActivityContainerView: View {
         }
       }
       .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle("활동 추가")
+      .navigationTitle("활동 추가 "+viewstore.routineDateTitle)
       .padding(.horizontal)
     }
   }

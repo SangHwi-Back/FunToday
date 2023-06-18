@@ -12,9 +12,9 @@ struct Routine: Identifiable, Entity, Hashable {
     case uniqueID, index, name, description, regDate, updateDate, time_s, time_e, activities
   }
   
-  let dateFormatter: DateFormatter = {
+  var dateFormatter: DateFormatter = {
     let format = DateFormatter()
-    format.dateFormat = "yyyy-MM-dd HH:mm"
+    format.dateFormat = "yyyy-MM-dd"
     return format
   }()
   
@@ -51,10 +51,6 @@ struct Routine: Identifiable, Entity, Hashable {
   }
   
   var activities: [Activity]
-  
-  var timeFromTo: String {
-    updateDate ?? "none"
-  }
   
   init(uniqueID: String,
        index: Int,
@@ -99,5 +95,17 @@ struct Routine: Identifiable, Entity, Hashable {
     try container.encode(self.time_s, forKey: .time_s)
     try container.encode(self.time_e, forKey: .time_e)
     try container.encode(self.activities, forKey: .activities)
+  }
+  
+  func dateFromTo() -> String {
+    let df = dateFormatter
+    df.dateFormat = "YYYY.MM.dd"
+    
+    let start = df.string(from: startDate).split(separator: ".")
+    let end = df.string(from: endDate).split(separator: ".")
+    let startMonth = start[1], endMonth = end[1]
+    
+    return start[1]+"."+start[2]+" ~ "
+    + (startMonth == endMonth ? "" : "\(end[1]).")+end[2]
   }
 }

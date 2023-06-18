@@ -32,6 +32,7 @@ struct ActivityInputFeature: ReducerProtocol {
         isNew ? activity.completionCount : activity.countCompletion
       }
     }
+    var routineDateTitle: String = ""
   }
   
   enum Action {

@@ -17,6 +17,13 @@ struct ActivityContainerFeature: ReducerProtocol {
     
     var isNew: Bool = false
     var currentIndex: ActivityInputFeature.State.ID = ""
+    var routineDateTitle: String = "" {
+      didSet {
+        for i in activities.indices {
+          activities[i].routineDateTitle = routineDateTitle
+        }
+      }
+    }
   }
   
   enum Action {
