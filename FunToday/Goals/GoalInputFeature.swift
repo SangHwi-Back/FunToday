@@ -15,6 +15,7 @@ struct GoalInputFeature: ReducerProtocol {
       goal.id
     }
     var routines: IdentifiedArrayOf<RoutineInputFeature.State>
+    var dateDuration: DateDuration?
     var isNew: Bool = false
   }
   
@@ -26,6 +27,7 @@ struct GoalInputFeature: ReducerProtocol {
     case resetGoal
     case setFold
     case updateDate(DateType, Date)
+    case updateDateAsDuration(DateDuration)
     case updateName(String)
     case updateDescription(String)
     
@@ -56,6 +58,39 @@ struct GoalInputFeature: ReducerProtocol {
         let keyPath = type == .start ? \Goal.startDate : \Goal.endDate
         state.goal[keyPath: keyPath] = date
         return .none
+      case .updateDateAsDuration(let duration):
+        let dates = state.goal.time_s.split(separator: "-")
+        guard dates.count >= 3, let year = Int(dates[0]), let month = Int(dates[1]), let day = Int(dates[2]) else {
+          return .none
+        }
+        
+        var components = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: year, month: month, day: day)
+        
+        switch duration {
+        case .five: if let value = components.day {
+          components.day = value + 5
+        }
+        case .seven: if let value = components.day {
+          components.day = value + 7
+        }
+        case .month: if let value = components.month {
+          components.month = value + 1
+        }
+        case .halfOfYear: if let value = components.month {
+          components.month = value + 6
+        }
+        case .year: if let value = components.year {
+          components.year = value + 1
+        }
+        }
+        
+        if let date = components.date {
+          state.dateDuration = duration
+          state.goal.startDate = Date()
+          state.goal.endDate = date
+        }
+        
+        return .none
       case .updateName(let txt):
         state.goal.name = txt
         return .none
@@ -76,6 +111,10 @@ struct GoalInputFeature: ReducerProtocol {
   
   enum DateType {
     case start, end
+  }
+  
+  enum DateDuration: String, CaseIterable {
+    case five, seven, month, halfOfYear, year
   }
   
   struct Alert: Equatable {

@@ -14,7 +14,7 @@ struct Goal: Hashable, Identifiable, Entity {
   
   let dateFormatter: DateFormatter = {
     let format = DateFormatter()
-    format.dateFormat = "yyyy-MM-dd HH:mm"
+    format.dateFormat = "yyyy-MM-dd"
     return format
   }()
   

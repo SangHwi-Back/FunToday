@@ -21,30 +21,47 @@ struct GoalInputView: View {
     WithViewStore(store, observe: { $0 }) { viewstore in
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 8) {
+          HStack {
+            DatePicker("",
+                       selection: Binding(
+                        get: { viewstore.goal.startDate },
+                        set: { viewstore.send(.updateDate(.start, $0)) }),
+                       displayedComponents: [.date])
+            DatePicker("",
+                       selection: Binding(
+                        get: { viewstore.goal.endDate },
+                        set: { viewstore.send(.updateDate(.end, $0)) }),
+                       displayedComponents: [.date])
+            Spacer()
+            
+            HStack(spacing: 2) {
+              Text(viewstore.dateDuration?.rawValue ?? "기간")
+              Image.init(systemName: "chevron.down")
+            }
+            .padding(8)
+            .background(Color.element.cornerRadius(8))
+            .scaledToFit()
+            .contextMenu {
+              ForEach(GoalInputFeature.DateDuration.allCases, id: \.self) { duration in
+                Button {
+                  viewstore.send(.updateDateAsDuration(duration))
+                } label: {
+                  Text(duration.rawValue)
+                }
+              }
+            }
+          }
+          .padding(.bottom, 6)
+          
+          // MARK: - Goal Section
           CustomSectionView {
             VStack(spacing: 8) {
-              HStack {
-                Text("기간")
-                  .padding(.leading, 8)
-                Spacer()
-                DatePicker("",
-                           selection: Binding(
-                            get: { viewstore.goal.startDate },
-                            set: { viewstore.send(.updateDate(.start, $0)) }),
-                           displayedComponents: [.date])
-                DatePicker("~",
-                           selection: Binding(
-                            get: { viewstore.goal.endDate },
-                            set: { viewstore.send(.updateDate(.end, $0)) }),
-                           displayedComponents: [.date])
-              }
-              .padding(.bottom, 6)
-              
-              // MARK: - Goal Section
               InputField(
                 title: "이름 :",
                 isEssential: true,
-                text: viewstore.binding(get: \.goal.name, send: GoalInputFeature.Action.updateName))
+                text: viewstore.binding(
+                  get: \.goal.name,
+                  send: GoalInputFeature.Action.updateName))
               InputField(
                 title: "설명 :",
                 isEssential: false,
@@ -57,7 +74,7 @@ struct GoalInputView: View {
           // MARK: - Routines Section
           Text("루틴")
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom)
+            .padding(.top)
           
           ForEachStore(
             store.scope(state: \.routines, action: GoalInputFeature.Action.fromRoutineElement(id:action:))
