@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct FunTodayApp: App {
 
   @ObservedObject var firebasedb = DependencyFirebaseDB()
-
+  var isLogin = false
+  
   var body: some Scene {
     WindowGroup {
-      FunTodayAppTabView()
-        .environmentObject(firebasedb)
+      if isLogin {
+        FunTodayAppTabView()
+          .environmentObject(firebasedb)
+      } else {
+        LoginView(store: Store(initialState: .init(), reducer: { LoginFeature() }))
+      }
     }
   }
 }
