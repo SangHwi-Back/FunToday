@@ -45,8 +45,10 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
     let state = UserState()
+    var loginConfirmed = false
+    
     return LoginView(store: Store(
       initialState: .init(),
-      reducer: { LoginFeature(userState: Binding.constant(state)) }))
+      reducer: { LoginFeature(loginConfirmed: Binding.constant(loginConfirmed)) }))
   }
 }

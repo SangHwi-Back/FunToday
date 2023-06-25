@@ -10,9 +10,11 @@ import ComposableArchitecture
 
 struct LoginFeature: ReducerProtocol {
   
+  @Binding var loginConfirmed: Bool
+  
   // MARK: - For Test (Start)
-  var predefinedID = "Ttest"
-  var predefinedPassWord = "1234qwER!@#$"
+  var predefinedID = "Test"
+  var predefinedPassWord = "12!@qwQW"
   // MARK: - For Test (End)
   
   struct State: Equatable {
@@ -45,7 +47,7 @@ struct LoginFeature: ReducerProtocol {
       
       switch keyPath {
       case \.id:
-        guard value.count >= 5 else { return .idLength }
+        guard value.count >= 4 else { return .idLength }
         return nil
       case \.password:
         guard value.count >= 8 else { return .passwordLength }
@@ -110,7 +112,9 @@ struct LoginFeature: ReducerProtocol {
           return .none
         }
         
+        loginConfirmed = true
         state.loginConfirmed = true
+        print(loginConfirmed, state.loginConfirmed)
         return .none
       }
     }

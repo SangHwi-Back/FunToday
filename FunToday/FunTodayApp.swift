@@ -12,15 +12,17 @@ import ComposableArchitecture
 struct FunTodayApp: App {
 
   @ObservedObject var firebasedb = DependencyFirebaseDB()
-  var isLogin = false
+  @State var loginConfirmed = false
   
   var body: some Scene {
     WindowGroup {
-      if isLogin {
+      if loginConfirmed {
         FunTodayAppTabView()
           .environmentObject(firebasedb)
       } else {
-        LoginView(store: Store(initialState: .init(), reducer: { LoginFeature() }))
+        LoginView(store: Store(
+          initialState: .init(),
+          reducer: { LoginFeature(loginConfirmed: $loginConfirmed) }))
       }
     }
   }
