@@ -8,7 +8,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LoginView: View {
-  
   let store: StoreOf<LoginFeature>
   
   var body: some View {
@@ -37,7 +36,7 @@ struct LoginView: View {
       .alert(
         store.scope(
           state: \.alertState,
-          action: {_ in .showAlert(nil)}),
+          action: { _ in .showAlert(nil)} ),
         dismiss: .showAlert(nil))
     }
   }
@@ -45,6 +44,9 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
-    LoginView(store: .init(initialState: .init(), reducer: {LoginFeature()}))
+    let state = UserState()
+    return LoginView(store: Store(
+      initialState: .init(),
+      reducer: { LoginFeature(userState: Binding.constant(state)) }))
   }
 }

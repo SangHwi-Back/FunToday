@@ -11,21 +11,21 @@ import ComposableArchitecture
 struct LoginFeature: ReducerProtocol {
   
   // MARK: - For Test (Start)
-  var predefinedID: String = "Ttest"
-  var predefinedPassWord: String = "1234qwER!@#$"
+  var predefinedID = "Ttest"
+  var predefinedPassWord = "1234qwER!@#$"
   // MARK: - For Test (End)
   
   struct State: Equatable {
-    static func == (lhs: LoginFeature.State, rhs: LoginFeature.State) -> Bool {
-      lhs.id == rhs.id && lhs.password == rhs.password
-    }
+    var id = "", password = ""
     
-    var id: String = ""
-    var password: String = ""
+    var loginConfirmed = false
+    var isAlreadyLogin = false
     
     var alertState: AlertState<Action>?
     
-    var loginConfirmed: Bool = false
+    static func == (lhs: LoginFeature.State, rhs: LoginFeature.State) -> Bool {
+      lhs.id == rhs.id && lhs.password == rhs.password
+    }
   }
   
   enum Action {
@@ -36,21 +36,19 @@ struct LoginFeature: ReducerProtocol {
   }
   
   enum Errors: Error {
-    case idLength, passwordLength, passwordDiversity, wrongInfo, unknown
+    case idLength, passwordLength, whiteSpaceNotAllowed, passwordDiversity, wrongInfo, unknown
     
     static func validate(keyPath: KeyPath<LoginFeature.State, String>, value: String) -> Self? {
+      guard value.contains(where: {Character(" ") == $0}) == false else {
+        return .whiteSpaceNotAllowed
+      }
+      
       switch keyPath {
       case \.id:
-        if value.count < 5 {
-          return .idLength
-        }
-        
+        guard value.count >= 5 else { return .idLength }
         return nil
       case \.password:
-        if value.count < 8 {
-          return .passwordLength
-        }
-        
+        guard value.count >= 8 else { return .passwordLength }
         // https://ios-development.tistory.com/591
         let predicate = NSPredicate(
           format: "SELF MATCHES %@",
@@ -72,6 +70,8 @@ struct LoginFeature: ReducerProtocol {
         return AlertState(title: "Password 에러", message: "Password 는 8 자 이상입니다.", dismissButton: button)
       case .passwordDiversity:
         return AlertState(title: "Password 에러", message: "Password 에는 특수문자, 영어 대소문자가 포함되어야 합니다.", dismissButton: button)
+      case .whiteSpaceNotAllowed:
+        return AlertState(title: "잘못된 로그인 정보", message: "공백은 포함할 수 없습니다", dismissButton: button)
       case .wrongInfo:
         return AlertState(title: "잘못된 로그인 정보", message: "잘못된 로그인 정보를 입력하였습니다.", dismissButton: button)
       case .unknown:
@@ -81,6 +81,7 @@ struct LoginFeature: ReducerProtocol {
   }
   
   var body: some ReducerProtocol<State, Action> {
+    
     Reduce { state, action in
       switch action {
       case .setId(let id):
@@ -94,11 +95,6 @@ struct LoginFeature: ReducerProtocol {
         state.alertState = alert?.getAlertState()
         return .none
       case .login:
-        guard predefinedID == state.id && predefinedPassWord == state.password else {
-          state.alertState = Errors.wrongInfo.getAlertState()
-          return .none
-        }
-        
         if let alert = Errors.validate(keyPath: \.password, value: state.password)?.getAlertState() {
           state.alertState = alert
           return .none
@@ -106,6 +102,11 @@ struct LoginFeature: ReducerProtocol {
         
         if let alert = Errors.validate(keyPath: \.id, value: state.id)?.getAlertState() {
           state.alertState = alert
+          return .none
+        }
+        
+        guard predefinedID == state.id && predefinedPassWord == state.password else {
+          state.alertState = Errors.wrongInfo.getAlertState()
           return .none
         }
         

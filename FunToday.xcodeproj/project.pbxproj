@@ -12,6 +12,7 @@
 		1B1696132A09C5A000D827FB /* CustomTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1696122A09C5A000D827FB /* CustomTable.swift */; };
 		1B1B9AC22A472E06006FD86E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B9AC12A472E06006FD86E /* LoginView.swift */; };
 		1B1B9AC42A472E50006FD86E /* LoginFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B9AC32A472E50006FD86E /* LoginFeature.swift */; };
+		1B1B9AC82A47CBE6006FD86E /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B9AC72A47CBE6006FD86E /* UserState.swift */; };
 		1B2118C32A1600D2009E09FF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C22A1600D2009E09FF /* ComposableArchitecture */; };
 		1B2118C62A1600FC009E09FF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C52A1600FC009E09FF /* FirebaseDatabase */; };
 		1B2118C82A1600FC009E09FF /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2118C72A1600FC009E09FF /* FirebaseDatabaseSwift */; };
@@ -129,6 +130,7 @@
 		1B1696122A09C5A000D827FB /* CustomTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTable.swift; sourceTree = "<group>"; };
 		1B1B9AC12A472E06006FD86E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1B1B9AC32A472E50006FD86E /* LoginFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeature.swift; sourceTree = "<group>"; };
+		1B1B9AC72A47CBE6006FD86E /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		1B396F942A03691900C7966C /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		1B396F962A03695F00C7966C /* CommonPushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPushButtonStyle.swift; sourceTree = "<group>"; };
 		1B48E8F22A20D0F00019E035 /* ActivityPresetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresetListView.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				1B7160DA2A24ABCC004DC4E9 /* FileDependency.swift */,
 				1B7160DE2A24BCE9004DC4E9 /* StoreInDiskDependency.swift */,
 				1B7160DC2A24B6CC004DC4E9 /* DiskStore.swift */,
+				1B1B9AC72A47CBE6006FD86E /* UserState.swift */,
 			);
 			path = Dependency;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				1B48E8F72A21000C0019E035 /* SettingActivityPresetFeature.swift in Sources */,
 				1B6C37832A1240A100BA731B /* DottedLine.swift in Sources */,
 				1B1B9AC42A472E50006FD86E /* LoginFeature.swift in Sources */,
+				1B1B9AC82A47CBE6006FD86E /* UserState.swift in Sources */,
 				1B8AA76D29FA9010001C3A97 /* Entity.swift in Sources */,
 				1B396F952A03691900C7966C /* ProgressCircle.swift in Sources */,
 				1B8AA76F29FA94F6001C3A97 /* PriorityQueue.swift in Sources */,
@@ -820,7 +824,7 @@
 				INFOPLIST_FILE = FunToday/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -851,7 +855,7 @@
 				INFOPLIST_FILE = FunToday/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
